@@ -2386,3 +2386,450 @@ Time for 'build typescript dependencies' 0.028999000031035393
 [NX v22.3.3 Daemon Server] - 2026-01-04T02:36:32.571Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 16. Response time: 5.
 [NX v22.3.3 Daemon Server] - 2026-01-04T02:37:07.334Z - Closed a connection. Number of open connections: 4
 [NX v22.3.3 Daemon Server] - 2026-01-04T02:37:07.347Z - Closed a connection. Number of open connections: 3
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.641Z - [WATCHER]: README.md was modified
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.641Z - [SYNC]: clearing sync generators cache due to file changes
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.641Z - [WATCHER]: Processing file changes in outputs
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.743Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.743Z - [REQUEST]: README.md
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.743Z - [REQUEST]: 
+Time for 'daemon-message-serialization-HASH_GLOB' 0.04606199997942895
+Time for 'daemon-message-serialization-GLOB' 0.01662200002465397
+Time for 'daemon-message-serialization-HASH_MULTI_GLOB' 0.03845200000796467
+Time for 'nx/core/package-json:createNodes' 1.1484279999276623
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.772Z - Received raw message of length 71
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.773Z - Received json message of type HASH_GLOB
+Time for 'nx/core/project-json:createNodes' 1.0567060000030324
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.774Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.774Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.774Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.774Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.774Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 0.
+Time for 'HASH_GLOB round trip' 15.696088999975473
+Time for 'deserialize daemon response - HASH_GLOB' 0.05246999999508262
+Time for 'daemon-message-serialization-HASH_GLOB' 0.0319429999217391
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.775Z - Received raw message of length 73
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.775Z - Received json message of type GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.777Z - Serializing response for GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.777Z - Responding to GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.777Z - [REQUEST]: Responding to the client. handleGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.777Z - Done responding to the client handleGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.777Z - Handled json message GLOB. Handling time: 2. Response time: 0.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.778Z - Received raw message of length 331
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.779Z - Received json message of type HASH_MULTI_GLOB
+Time for 'GLOB round trip' 10.314727000077255
+Time for 'deserialize daemon response - GLOB' 0.07069399999454618
+Time for 'daemon-message-serialization-HASH_MULTI_GLOB' 0.04976600001100451
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 12.196631999919191
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.787Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.788Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.788Z - [REQUEST]: Responding to the client. handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.788Z - Done responding to the client handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.788Z - Handled json message HASH_GLOB. Handling time: 8. Response time: 1.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.788Z - Time taken for 'hash changed files from watcher' 0.5946909999474883ms
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.789Z - Received raw message of length 73
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.789Z - Received json message of type HASH_GLOB
+Time for '@nx/jest/plugin:createNodes' 20.84604199999012
+Time for 'HASH_MULTI_GLOB round trip' 17.21501000004355
+Time for 'deserialize daemon response - HASH_MULTI_GLOB' 0.032041999977082014
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.790Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.790Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.790Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.790Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.790Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 0.
+Time for 'HASH_GLOB round trip' 16.03934500005562
+Time for 'deserialize daemon response - HASH_GLOB' 0.0438579999608919
+Time for 'daemon-message-serialization-HASH_GLOB' 0.039652999956160784
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.791Z - Received raw message of length 1485
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.792Z - Received json message of type HASH_MULTI_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.805Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.806Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.806Z - [REQUEST]: Responding to the client. handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.806Z - Done responding to the client handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.806Z - Handled json message HASH_GLOB. Handling time: 13. Response time: 1.
+Time for 'HASH_MULTI_GLOB round trip' 27.508409000001848
+Time for 'deserialize daemon response - HASH_MULTI_GLOB' 0.038951999973505735
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.811Z - Received raw message of length 72
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.811Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.813Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.813Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.813Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.813Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.813Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 0.
+Time for 'HASH_GLOB round trip' 22.252814999897964
+Time for 'deserialize daemon response - HASH_GLOB' 0.03664800000842661
+Time for 'daemon-message-serialization-HASH_GLOB' 0.02623499999754131
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.814Z - Received raw message of length 77
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.815Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.816Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.816Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.816Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.817Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.817Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 1.
+Time for 'HASH_GLOB round trip' 3.249424000037834
+Time for 'deserialize daemon response - HASH_GLOB' 0.050466999993659556
+Time for 'daemon-message-serialization-HASH_GLOB' 0.022429000004194677
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.818Z - Received raw message of length 70
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.818Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.819Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.819Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.819Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.819Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.819Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 0.
+Time for 'HASH_GLOB round trip' 2.2189540000399575
+Time for 'deserialize daemon response - HASH_GLOB' 0.030341000063344836
+Time for 'daemon-message-serialization-HASH_GLOB' 0.016721999971196055
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.820Z - Received raw message of length 80
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.821Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.822Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.822Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.822Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.822Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.822Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 0.
+Time for 'HASH_GLOB round trip' 2.5532980000134557
+Time for 'deserialize daemon response - HASH_GLOB' 0.033143999986350536
+Time for 'daemon-message-serialization-HASH_GLOB' 0.017222999944351614
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.823Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.823Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.825Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.825Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.825Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.825Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.825Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 0.
+Time for 'HASH_GLOB round trip' 2.3941869999980554
+Time for 'deserialize daemon response - HASH_GLOB' 0.033844999969005585
+Time for 'daemon-message-serialization-HASH_GLOB' 0.017622999963350594
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.826Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.827Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.828Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.828Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.828Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.828Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.828Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 0.
+Time for 'HASH_GLOB round trip' 2.6923830000450835
+Time for 'deserialize daemon response - HASH_GLOB' 0.030540999956429005
+Time for 'daemon-message-serialization-HASH_GLOB' 0.016020999988541007
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.829Z - Received raw message of length 75
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.829Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.830Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.831Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.831Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.831Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.831Z - Handled json message HASH_GLOB. Handling time: 1. Response time: 1.
+Time for 'HASH_GLOB round trip' 2.553998999996111
+Time for 'deserialize daemon response - HASH_GLOB' 0.03885200002696365
+Time for 'daemon-message-serialization-HASH_GLOB' 0.015721000032499433
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.832Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.832Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.833Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.834Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.834Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.834Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.834Z - Handled json message HASH_GLOB. Handling time: 0. Response time: 1.
+Time for '@nx/webpack/plugin:createNodes' 80.9316070000641
+Time for 'HASH_GLOB round trip' 2.713110000011511
+Time for 'deserialize daemon response - HASH_GLOB' 0.046260999981313944
+Time for '@nx/eslint/plugin:createNodes' 90.85721699998248
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.869Z - Time taken for 'build-project-configs' 109.70579999999609ms
+Time for 'build typescript dependencies' 0.0351469999877736
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.888Z - [SYNC]: collect registered sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.889Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.889Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:38:50.889Z - Time taken for 'total execution time for createProjectGraph()' 21.742235000012442ms
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.046Z - [WATCHER]: apps/inventory-service/src/app/entities/asset.entity.ts was created or restored
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.047Z - [SYNC]: clearing sync generators cache due to file changes
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.047Z - [WATCHER]: Processing file changes in outputs
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.149Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.149Z - [REQUEST]: apps/inventory-service/src/app/entities/asset.entity.ts
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.150Z - [REQUEST]: 
+Time for 'daemon-message-serialization-HASH_GLOB' 0.07069399999454618
+Time for 'daemon-message-serialization-GLOB' 0.09019299992360175
+Time for 'daemon-message-serialization-HASH_MULTI_GLOB' 0.08049399999435991
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.254Z - [WATCHER]: apps/inventory-service/src/app/entities/asset.entity.ts was modified
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.255Z - [SYNC]: clearing sync generators cache due to file changes
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.255Z - [WATCHER]: Processing file changes in outputs
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.257Z - Received raw message of length 71
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.257Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.259Z - Serializing response for HASH_GLOB message in json mode
+Time for 'nx/core/package-json:createNodes' 3.1584420000435784
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.270Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.271Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.271Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.271Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 12.
+Time for 'HASH_GLOB round trip' 64.68560199998319
+Time for 'deserialize daemon response - HASH_GLOB' 0.10379199997987598
+Time for 'daemon-message-serialization-HASH_GLOB' 0.05029599997214973
+Time for 'nx/core/project-json:createNodes' 20.22514300001785
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.273Z - Received raw message of length 73
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.286Z - Received json message of type GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.289Z - Serializing response for GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.289Z - Responding to GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.290Z - [REQUEST]: Responding to the client. handleGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.290Z - Done responding to the client handleGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.290Z - Handled json message GLOB. Handling time: 2. Response time: 1.
+Time for 'GLOB round trip' 47.39831800002139
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 44.69873900001403
+Time for 'deserialize daemon response - GLOB' 0.11759000003803521
+Time for 'daemon-message-serialization-HASH_MULTI_GLOB' 0.10429199994541705
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.303Z - Received raw message of length 331
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.304Z - Received json message of type HASH_MULTI_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.330Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.330Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.330Z - [REQUEST]: Responding to the client. handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.330Z - Done responding to the client handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.330Z - Handled json message HASH_GLOB. Handling time: 26. Response time: 0.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.331Z - Time taken for 'hash changed files from watcher' 1.355788999935612ms
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.333Z - Received raw message of length 73
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.333Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.340Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.341Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.341Z - [REQUEST]: Responding to the client. handleHashGlob
+Time for 'HASH_GLOB round trip' 69.33622099994682
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.343Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.343Z - Handled json message HASH_GLOB. Handling time: 7. Response time: 3.
+Time for 'deserialize daemon response - HASH_GLOB' 0.053195999935269356
+Time for 'daemon-message-serialization-HASH_GLOB' 0.05589600000530481
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.346Z - Received raw message of length 1485
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.348Z - Received json message of type HASH_MULTI_GLOB
+Time for '@nx/jest/plugin:createNodes' 161.5715649999911
+Time for 'HASH_MULTI_GLOB round trip' 86.81308899994474
+Time for 'deserialize daemon response - HASH_MULTI_GLOB' 0.06249499996192753
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.408Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.408Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.408Z - [REQUEST]: Responding to the client. handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.409Z - Done responding to the client handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.409Z - Handled json message HASH_GLOB. Handling time: 60. Response time: 1.
+Time for 'HASH_MULTI_GLOB round trip' 115.80371400003787
+Time for 'deserialize daemon response - HASH_MULTI_GLOB' 0.08169300004374236
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.431Z - Received raw message of length 72
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.431Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.434Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.434Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.434Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.434Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.435Z - Handled json message HASH_GLOB. Handling time: 3. Response time: 1.
+Time for 'HASH_GLOB round trip' 92.90339000010863
+Time for 'deserialize daemon response - HASH_GLOB' 0.04989600006956607
+Time for 'daemon-message-serialization-HASH_GLOB' 0.06499400001484901
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.442Z - Received raw message of length 77
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.445Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.447Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.448Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.448Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.448Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.449Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 2.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.457Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.457Z - [REQUEST]: apps/inventory-service/src/app/entities/asset.entity.ts
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.457Z - [REQUEST]: 
+Time for 'HASH_GLOB round trip' 13.063229999970645
+Time for 'deserialize daemon response - HASH_GLOB' 0.056794999982230365
+Time for 'daemon-message-serialization-HASH_GLOB' 0.05869500001426786
+Time for 'daemon-message-serialization-HASH_MULTI_GLOB' 0.05449500004760921
+Time for 'nx/core/package-json:createNodes' 2.64808300009463
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.576Z - Received raw message of length 70
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.585Z - Received json message of type HASH_GLOB
+Time for 'nx/core/project-json:createNodes' 6.085400999989361
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.596Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.599Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.600Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.601Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.602Z - Handled json message HASH_GLOB. Handling time: 11. Response time: 6.
+Time for 'HASH_GLOB round trip' 137.41514299996197
+Time for 'deserialize daemon response - HASH_GLOB' 0.06409400003030896
+Time for 'daemon-message-serialization-HASH_GLOB' 0.042797000030986965
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.606Z - Received raw message of length 331
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.606Z - Received json message of type HASH_MULTI_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.640Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.641Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.641Z - [REQUEST]: Responding to the client. handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.642Z - Done responding to the client handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.642Z - Handled json message HASH_GLOB. Handling time: 33. Response time: 2.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.643Z - Time taken for 'hash changed files from watcher' 0.6307479999959469ms
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.645Z - Received raw message of length 80
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.645Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.648Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.649Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.649Z - [REQUEST]: Responding to the client. handleHashGlob
+Time for 'HASH_GLOB round trip' 44.263974000001326
+Time for 'deserialize daemon response - HASH_GLOB' 0.05709499993827194
+Time for 'daemon-message-serialization-HASH_GLOB' 0.04749599995557219
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 69.76588500000071
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.653Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.653Z - Handled json message HASH_GLOB. Handling time: 3. Response time: 5.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.661Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.661Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.664Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.664Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.664Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.664Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.665Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 1.
+Time for 'HASH_GLOB round trip' 14.280729999998584
+Time for 'deserialize daemon response - HASH_GLOB' 0.04389600001741201
+Time for 'daemon-message-serialization-HASH_GLOB' 0.04149699991103262
+Time for '@nx/jest/plugin:createNodes' 114.63670999999158
+Time for 'HASH_MULTI_GLOB round trip' 70.94808799994644
+Time for 'deserialize daemon response - HASH_MULTI_GLOB' 0.2840759999817237
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.685Z - Received raw message of length 74
+Time for '@nx/eslint/plugin:createNodes' 444.1595170000801
+Time for 'daemon-message-serialization-GLOB' 0.06159499997738749
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.685Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.694Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.694Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.694Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.695Z - Done responding to the client handleHashGlob
+Time for 'HASH_GLOB round trip' 29.38419300003443
+Time for 'deserialize daemon response - HASH_GLOB' 0.07849400001578033
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.696Z - Handled json message HASH_GLOB. Handling time: 5. Response time: 2.
+Time for 'daemon-message-serialization-HASH_GLOB' 0.07249400008004159
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.703Z - Received raw message of length 75
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.703Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.710Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.710Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.710Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.711Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.711Z - Handled json message HASH_GLOB. Handling time: 6. Response time: 1.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.712Z - Received raw message of length 73
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.713Z - Received json message of type GLOB
+Time for 'HASH_GLOB round trip' 17.611058000009507
+Time for 'deserialize daemon response - HASH_GLOB' 0.054995999904349446
+Time for 'daemon-message-serialization-HASH_GLOB' 0.04589599999599159
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.726Z - Serializing response for GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.726Z - Responding to GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.726Z - [REQUEST]: Responding to the client. handleGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.727Z - Done responding to the client handleGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.727Z - Handled json message GLOB. Handling time: 13. Response time: 1.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.729Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.729Z - Received json message of type HASH_GLOB
+Time for 'GLOB round trip' 41.2884179999819
+Time for 'deserialize daemon response - GLOB' 0.1895849999273196
+Time for 'daemon-message-serialization-HASH_MULTI_GLOB' 0.10469199996441603
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.765Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.766Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.773Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.774Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.774Z - Handled json message HASH_GLOB. Handling time: 36. Response time: 9.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.781Z - Received raw message of length 71
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.787Z - Received json message of type HASH_GLOB
+Time for '@nx/webpack/plugin:createNodes' 286.7954069999978
+Time for 'HASH_GLOB round trip' 59.76710500009358
+Time for 'deserialize daemon response - HASH_GLOB' 0.0633950000628829
+Time for 'daemon-message-serialization-HASH_GLOB' 0.0507949999300763
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.790Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.792Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.792Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.792Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.792Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 2.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.794Z - Received raw message of length 1485
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.794Z - Received json message of type HASH_MULTI_GLOB
+Time for 'HASH_GLOB round trip' 19.224524999968708
+Time for 'deserialize daemon response - HASH_GLOB' 0.057395000010728836
+Time for 'daemon-message-serialization-HASH_GLOB' 0.05229599995072931
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.829Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.829Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.829Z - [REQUEST]: Responding to the client. handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.835Z - Done responding to the client handleHashMultiGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.836Z - Handled json message HASH_GLOB. Handling time: 34. Response time: 8.
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.838Z - Received raw message of length 73
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.838Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.841Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.841Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.841Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.841Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.842Z - Handled json message HASH_GLOB. Handling time: 3. Response time: 1.
+Time for 'HASH_GLOB round trip' 49.23796699999366
+Time for 'deserialize daemon response - HASH_GLOB' 0.08479300001636147
+Time for 'daemon-message-serialization-HASH_GLOB' 0.07409400003962219
+Time for 'HASH_MULTI_GLOB round trip' 106.07781000004616
+Time for 'deserialize daemon response - HASH_MULTI_GLOB' 0.06379399995785207
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.908Z - Time taken for 'build-project-configs' 381.22027300007176ms
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.912Z - Received raw message of length 72
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.912Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.915Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.915Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.915Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.915Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.916Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 1.
+Time for 'HASH_GLOB round trip' 72.4220679999562
+Time for 'deserialize daemon response - HASH_GLOB' 0.1755859999684617
+Time for 'daemon-message-serialization-HASH_GLOB' 0.0367969999788329
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.920Z - Received raw message of length 77
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.921Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.924Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.924Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.924Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.924Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.924Z - Handled json message HASH_GLOB. Handling time: 3. Response time: 0.
+Time for 'HASH_GLOB round trip' 7.577278999960981
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.933Z - Received raw message of length 70
+Time for 'deserialize daemon response - HASH_GLOB' 0.05689500004518777
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.934Z - Received json message of type HASH_GLOB
+Time for 'daemon-message-serialization-HASH_GLOB' 0.04379600007086992
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.938Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.938Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.938Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.938Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.938Z - Handled json message HASH_GLOB. Handling time: 4. Response time: 0.
+Time for 'HASH_GLOB round trip' 9.45652499992866
+Time for 'deserialize daemon response - HASH_GLOB' 0.052995999925769866
+Time for 'daemon-message-serialization-HASH_GLOB' 0.04309699998702854
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.947Z - Received raw message of length 80
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.948Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.950Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.951Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.951Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.951Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.951Z - Handled json message HASH_GLOB. Handling time: 2. Response time: 1.
+Time for 'HASH_GLOB round trip' 9.92508699989412
+Time for 'deserialize daemon response - HASH_GLOB' 0.05919499997980893
+Time for 'daemon-message-serialization-HASH_GLOB' 0.050396000035107136
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.954Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.954Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.958Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.958Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.958Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.959Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.959Z - Handled json message HASH_GLOB. Handling time: 4. Response time: 1.
+Time for 'HASH_GLOB round trip' 7.593878000043333
+Time for 'deserialize daemon response - HASH_GLOB' 0.04619599995203316
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.962Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.962Z - Received json message of type HASH_GLOB
+Time for 'daemon-message-serialization-HASH_GLOB' 0.0440960000269115
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.968Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.968Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.968Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.969Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.969Z - Handled json message HASH_GLOB. Handling time: 6. Response time: 1.
+Time for 'HASH_GLOB round trip' 8.451908000046387
+Time for 'deserialize daemon response - HASH_GLOB' 0.08709300006739795
+Time for 'daemon-message-serialization-HASH_GLOB' 0.07939400000032037
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.972Z - Received raw message of length 75
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.972Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.976Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.977Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.977Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.977Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.977Z - Handled json message HASH_GLOB. Handling time: 4. Response time: 1.
+Time for 'HASH_GLOB round trip' 7.184711000067182
+Time for 'deserialize daemon response - HASH_GLOB' 0.054995000013150275
+Time for 'daemon-message-serialization-HASH_GLOB' 0.06319400004576892
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.980Z - Received raw message of length 74
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.981Z - Received json message of type HASH_GLOB
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.984Z - Serializing response for HASH_GLOB message in json mode
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.985Z - Responding to HASH_GLOB message
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.985Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.985Z - Done responding to the client handleHashGlob
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:52.985Z - Handled json message HASH_GLOB. Handling time: 3. Response time: 1.
+Time for '@nx/webpack/plugin:createNodes' 488.0277239999268
+Time for 'HASH_GLOB round trip' 7.85935599997174
+Time for 'deserialize daemon response - HASH_GLOB' 0.06109500001184642
+Time for '@nx/eslint/plugin:createNodes' 329.85305400006473
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.062Z - Time taken for 'build-project-configs' 545.9360900000902ms
+Time for 'build typescript dependencies' 841.5684220000403
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.816Z - [SYNC]: collect registered sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.818Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.819Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.819Z - Time taken for 'total execution time for createProjectGraph()' 765.0551919999998ms
+Time for 'build typescript dependencies' 5.56960699998308
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.868Z - [SYNC]: collect registered sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.870Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.870Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v22.3.3 Daemon Server] - 2026-01-04T02:39:53.871Z - Time taken for 'total execution time for createProjectGraph()' 812.9940669999924ms
