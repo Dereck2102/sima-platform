@@ -1,18 +1,18 @@
 {
   "run": {
-    "command": "nx run inventory-service:build:development",
-    "startTime": "2026-01-04T03:18:56.635Z",
-    "endTime": "2026-01-04T03:19:14.704Z",
+    "command": "nx run auth-service:build:development",
+    "startTime": "2026-01-04T03:32:04.514Z",
+    "endTime": "2026-01-04T03:32:16.097Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "inventory-service:build:development",
+      "taskId": "auth-service:build:development",
       "target": "build",
-      "projectName": "inventory-service",
-      "hash": "5564041919470274817",
-      "startTime": "2026-01-04T03:18:56.679Z",
-      "endTime": "2026-01-04T03:19:14.680Z",
+      "projectName": "auth-service",
+      "hash": "14412583292648197977",
+      "startTime": "2026-01-04T03:32:04.543Z",
+      "endTime": "2026-01-04T03:32:16.072Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 0

@@ -2,3 +2,4 @@ autoInstallPeers: true
 
 onlyBuiltDependencies:
   - '@nestjs/core'
+  - bcrypt
