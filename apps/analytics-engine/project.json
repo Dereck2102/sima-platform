@@ -1,0 +1,14 @@
+{
+  "name": "analytics-engine",
+  "projectType": "application",
+  "sourceRoot": "apps/analytics-engine",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "python3 main.py",
+        "cwd": "apps/analytics-engine"
+      }
+    }
+  }
+}
