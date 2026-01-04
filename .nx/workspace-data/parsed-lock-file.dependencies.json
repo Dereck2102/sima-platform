@@ -2950,6 +2950,16 @@
     "type": "static"
   },
   {
+    "source": "npm:@nestjs/common",
+    "target": "npm:class-transformer",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/common",
+    "target": "npm:class-validator",
+    "type": "static"
+  },
+  {
     "source": "npm:@nestjs/core",
     "target": "npm:@nestjs/common",
     "type": "static"
@@ -5567,6 +5577,21 @@
   {
     "source": "npm:chokidar@4.0.3",
     "target": "npm:readdirp@4.1.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:class-validator",
+    "target": "npm:@types/validator",
+    "type": "static"
+  },
+  {
+    "source": "npm:class-validator",
+    "target": "npm:libphonenumber-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:class-validator",
+    "target": "npm:validator",
     "type": "static"
   },
   {

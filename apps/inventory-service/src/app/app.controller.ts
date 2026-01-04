@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { CreateAssetDto } from './dto/create-asset.dto';
 
 @Controller()
 export class AppController {
@@ -7,6 +8,11 @@ export class AppController {
 
   @Get()
   getData() {
-    return this.appService.getData();
+    return this.appService.getHello();
+  }
+
+  @Post('assets')
+  create(@Body() createAssetDto: CreateAssetDto) {
+    return this.appService.createAsset(createAssetDto);
   }
 }

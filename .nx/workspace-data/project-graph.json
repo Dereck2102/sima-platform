@@ -5352,6 +5352,15 @@
         "hash": "sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw=="
       }
     },
+    "npm:@types/validator": {
+      "type": "npm",
+      "name": "npm:@types/validator",
+      "data": {
+        "version": "13.15.10",
+        "packageName": "@types/validator",
+        "hash": "sha512-T8L6i7wCuyoK8A/ZeLYt1+q0ty3Zb9+qbSSvrIVitzT3YjZqkTZ40IbRsPanlB4h1QB3JVL1SYCdR6ngtFYcuA=="
+      }
+    },
     "npm:@types/ws": {
       "type": "npm",
       "name": "npm:@types/ws",
@@ -6655,6 +6664,24 @@
         "version": "2.2.0",
         "packageName": "cjs-module-lexer",
         "hash": "sha512-4bHTS2YuzUvtoLjdy+98ykbNB5jS0+07EvFNXerqZQJ89F7DI6ET7OQo/HJuW6K0aVsKA9hj9/RVb2kQVOrPDQ=="
+      }
+    },
+    "npm:class-transformer": {
+      "type": "npm",
+      "name": "npm:class-transformer",
+      "data": {
+        "version": "0.5.1",
+        "packageName": "class-transformer",
+        "hash": "sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw=="
+      }
+    },
+    "npm:class-validator": {
+      "type": "npm",
+      "name": "npm:class-validator",
+      "data": {
+        "version": "0.14.3",
+        "packageName": "class-validator",
+        "hash": "sha512-rXXekcjofVN1LTOSw+u4u9WXVEUvNBVjORW154q/IdmYWy1nMbOU9aNtZB0t8m+FJQ9q91jlr2f9CwwUFdFMRA=="
       }
     },
     "npm:cli-cursor": {
@@ -9562,6 +9589,15 @@
         "version": "0.4.1",
         "packageName": "levn",
         "hash": "sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ=="
+      }
+    },
+    "npm:libphonenumber-js": {
+      "type": "npm",
+      "name": "npm:libphonenumber-js",
+      "data": {
+        "version": "1.12.33",
+        "packageName": "libphonenumber-js",
+        "hash": "sha512-r9kw4OA6oDO4dPXkOrXTkArQAafIKAU71hChInV4FxZ69dxCfbwQGDPzqR5/vea94wU705/3AZroEbSoeVWrQw=="
       }
     },
     "npm:license-webpack-plugin": {
@@ -12867,6 +12903,15 @@
         "hash": "sha512-kiGUalWN+rgBJ/1OHZsBtU4rXZOfj/7rKQxULKlIzwzQSvMJUUNgPwJEEh7gU6xEVxC0ahoOBvN2YI8GH6FNgA=="
       }
     },
+    "npm:validator": {
+      "type": "npm",
+      "name": "npm:validator",
+      "data": {
+        "version": "13.15.26",
+        "packageName": "validator",
+        "hash": "sha512-spH26xU080ydGggxRyR1Yhcbgx+j3y5jbNXk/8L+iRvdIEQ4uTRH2Sgf2dokud6Q4oAtsbNvJ1Ft+9xmm6IZcA=="
+      }
+    },
     "npm:varint": {
       "type": "npm",
       "name": "npm:varint",
@@ -13261,6 +13306,11 @@
       {
         "source": "inventory-service",
         "target": "npm:typeorm",
+        "type": "static"
+      },
+      {
+        "source": "inventory-service",
+        "target": "npm:class-validator",
         "type": "static"
       },
       {
@@ -16702,6 +16752,16 @@
         "source": "npm:@nestjs/common",
         "target": "npm:uid",
         "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/common",
+        "target": "npm:class-transformer",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/common",
+        "target": "npm:class-validator",
+        "type": "static"
       }
     ],
     "npm:@nestjs/core": [
@@ -19589,6 +19649,23 @@
       {
         "source": "npm:chokidar@4.0.3",
         "target": "npm:readdirp@4.1.2",
+        "type": "static"
+      }
+    ],
+    "npm:class-validator": [
+      {
+        "source": "npm:class-validator",
+        "target": "npm:@types/validator",
+        "type": "static"
+      },
+      {
+        "source": "npm:class-validator",
+        "target": "npm:libphonenumber-js",
+        "type": "static"
+      },
+      {
+        "source": "npm:class-validator",
+        "target": "npm:validator",
         "type": "static"
       }
     ],
@@ -27482,5 +27559,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1767496375706
+  "computedAt": 1767496736562
 }
