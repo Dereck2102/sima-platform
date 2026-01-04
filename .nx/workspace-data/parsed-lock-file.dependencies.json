@@ -3085,6 +3085,31 @@
     "type": "static"
   },
   {
+    "source": "npm:@nestjs/typeorm",
+    "target": "npm:@nestjs/common",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/typeorm",
+    "target": "npm:@nestjs/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/typeorm",
+    "target": "npm:reflect-metadata",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/typeorm",
+    "target": "npm:rxjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/typeorm",
+    "target": "npm:typeorm",
+    "type": "static"
+  },
+  {
     "source": "npm:@nodelib/fs.scandir",
     "target": "npm:@nodelib/fs.stat",
     "type": "static"
@@ -4910,6 +4935,11 @@
     "type": "static"
   },
   {
+    "source": "npm:available-typed-arrays",
+    "target": "npm:possible-typed-array-names",
+    "type": "static"
+  },
+  {
     "source": "npm:axios",
     "target": "npm:follow-redirects",
     "type": "static"
@@ -5211,7 +5241,7 @@
   },
   {
     "source": "npm:bl",
-    "target": "npm:buffer",
+    "target": "npm:buffer@5.7.1",
     "type": "static"
   },
   {
@@ -5395,12 +5425,22 @@
     "type": "static"
   },
   {
-    "source": "npm:buffer",
+    "source": "npm:buffer@5.7.1",
     "target": "npm:base64-js",
     "type": "static"
   },
   {
-    "source": "npm:buffer",
+    "source": "npm:buffer@5.7.1",
+    "target": "npm:ieee754",
+    "type": "static"
+  },
+  {
+    "source": "npm:buffer@6.0.3",
+    "target": "npm:base64-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:buffer@6.0.3",
     "target": "npm:ieee754",
     "type": "static"
   },
@@ -5422,6 +5462,26 @@
   {
     "source": "npm:call-bind-apply-helpers",
     "target": "npm:function-bind",
+    "type": "static"
+  },
+  {
+    "source": "npm:call-bind",
+    "target": "npm:call-bind-apply-helpers",
+    "type": "static"
+  },
+  {
+    "source": "npm:call-bind",
+    "target": "npm:es-define-property",
+    "type": "static"
+  },
+  {
+    "source": "npm:call-bind",
+    "target": "npm:get-intrinsic",
+    "type": "static"
+  },
+  {
+    "source": "npm:call-bind",
+    "target": "npm:set-function-length",
     "type": "static"
   },
   {
@@ -6085,6 +6145,21 @@
     "type": "static"
   },
   {
+    "source": "npm:define-data-property",
+    "target": "npm:es-define-property",
+    "type": "static"
+  },
+  {
+    "source": "npm:define-data-property",
+    "target": "npm:es-errors",
+    "type": "static"
+  },
+  {
+    "source": "npm:define-data-property",
+    "target": "npm:gopd",
+    "type": "static"
+  },
+  {
     "source": "npm:detect-port",
     "target": "npm:address",
     "type": "static"
@@ -6141,7 +6216,7 @@
   },
   {
     "source": "npm:dotenv-expand",
-    "target": "npm:dotenv",
+    "target": "npm:dotenv@16.4.7",
     "type": "static"
   },
   {
@@ -7025,6 +7100,11 @@
     "type": "static"
   },
   {
+    "source": "npm:for-each",
+    "target": "npm:is-callable",
+    "type": "static"
+  },
+  {
     "source": "npm:foreground-child",
     "target": "npm:cross-spawn",
     "type": "static"
@@ -7340,6 +7420,11 @@
     "type": "static"
   },
   {
+    "source": "npm:has-property-descriptors",
+    "target": "npm:es-define-property",
+    "type": "static"
+  },
+  {
     "source": "npm:has-tostringtag",
     "target": "npm:has-symbols",
     "type": "static"
@@ -7607,6 +7692,11 @@
   {
     "source": "npm:is-plain-object",
     "target": "npm:isobject",
+    "type": "static"
+  },
+  {
+    "source": "npm:is-typed-array",
+    "target": "npm:which-typed-array",
     "type": "static"
   },
   {
@@ -9261,7 +9351,7 @@
   },
   {
     "source": "npm:nx",
-    "target": "npm:dotenv",
+    "target": "npm:dotenv@16.4.7",
     "type": "static"
   },
   {
@@ -9692,6 +9782,71 @@
   {
     "source": "npm:path-scurry",
     "target": "npm:minipass",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg-pool",
+    "target": "npm:pg",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg-types",
+    "target": "npm:pg-int8",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg-types",
+    "target": "npm:postgres-array",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg-types",
+    "target": "npm:postgres-bytea",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg-types",
+    "target": "npm:postgres-date",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg-types",
+    "target": "npm:postgres-interval",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg",
+    "target": "npm:pg-connection-string",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg",
+    "target": "npm:pg-pool",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg",
+    "target": "npm:pg-protocol",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg",
+    "target": "npm:pg-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg",
+    "target": "npm:pgpass",
+    "type": "static"
+  },
+  {
+    "source": "npm:pg",
+    "target": "npm:pg-cloudflare",
+    "type": "static"
+  },
+  {
+    "source": "npm:pgpass",
+    "target": "npm:split2",
     "type": "static"
   },
   {
@@ -10170,6 +10325,11 @@
     "type": "static"
   },
   {
+    "source": "npm:postgres-interval",
+    "target": "npm:xtend",
+    "type": "static"
+  },
+  {
     "source": "npm:pretty-format",
     "target": "npm:@jest/schemas@30.0.5",
     "type": "static"
@@ -10261,7 +10421,7 @@
   },
   {
     "source": "npm:readable-stream@2.3.8",
-    "target": "npm:isarray",
+    "target": "npm:isarray@1.0.0",
     "type": "static"
   },
   {
@@ -10840,6 +11000,51 @@
     "type": "static"
   },
   {
+    "source": "npm:set-function-length",
+    "target": "npm:define-data-property",
+    "type": "static"
+  },
+  {
+    "source": "npm:set-function-length",
+    "target": "npm:es-errors",
+    "type": "static"
+  },
+  {
+    "source": "npm:set-function-length",
+    "target": "npm:function-bind",
+    "type": "static"
+  },
+  {
+    "source": "npm:set-function-length",
+    "target": "npm:get-intrinsic",
+    "type": "static"
+  },
+  {
+    "source": "npm:set-function-length",
+    "target": "npm:gopd",
+    "type": "static"
+  },
+  {
+    "source": "npm:set-function-length",
+    "target": "npm:has-property-descriptors",
+    "type": "static"
+  },
+  {
+    "source": "npm:sha.js",
+    "target": "npm:inherits@2.0.4",
+    "type": "static"
+  },
+  {
+    "source": "npm:sha.js",
+    "target": "npm:safe-buffer@5.2.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:sha.js",
+    "target": "npm:to-buffer",
+    "type": "static"
+  },
+  {
     "source": "npm:shallow-clone",
     "target": "npm:kind-of",
     "type": "static"
@@ -10936,7 +11141,7 @@
   },
   {
     "source": "npm:sockjs",
-    "target": "npm:uuid",
+    "target": "npm:uuid@8.3.2",
     "type": "static"
   },
   {
@@ -11330,6 +11535,21 @@
     "type": "static"
   },
   {
+    "source": "npm:to-buffer",
+    "target": "npm:isarray@2.0.5",
+    "type": "static"
+  },
+  {
+    "source": "npm:to-buffer",
+    "target": "npm:safe-buffer@5.2.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:to-buffer",
+    "target": "npm:typed-array-buffer",
+    "type": "static"
+  },
+  {
     "source": "npm:to-regex-range",
     "target": "npm:is-number",
     "type": "static"
@@ -11617,6 +11837,106 @@
   {
     "source": "npm:type-is@2.0.1",
     "target": "npm:mime-types@3.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-array-buffer",
+    "target": "npm:call-bound",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-array-buffer",
+    "target": "npm:es-errors",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-array-buffer",
+    "target": "npm:is-typed-array",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:@sqltools/formatter",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:ansis",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:app-root-path",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:buffer@6.0.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:dayjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:debug@4.4.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:dedent",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:dotenv@16.6.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:glob@10.5.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:reflect-metadata@0.2.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:sha.js",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:sql-highlight",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:uuid@11.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:yargs",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:pg",
+    "type": "static"
+  },
+  {
+    "source": "npm:typeorm",
+    "target": "npm:ts-node",
     "type": "static"
   },
   {
@@ -12257,6 +12577,41 @@
   {
     "source": "npm:whatwg-encoding",
     "target": "npm:iconv-lite@0.6.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:available-typed-arrays",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:call-bind",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:call-bound",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:for-each",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:get-proto",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:gopd",
+    "type": "static"
+  },
+  {
+    "source": "npm:which-typed-array",
+    "target": "npm:has-tostringtag",
     "type": "static"
   },
   {

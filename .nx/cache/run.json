@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx serve inventory-service",
+    "startTime": "2026-01-04T03:12:40.668Z",
+    "endTime": "2026-01-04T03:15:31.393Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "inventory-service:build",
+      "target": "build",
+      "projectName": "inventory-service",
+      "hash": "8589977399311839794",
+      "startTime": "2026-01-04T03:12:40.710Z",
+      "endTime": "2026-01-04T03:12:53.140Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}
