@@ -4460,6 +4460,15 @@
         "hash": "sha512-rK8aE/3/Ma45gAWfCksAXUNbOoSOUudU0Kn3rT39htPF7wsYXtKfjALKeKKJbFrIWbLjsbqfXX5bIJNvgBugGA=="
       }
     },
+    "npm:@nestjs/microservices": {
+      "type": "npm",
+      "name": "npm:@nestjs/microservices",
+      "data": {
+        "version": "11.1.11",
+        "packageName": "@nestjs/microservices",
+        "hash": "sha512-nqOdHk0QHmaloWTBb+6enT+OIT5atqjEHWKaaSoQfAlJVGa7FVhgdNVcWBdDcPtNQM6hCTc8VGgQHIRDDhjFOw=="
+      }
+    },
     "npm:@nestjs/passport": {
       "type": "npm",
       "name": "npm:@nestjs/passport",
@@ -9725,6 +9734,15 @@
         "hash": "sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA=="
       }
     },
+    "npm:kafkajs": {
+      "type": "npm",
+      "name": "npm:kafkajs",
+      "data": {
+        "version": "2.2.4",
+        "packageName": "kafkajs",
+        "hash": "sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA=="
+      }
+    },
     "npm:keyv": {
       "type": "npm",
       "name": "npm:keyv",
@@ -13642,6 +13660,11 @@
       },
       {
         "source": "inventory-service",
+        "target": "npm:@nestjs/microservices",
+        "type": "static"
+      },
+      {
+        "source": "inventory-service",
         "target": "npm:typeorm",
         "type": "static"
       },
@@ -13781,6 +13804,11 @@
       {
         "source": "audit-service",
         "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "audit-service",
+        "target": "npm:@nestjs/microservices",
         "type": "static"
       },
       {
@@ -17196,6 +17224,11 @@
       },
       {
         "source": "npm:@nestjs/core",
+        "target": "npm:@nestjs/microservices",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/core",
         "target": "npm:@nestjs/platform-express",
         "type": "static"
       }
@@ -17214,6 +17247,43 @@
       {
         "source": "npm:@nestjs/jwt",
         "target": "npm:jsonwebtoken",
+        "type": "static"
+      }
+    ],
+    "npm:@nestjs/microservices": [
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:iterare",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:reflect-metadata",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:tslib",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/microservices",
+        "target": "npm:kafkajs",
         "type": "static"
       }
     ],
@@ -17312,6 +17382,11 @@
       {
         "source": "npm:@nestjs/testing",
         "target": "npm:tslib",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nestjs/testing",
+        "target": "npm:@nestjs/microservices",
         "type": "static"
       },
       {
@@ -28151,5 +28226,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1767498536401
+  "computedAt": 1767500080413
 }

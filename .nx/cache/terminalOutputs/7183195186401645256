@@ -1,0 +1,37 @@
+[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+webpack compiled [1m[32msuccessfully[39m[22m (40ee099aa79e19be)
+[0K
+[2m[32m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[32m NX [39m[22m[27m[0m  [32mSuccessfully ran target [1mbuild[22m for project audit-service[39m[2m (13s)[22m[0K
+[0K
+[0J[?25h[?25h[?25h[1m[31mStarting inspector on localhost:9229 failed: address already in use[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:16 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +25ms[39m
+[33m[Nest] 9663  - [39m01/03/2026, 11:05:16 PM [33m   WARN[39m [38;5;3m[ServerKafka] [39m[33mWARN [undefined] KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option "createPartitioner: Partitioners.LegacyPartitioner". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable "KAFKAJS_NO_PARTITIONER_WARNING=1" {"timestamp":"2026-01-04T04:05:16.656Z","logger":"kafkajs"}[39m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:17 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response Metadata(key: 3, version: 6) {"timestamp":"2026-01-04T04:05:17.413Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"There is no leader for this topic-partition as we are in the middle of a leadership election","correlationId":1,"size":87}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:17 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response Metadata(key: 3, version: 6) {"timestamp":"2026-01-04T04:05:17.771Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"There is no leader for this topic-partition as we are in the middle of a leadership election","correlationId":2,"size":87}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:18 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response Metadata(key: 3, version: 6) {"timestamp":"2026-01-04T04:05:18.531Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"There is no leader for this topic-partition as we are in the middle of a leadership election","correlationId":3,"size":87}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:19 PM [32m    LOG[39m [38;5;3m[ServerKafka] [39m[32mINFO [Consumer] Starting {"timestamp":"2026-01-04T04:05:19.821Z","logger":"kafkajs","groupId":"audit-consumer-server"}[39m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:19 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response GroupCoordinator(key: 10, version: 2) {"timestamp":"2026-01-04T04:05:19.914Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"The group coordinator is not available","correlationId":5,"size":55}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:20 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response GroupCoordinator(key: 10, version: 2) {"timestamp":"2026-01-04T04:05:20.217Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"The group coordinator is not available","correlationId":6,"size":55}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:20 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response GroupCoordinator(key: 10, version: 2) {"timestamp":"2026-01-04T04:05:20.774Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"The group coordinator is not available","correlationId":7,"size":55}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 9663  - [39m[31m01/03/2026, 11:05:21 PM [31m  ERROR[39m[31m [38;5;3m[ServerKafka] [39m[31m[31mERROR [Connection] Response GroupCoordinator(key: 10, version: 2) {"timestamp":"2026-01-04T04:05:21.777Z","logger":"kafkajs","broker":"localhost:9092","clientId":"nestjs-consumer-server","error":"The group coordinator is not available","correlationId":8,"size":55}[39m[31m[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:26 PM [32m    LOG[39m [38;5;3m[ServerKafka] [39m[32mINFO [ConsumerGroup] Consumer has joined the group {"timestamp":"2026-01-04T04:05:26.934Z","logger":"kafkajs","groupId":"audit-consumer-server","memberId":"nestjs-consumer-server-1167999e-729a-42b5-ae17-1e51e213373d","leaderId":"nestjs-consumer-server-1167999e-729a-42b5-ae17-1e51e213373d","isLeader":true,"memberAssignment":{"asset.created":[0]},"groupProtocol":"RoundRobinAssigner","duration":7108}[39m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:26 PM [32m    LOG[39m [38;5;3m[NestMicroservice] [39m[32mNest microservice successfully started[39m[38;5;3m +5ms[39m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:26 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +29ms[39m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:26 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +8ms[39m
+[32m[Nest] 9663  - [39m01/03/2026, 11:05:26 PM [32m    LOG[39m [38;5;3m[AuditService] [39m[32mAudit Service running on: http://localhost:3002[39m
+[1m[31mWatch error: Daemon closed the connection[39m[22m

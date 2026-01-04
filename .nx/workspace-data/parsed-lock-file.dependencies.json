@@ -3006,6 +3006,11 @@
   },
   {
     "source": "npm:@nestjs/core",
+    "target": "npm:@nestjs/microservices",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/core",
     "target": "npm:@nestjs/platform-express",
     "type": "static"
   },
@@ -3022,6 +3027,41 @@
   {
     "source": "npm:@nestjs/jwt",
     "target": "npm:jsonwebtoken",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:@nestjs/common",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:@nestjs/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:iterare",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:reflect-metadata",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:rxjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/microservices",
+    "target": "npm:kafkajs",
     "type": "static"
   },
   {
@@ -3112,6 +3152,11 @@
   {
     "source": "npm:@nestjs/testing",
     "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/testing",
+    "target": "npm:@nestjs/microservices",
     "type": "static"
   },
   {
