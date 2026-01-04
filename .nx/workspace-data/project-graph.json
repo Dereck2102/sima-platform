@@ -569,6 +569,95 @@
         "tags": []
       }
     },
+    "auth-lib": {
+      "name": "auth-lib",
+      "type": "lib",
+      "data": {
+        "root": "libs/shared/auth-lib",
+        "targets": {
+          "lint": {
+            "cache": true,
+            "options": {
+              "cwd": "libs/shared/auth-lib",
+              "command": "eslint ."
+            },
+            "inputs": [
+              "default",
+              "^default",
+              "{workspaceRoot}/eslint.config.mjs",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "metadata": {
+              "technologies": [
+                "eslint"
+              ],
+              "description": "Runs ESLint on project",
+              "help": {
+                "command": "pnpm exec eslint --help",
+                "example": {
+                  "options": {
+                    "max-warnings": 0
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          },
+          "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": [
+              "{options.outputPath}"
+            ],
+            "options": {
+              "outputPath": "dist/libs/shared/auth-lib",
+              "tsConfig": "libs/shared/auth-lib/tsconfig.lib.json",
+              "packageJson": "libs/shared/auth-lib/package.json",
+              "main": "libs/shared/auth-lib/src/index.ts",
+              "assets": [
+                "libs/shared/auth-lib/*.md"
+              ]
+            },
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ]
+          }
+        },
+        "name": "auth-lib",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "js": {
+            "packageName": "@sima-platform/auth-lib",
+            "packageVersion": "0.0.1",
+            "packageMain": "./src/index.js",
+            "isInPackageManagerWorkspaces": false
+          }
+        },
+        "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/shared/auth-lib/src",
+        "projectType": "library",
+        "implicitDependencies": []
+      }
+    },
     "storage-service": {
       "name": "storage-service",
       "type": "app",
@@ -13543,6 +13632,11 @@
       },
       {
         "source": "inventory-service",
+        "target": "auth-lib",
+        "type": "static"
+      },
+      {
+        "source": "inventory-service",
         "target": "npm:@nestjs/typeorm",
         "type": "static"
       },
@@ -13568,6 +13662,28 @@
       }
     ],
     "analytics-engine": [],
+    "auth-lib": [
+      {
+        "source": "auth-lib",
+        "target": "npm:tslib",
+        "type": "static"
+      },
+      {
+        "source": "auth-lib",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "auth-lib",
+        "target": "npm:@nestjs/passport",
+        "type": "static"
+      },
+      {
+        "source": "auth-lib",
+        "target": "npm:passport-jwt",
+        "type": "static"
+      }
+    ],
     "storage-service": [
       {
         "source": "storage-service",
@@ -28035,5 +28151,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1767497524460
+  "computedAt": 1767498536401
 }

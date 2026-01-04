@@ -1,0 +1,23 @@
+> webpack-cli build --node-env=production
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.ts:[32m[1m15:4[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'UseGuards'.
+  [0m [90m 13 |[39m   }
+   [90m 14 |[39m
+  [31m[1m>[22m[39m[90m 15 |[39m   [33m@[39m[33mUseGuards[39m([33mJwtAuthGuard[39m)
+   [90m    |[39m    [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 16 |[39m   [33m@[39m[33mPost[39m([32m'assets'[39m)
+   [90m 17 |[39m   create([33m@[39m[33mBody[39m() createAssetDto[33m:[39m [33mCreateAssetDto[39m[33m,[39m [33m@[39m[33mRequest[39m() req) {
+   [90m 18 |[39m     [36mconst[39m user [33m=[39m req[33m.[39muser[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.ts:[32m[1m17:51[22m[39m[1m[39m[22m
+[90mTS2348: [39mValue of type '{ new (input: RequestInfo | URL, init?: RequestInit): Request; prototype: Request; }' is not callable. Did you mean to include 'new'?
+  [0m [90m 15 |[39m   [33m@[39m[33mUseGuards[39m([33mJwtAuthGuard[39m)
+   [90m 16 |[39m   [33m@[39m[33mPost[39m([32m'assets'[39m)
+  [31m[1m>[22m[39m[90m 17 |[39m   create([33m@[39m[33mBody[39m() createAssetDto[33m:[39m [33mCreateAssetDto[39m[33m,[39m [33m@[39m[33mRequest[39m() req) {
+   [90m    |[39m                                                   [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 18 |[39m     [36mconst[39m user [33m=[39m req[33m.[39muser[33m;[39m
+   [90m 19 |[39m     createAssetDto[33m.[39mtenantId [33m=[39m user[33m.[39mtenantId[33m;[39m
+   [90m 20 |[39m     [36mreturn[39m [36mthis[39m[33m.[39mappService[33m.[39mcreateAsset(createAssetDto)[33m;[39m[0m
+
+webpack compiled with [1m[31m2 errors[39m[22m (a25f8c2e87061004)

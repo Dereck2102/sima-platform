@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Asset } from './entities/asset.entity';
-
+import { AuthLibModule } from '@sima-platform/auth-lib';
 @Module({
   imports: [
+    AuthLibModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost', // Docker expone el puerto 5432 en localhost
