@@ -34,64 +34,64 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "README.md",
-        "hash": "14000822796782826815"
+        "file": "jest.config.ts",
+        "hash": "6870352021923392442"
       },
       {
         "file": ".gitignore",
         "hash": "3112686563449174471"
       },
       {
-        "file": "nx.json",
-        "hash": "1385747933987164305"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "5443105041930014821"
-      },
-      {
-        "file": "package.json",
-        "hash": "168579762886926250"
-      },
-      {
-        "file": "pnpm-workspace.yaml",
-        "hash": "2796837336234828585"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "14688272390704683536"
-      },
-      {
         "file": "jest.preset.js",
         "hash": "9430166341120122740"
-      },
-      {
-        "file": "eslint.config.mjs",
-        "hash": "12926286793420397906"
       },
       {
         "file": ".prettierrc",
         "hash": "16267754514737964994"
       },
       {
-        "file": "tsconfig.base.json",
-        "hash": "10237437068429485411"
+        "file": "package.json",
+        "hash": "3596749832258068225"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "12926286793420397906"
       },
       {
         "file": ".vscode/launch.json",
         "hash": "2821668748974593483"
       },
       {
-        "file": "pnpm-lock.yaml",
-        "hash": "2497107639799904276"
+        "file": "README.md",
+        "hash": "14000822796782826815"
       },
       {
-        "file": "jest.config.ts",
-        "hash": "6870352021923392442"
+        "file": "pnpm-workspace.yaml",
+        "hash": "2796837336234828585"
       },
       {
         "file": ".vscode/extensions.json",
         "hash": "4637156562308165301"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "14688272390704683536"
+      },
+      {
+        "file": "nx.json",
+        "hash": "1385747933987164305"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "2123806708883109935"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "10237437068429485411"
       },
       {
         "file": "docker-compose.yml",
@@ -99,6 +99,166 @@
       }
     ],
     "projectFileMap": {
+      "report-service": [
+        {
+          "file": "apps/report-service/eslint.config.mjs",
+          "hash": "2624537849564014525"
+        },
+        {
+          "file": "apps/report-service/jest.config.cts",
+          "hash": "10717983665688343778"
+        },
+        {
+          "file": "apps/report-service/project.json",
+          "hash": "7547503962082082733"
+        },
+        {
+          "file": "apps/report-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/report-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/report-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/report-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/report-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/report-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/report-service/src/main.ts",
+          "hash": "14244403322143362372",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/report-service/tsconfig.app.json",
+          "hash": "4241502811899613286"
+        },
+        {
+          "file": "apps/report-service/tsconfig.json",
+          "hash": "3490524966360018312"
+        },
+        {
+          "file": "apps/report-service/tsconfig.spec.json",
+          "hash": "11011431583980985399"
+        },
+        {
+          "file": "apps/report-service/webpack.config.js",
+          "hash": "14411869222273789200",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "notification-service": [
+        {
+          "file": "apps/notification-service/eslint.config.mjs",
+          "hash": "2624537849564014525"
+        },
+        {
+          "file": "apps/notification-service/jest.config.cts",
+          "hash": "6185566288553090136"
+        },
+        {
+          "file": "apps/notification-service/project.json",
+          "hash": "16005931212844156087"
+        },
+        {
+          "file": "apps/notification-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/notification-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/notification-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/notification-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/notification-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/notification-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/notification-service/src/main.ts",
+          "hash": "14244403322143362372",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/notification-service/tsconfig.app.json",
+          "hash": "4241502811899613286"
+        },
+        {
+          "file": "apps/notification-service/tsconfig.json",
+          "hash": "3490524966360018312"
+        },
+        {
+          "file": "apps/notification-service/tsconfig.spec.json",
+          "hash": "11011431583980985399"
+        },
+        {
+          "file": "apps/notification-service/webpack.config.js",
+          "hash": "238421555387715454",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
       "api-gateway": [
         {
           "file": "apps/api-gateway/eslint.config.mjs",
@@ -179,81 +339,94 @@
           ]
         }
       ],
-      "report-service": [
+      "audit-service": [
         {
-          "file": "apps/report-service/eslint.config.mjs",
+          "file": "apps/audit-service/eslint.config.mjs",
           "hash": "2624537849564014525"
         },
         {
-          "file": "apps/report-service/jest.config.cts",
-          "hash": "10717983665688343778"
+          "file": "apps/audit-service/jest.config.cts",
+          "hash": "1329416596669017052"
         },
         {
-          "file": "apps/report-service/project.json",
-          "hash": "7547503962082082733"
+          "file": "apps/audit-service/project.json",
+          "hash": "2956071521127703021"
         },
         {
-          "file": "apps/report-service/src/app/app.controller.spec.ts",
+          "file": "apps/audit-service/src/app/app.controller.spec.ts",
           "hash": "7647647754668916054",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
-          "file": "apps/report-service/src/app/app.controller.ts",
-          "hash": "15276891910009544695",
+          "file": "apps/audit-service/src/app/app.controller.ts",
+          "hash": "1091851762721065026",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/microservices",
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
           ]
         },
         {
-          "file": "apps/report-service/src/app/app.module.ts",
-          "hash": "11673476679848632172",
+          "file": "apps/audit-service/src/app/app.module.ts",
+          "hash": "17349515974072492337",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose"
           ]
         },
         {
-          "file": "apps/report-service/src/app/app.service.spec.ts",
+          "file": "apps/audit-service/src/app/app.service.spec.ts",
           "hash": "13111976464657524091",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
-          "file": "apps/report-service/src/app/app.service.ts",
+          "file": "apps/audit-service/src/app/app.service.ts",
           "hash": "9967902337593410053",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
-          "file": "apps/report-service/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/report-service/src/main.ts",
-          "hash": "14244403322143362372",
+          "file": "apps/audit-service/src/app/schemas/audit-log.schema.ts",
+          "hash": "535835885117253704",
           "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core"
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
           ]
         },
         {
-          "file": "apps/report-service/tsconfig.app.json",
+          "file": "apps/audit-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/audit-service/src/main.ts",
+          "hash": "2434296993482281551",
+          "deps": [
+            "npm:@nestjs/core",
+            "npm:@nestjs/microservices",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/audit-service/tsconfig.app.json",
           "hash": "4241502811899613286"
         },
         {
-          "file": "apps/report-service/tsconfig.json",
+          "file": "apps/audit-service/tsconfig.json",
           "hash": "3490524966360018312"
         },
         {
-          "file": "apps/report-service/tsconfig.spec.json",
+          "file": "apps/audit-service/tsconfig.spec.json",
           "hash": "11011431583980985399"
         },
         {
-          "file": "apps/report-service/webpack.config.js",
-          "hash": "14411869222273789200",
+          "file": "apps/audit-service/webpack.config.js",
+          "hash": "3077443311655931782",
           "deps": [
             "npm:@nx/webpack"
           ]
@@ -359,93 +532,81 @@
           ]
         }
       ],
-      "analytics-engine": [
+      "mobile-bff": [
         {
-          "file": "apps/analytics-engine/main.py",
-          "hash": "9093841136766039899"
-        },
-        {
-          "file": "apps/analytics-engine/project.json",
-          "hash": "1037435282448354588"
-        }
-      ],
-      "audit-service": [
-        {
-          "file": "apps/audit-service/eslint.config.mjs",
+          "file": "apps/mobile-bff/eslint.config.mjs",
           "hash": "2624537849564014525"
         },
         {
-          "file": "apps/audit-service/jest.config.cts",
-          "hash": "1329416596669017052"
+          "file": "apps/mobile-bff/jest.config.cts",
+          "hash": "6497547379068522455"
         },
         {
-          "file": "apps/audit-service/project.json",
-          "hash": "2956071521127703021"
+          "file": "apps/mobile-bff/project.json",
+          "hash": "2189686961740598051"
         },
         {
-          "file": "apps/audit-service/src/app/app.controller.spec.ts",
+          "file": "apps/mobile-bff/src/app/app.controller.spec.ts",
           "hash": "7647647754668916054",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
-          "file": "apps/audit-service/src/app/app.controller.ts",
-          "hash": "2745379663898139597",
+          "file": "apps/mobile-bff/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
           "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/microservices"
+            "npm:@nestjs/common"
           ]
         },
         {
-          "file": "apps/audit-service/src/app/app.module.ts",
+          "file": "apps/mobile-bff/src/app/app.module.ts",
           "hash": "11673476679848632172",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
-          "file": "apps/audit-service/src/app/app.service.spec.ts",
+          "file": "apps/mobile-bff/src/app/app.service.spec.ts",
           "hash": "13111976464657524091",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
-          "file": "apps/audit-service/src/app/app.service.ts",
+          "file": "apps/mobile-bff/src/app/app.service.ts",
           "hash": "9967902337593410053",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
-          "file": "apps/audit-service/src/assets/.gitkeep",
+          "file": "apps/mobile-bff/src/assets/.gitkeep",
           "hash": "3244421341483603138"
         },
         {
-          "file": "apps/audit-service/src/main.ts",
-          "hash": "2434296993482281551",
+          "file": "apps/mobile-bff/src/main.ts",
+          "hash": "14244403322143362372",
           "deps": [
-            "npm:@nestjs/core",
-            "npm:@nestjs/microservices",
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
           ]
         },
         {
-          "file": "apps/audit-service/tsconfig.app.json",
+          "file": "apps/mobile-bff/tsconfig.app.json",
           "hash": "4241502811899613286"
         },
         {
-          "file": "apps/audit-service/tsconfig.json",
+          "file": "apps/mobile-bff/tsconfig.json",
           "hash": "3490524966360018312"
         },
         {
-          "file": "apps/audit-service/tsconfig.spec.json",
+          "file": "apps/mobile-bff/tsconfig.spec.json",
           "hash": "11011431583980985399"
         },
         {
-          "file": "apps/audit-service/webpack.config.js",
-          "hash": "3077443311655931782",
+          "file": "apps/mobile-bff/webpack.config.js",
+          "hash": "734538968999705093",
           "deps": [
             "npm:@nx/webpack"
           ]
@@ -503,6 +664,96 @@
         {
           "file": "libs/shared/auth-lib/tsconfig.lib.json",
           "hash": "10698017584812971711"
+        }
+      ],
+      "storage-service": [
+        {
+          "file": "apps/storage-service/eslint.config.mjs",
+          "hash": "2624537849564014525"
+        },
+        {
+          "file": "apps/storage-service/jest.config.cts",
+          "hash": "17656343327123939749"
+        },
+        {
+          "file": "apps/storage-service/project.json",
+          "hash": "5320659232796019120"
+        },
+        {
+          "file": "apps/storage-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/storage-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/storage-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/storage-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/storage-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/storage-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/storage-service/src/main.ts",
+          "hash": "14244403322143362372",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/storage-service/tsconfig.app.json",
+          "hash": "4241502811899613286"
+        },
+        {
+          "file": "apps/storage-service/tsconfig.json",
+          "hash": "3490524966360018312"
+        },
+        {
+          "file": "apps/storage-service/tsconfig.spec.json",
+          "hash": "11011431583980985399"
+        },
+        {
+          "file": "apps/storage-service/webpack.config.js",
+          "hash": "1945207271398807958",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "geo-tracker": [
+        {
+          "file": "apps/geo-tracker/main.go",
+          "hash": "9761761009972577569"
+        },
+        {
+          "file": "apps/geo-tracker/project.json",
+          "hash": "2502329362365675141"
         }
       ],
       "search-service": [
@@ -583,16 +834,6 @@
           "deps": [
             "npm:@nx/webpack"
           ]
-        }
-      ],
-      "geo-tracker": [
-        {
-          "file": "apps/geo-tracker/main.go",
-          "hash": "9761761009972577569"
-        },
-        {
-          "file": "apps/geo-tracker/project.json",
-          "hash": "2502329362365675141"
         }
       ],
       "inventory-service": [
@@ -696,246 +937,6 @@
           ]
         }
       ],
-      "mobile-bff": [
-        {
-          "file": "apps/mobile-bff/eslint.config.mjs",
-          "hash": "2624537849564014525"
-        },
-        {
-          "file": "apps/mobile-bff/jest.config.cts",
-          "hash": "6497547379068522455"
-        },
-        {
-          "file": "apps/mobile-bff/project.json",
-          "hash": "2189686961740598051"
-        },
-        {
-          "file": "apps/mobile-bff/src/app/app.controller.spec.ts",
-          "hash": "7647647754668916054",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/mobile-bff/src/app/app.controller.ts",
-          "hash": "15276891910009544695",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/mobile-bff/src/app/app.module.ts",
-          "hash": "11673476679848632172",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/mobile-bff/src/app/app.service.spec.ts",
-          "hash": "13111976464657524091",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/mobile-bff/src/app/app.service.ts",
-          "hash": "9967902337593410053",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/mobile-bff/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/mobile-bff/src/main.ts",
-          "hash": "14244403322143362372",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "apps/mobile-bff/tsconfig.app.json",
-          "hash": "4241502811899613286"
-        },
-        {
-          "file": "apps/mobile-bff/tsconfig.json",
-          "hash": "3490524966360018312"
-        },
-        {
-          "file": "apps/mobile-bff/tsconfig.spec.json",
-          "hash": "11011431583980985399"
-        },
-        {
-          "file": "apps/mobile-bff/webpack.config.js",
-          "hash": "734538968999705093",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        }
-      ],
-      "storage-service": [
-        {
-          "file": "apps/storage-service/eslint.config.mjs",
-          "hash": "2624537849564014525"
-        },
-        {
-          "file": "apps/storage-service/jest.config.cts",
-          "hash": "17656343327123939749"
-        },
-        {
-          "file": "apps/storage-service/project.json",
-          "hash": "5320659232796019120"
-        },
-        {
-          "file": "apps/storage-service/src/app/app.controller.spec.ts",
-          "hash": "7647647754668916054",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/storage-service/src/app/app.controller.ts",
-          "hash": "15276891910009544695",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/storage-service/src/app/app.module.ts",
-          "hash": "11673476679848632172",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/storage-service/src/app/app.service.spec.ts",
-          "hash": "13111976464657524091",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/storage-service/src/app/app.service.ts",
-          "hash": "9967902337593410053",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/storage-service/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/storage-service/src/main.ts",
-          "hash": "14244403322143362372",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "apps/storage-service/tsconfig.app.json",
-          "hash": "4241502811899613286"
-        },
-        {
-          "file": "apps/storage-service/tsconfig.json",
-          "hash": "3490524966360018312"
-        },
-        {
-          "file": "apps/storage-service/tsconfig.spec.json",
-          "hash": "11011431583980985399"
-        },
-        {
-          "file": "apps/storage-service/webpack.config.js",
-          "hash": "1945207271398807958",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        }
-      ],
-      "notification-service": [
-        {
-          "file": "apps/notification-service/eslint.config.mjs",
-          "hash": "2624537849564014525"
-        },
-        {
-          "file": "apps/notification-service/jest.config.cts",
-          "hash": "6185566288553090136"
-        },
-        {
-          "file": "apps/notification-service/project.json",
-          "hash": "16005931212844156087"
-        },
-        {
-          "file": "apps/notification-service/src/app/app.controller.spec.ts",
-          "hash": "7647647754668916054",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/notification-service/src/app/app.controller.ts",
-          "hash": "15276891910009544695",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/notification-service/src/app/app.module.ts",
-          "hash": "11673476679848632172",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/notification-service/src/app/app.service.spec.ts",
-          "hash": "13111976464657524091",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/notification-service/src/app/app.service.ts",
-          "hash": "9967902337593410053",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/notification-service/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/notification-service/src/main.ts",
-          "hash": "14244403322143362372",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "apps/notification-service/tsconfig.app.json",
-          "hash": "4241502811899613286"
-        },
-        {
-          "file": "apps/notification-service/tsconfig.json",
-          "hash": "3490524966360018312"
-        },
-        {
-          "file": "apps/notification-service/tsconfig.spec.json",
-          "hash": "11011431583980985399"
-        },
-        {
-          "file": "apps/notification-service/webpack.config.js",
-          "hash": "238421555387715454",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        }
-      ],
       "tenant-service": [
         {
           "file": "apps/tenant-service/eslint.config.mjs",
@@ -1015,8 +1016,18 @@
             "npm:@nx/webpack"
           ]
         }
+      ],
+      "analytics-engine": [
+        {
+          "file": "apps/analytics-engine/main.py",
+          "hash": "9093841136766039899"
+        },
+        {
+          "file": "apps/analytics-engine/project.json",
+          "hash": "1037435282448354588"
+        }
       ]
     }
   },
-  "externalNodesHash": "10476195001391208405"
+  "externalNodesHash": "17203376009853389606"
 }

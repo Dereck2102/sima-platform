@@ -16,37 +16,26 @@
 [0K
 [2m[32m———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
 [0K
-[0m[7m[1m[32m NX [39m[22m[27m[0m  [32mSuccessfully ran target [1mbuild[22m for project inventory-service and [1m1[22m task it depends on[39m[2m (327ms)[22m[0K
+[0m[7m[1m[32m NX [39m[22m[27m[0m  [32mSuccessfully ran target [1mbuild[22m for project inventory-service and [1m1[22m task it depends on[39m[2m (181ms)[22m[0K
 [2m[22m
 [2mNx read the output from the cache instead of running the command for 2 out of 2 tasks.[22m[0K
 [0K
 [0J[?25h[?25h[?25h[1m[31mStarting inspector on localhost:9229 failed: address already in use[39m[22m
 [1m[31m[39m[22m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthLibModule dependencies initialized[39m[38;5;3m +180ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mClientsModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +284ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +4ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/api}:[39m[38;5;3m +16ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api, GET} route[39m[38;5;3m +15ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/assets, POST} route[39m[38;5;3m +6ms[39m
-[32m[Nest] 10298  - [39m01/03/2026, 11:13:43 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +12ms[39m
-[1m[31m[31m[Nest] 10298  - [39m[31m01/03/2026, 11:13:43 PM [31m  ERROR[39m[31m [38;5;3m[NestApplication] [39m[31m[31mError: listen EADDRINUSE: address already in use :::3000[39m[31m[38;5;3m +6ms[39m[31m[39m[22m
-[1m[31m[39m[22m
-[1m[31mError: listen EADDRINUSE: address already in use :::3000[39m[22m
-[1m[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m[22m
-[1m[31m    at listenInCluster (node:net:1965:12)[39m[22m
-[1m[31m    at Server.listen (node:net:2067:7)[39m[22m
-[1m[31m    at ExpressAdapter.listen (/home/adminsima/sima-platform/node_modules/.pnpm/@nestjs+platform-express@11.1.11_@nestjs+common@11.1.11_class-transformer@0.5.1_class-v_a2f2592816f551530c90021d6cebf375/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)[39m[22m
-[1m[31m    at /home/adminsima/sima-platform/node_modules/.pnpm/@nestjs+core@11.1.11_@nestjs+common@11.1.11_class-transformer@0.5.1_class-validator@0.1_c847f5daa2de9b7aeb204ca4e9465049/node_modules/@nestjs/core/nest-application.js:188:30[39m[22m
-[1m[31m    at new Promise (<anonymous>)[39m[22m
-[1m[31m    at NestApplication.listen (/home/adminsima/sima-platform/node_modules/.pnpm/@nestjs+core@11.1.11_@nestjs+common@11.1.11_class-transformer@0.5.1_class-validator@0.1_c847f5daa2de9b7aeb204ca4e9465049/node_modules/@nestjs/core/nest-application.js:178:16)[39m[22m
-[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
-[1m[31m    at bootstrap (/home/adminsima/sima-platform/apps/inventory-service/src/main.ts:15:3)[39m[22m
-[1m[31m[39m[22m
-
-[7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
-
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthLibModule dependencies initialized[39m[38;5;3m +149ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mClientsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +265ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/api}:[39m[38;5;3m +25ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api, GET} route[39m[38;5;3m +16ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/assets, POST} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +13ms[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:14:44 PM [32m    LOG[39m [32m🚀 Application is running on: http://localhost:3000/api[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:15:14 PM [32m    LOG[39m [38;5;3m[ClientKafka] [39m[32mINFO [Consumer] Starting {"timestamp":"2026-01-04T04:15:14.327Z","logger":"kafkajs","groupId":"inventory-consumer-client"}[39m
+[32m[Nest] 10514  - [39m01/03/2026, 11:15:17 PM [32m    LOG[39m [38;5;3m[ClientKafka] [39m[32mINFO [ConsumerGroup] Consumer has joined the group {"timestamp":"2026-01-04T04:15:17.442Z","logger":"kafkajs","groupId":"inventory-consumer-client","memberId":"inventory-client-d634493d-87c7-4efb-8bda-6b0d1afad29d","leaderId":"inventory-client-d634493d-87c7-4efb-8bda-6b0d1afad29d","isLeader":true,"memberAssignment":{},"groupProtocol":"NestReplyPartitionAssigner","duration":3060}[39m
+[33m[Nest] 10514  - [39m01/03/2026, 11:15:17 PM [33m   WARN[39m [38;5;3m[ClientKafka] [39m[33mWARN [undefined] KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option "createPartitioner: Partitioners.LegacyPartitioner". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable "KAFKAJS_NO_PARTITIONER_WARNING=1" {"timestamp":"2026-01-04T04:15:17.444Z","logger":"kafkajs"}[39m
+[1m[31mWatch error: Daemon closed the connection[39m[22m

@@ -2885,6 +2885,11 @@
     "type": "static"
   },
   {
+    "source": "npm:@mongodb-js/saslprep",
+    "target": "npm:sparse-bitfield",
+    "type": "static"
+  },
+  {
     "source": "npm:@napi-rs/wasm-runtime@0.2.12",
     "target": "npm:@emnapi/core",
     "type": "static"
@@ -3062,6 +3067,26 @@
   {
     "source": "npm:@nestjs/microservices",
     "target": "npm:kafkajs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/mongoose",
+    "target": "npm:@nestjs/common",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/mongoose",
+    "target": "npm:@nestjs/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/mongoose",
+    "target": "npm:mongoose",
+    "type": "static"
+  },
+  {
+    "source": "npm:@nestjs/mongoose",
+    "target": "npm:rxjs",
     "type": "static"
   },
   {
@@ -4407,6 +4432,11 @@
   {
     "source": "npm:@types/sockjs",
     "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/whatwg-url",
+    "target": "npm:@types/webidl-conversions",
     "type": "static"
   },
   {
@@ -9465,6 +9495,61 @@
     "type": "static"
   },
   {
+    "source": "npm:mongodb-connection-string-url",
+    "target": "npm:@types/whatwg-url",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongodb-connection-string-url",
+    "target": "npm:whatwg-url",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongodb",
+    "target": "npm:@mongodb-js/saslprep",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongodb",
+    "target": "npm:bson",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongodb",
+    "target": "npm:mongodb-connection-string-url",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongoose",
+    "target": "npm:kareem",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongoose",
+    "target": "npm:mongodb",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongoose",
+    "target": "npm:mpath",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongoose",
+    "target": "npm:mquery",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongoose",
+    "target": "npm:ms@2.1.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:mongoose",
+    "target": "npm:sift",
+    "type": "static"
+  },
+  {
     "source": "npm:multer",
     "target": "npm:append-field",
     "type": "static"
@@ -11445,6 +11530,11 @@
     "type": "static"
   },
   {
+    "source": "npm:sparse-bitfield",
+    "target": "npm:memory-pager",
+    "type": "static"
+  },
+  {
     "source": "npm:spdy-transport",
     "target": "npm:debug@4.4.3",
     "type": "static"
@@ -11817,6 +11907,11 @@
   {
     "source": "npm:token-types",
     "target": "npm:ieee754",
+    "type": "static"
+  },
+  {
+    "source": "npm:tr46",
+    "target": "npm:punycode",
     "type": "static"
   },
   {
@@ -12827,6 +12922,16 @@
   {
     "source": "npm:whatwg-encoding",
     "target": "npm:iconv-lite@0.6.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:whatwg-url",
+    "target": "npm:tr46",
+    "type": "static"
+  },
+  {
+    "source": "npm:whatwg-url",
+    "target": "npm:webidl-conversions",
     "type": "static"
   },
   {
