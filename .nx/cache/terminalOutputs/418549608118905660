@@ -1,0 +1,462 @@
+[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+webpack compiled [1m[32msuccessfully[39m[22m (081ef1b1c55f1a52)
+[0K
+[2m[32m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[32m NX [39m[22m[27m[0m  [32mSuccessfully ran target [1mbuild[22m for project audit-service[39m[2m (14s)[22m[0K
+[0K
+[0J[?25h[?25h[?25h[1m[31mDebugger listening on ws://localhost:9229/e150accd-a802-4619-9e69-4a9d6d8c1e33[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 29646  - [39m01/05/2026, 1:59:44 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 29646  - [39m01/05/2026, 1:59:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMongooseModule dependencies initialized[39m[38;5;3m +108ms[39m
+[32m[Nest] 29646  - [39m01/05/2026, 1:59:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29646  - [39m01/05/2026, 1:59:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 29646  - [39m01/05/2026, 1:59:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 1:59:45 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (1)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 1:59:48 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (2)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 1:59:51 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (3)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 1:59:54 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (4)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 1:59:57 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (5)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 2:00:00 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (6)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 2:00:03 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (7)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 2:00:06 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (8)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 2:00:09 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (9)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29646  - [39m[31m01/05/2026, 2:00:09 AM [31m  ERROR[39m[31m [38;5;3m[ExceptionHandler] [39m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connection.ts:557:17[90m)[39m[31m[39m[22m
+[1m[31m[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[31m[39m[22m
+[1m[31m    at Connection.command [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connection.ts:627:22[90m)[39m[31m[39m[22m
+[1m[31m    at executeScram [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/auth/scram.ts:113:20[90m)[39m[31m[39m[22m
+[1m[31m    at ScramSHA256.auth [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/auth/scram.ts:60:12[90m)[39m[31m[39m[22m
+[1m[31m    at performInitialHandshake [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connect.ts:164:7[90m)[39m[31m[39m[22m
+[1m[31m    at connect [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connect.ts:43:5[90m)[39m[31m {[39m[22m
+[1m[31m  errorLabelSet: Set(2) {[39m[22m
+[1m[31m    [32m'HandshakeError'[39m[31m,[39m[22m
+[1m[31m    [32m'ResetPool'[39m[31m[39m[22m
+[1m[31m  },[39m[22m
+[1m[31m  errorResponse: {[39m[22m
+[1m[31m    ok: [33m0[39m[31m,[39m[22m
+[1m[31m    errmsg: [32m'Authentication failed.'[39m[31m,[39m[22m
+[1m[31m    code: [33m18[39m[31m,[39m[22m
+[1m[31m    codeName: [32m'AuthenticationFailed'[39m[31m[39m[22m
+[1m[31m  },[39m[22m
+[1m[31m  ok: [33m0[39m[31m,[39m[22m
+[1m[31m  code: [33m18[39m[31m,[39m[22m
+[1m[31m  codeName: [32m'AuthenticationFailed'[39m[31m,[39m[22m
+[1m[31m  connectionGeneration: [33m0[39m[31m[39m[22m
+[1m[31m}[39m[22m
+[1m[31m[39m[22m
+
+[7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mRan target [1mbuild[22m for project [1maudit-service[22m[39m[2m (8s)[22m[0K
+[0K
+   [31m✖[39m  1/1 failed[0K
+   [2m✔[22m  0/1 succeeded [2m[0 read from cache][22m[0K
+[0K
+[0J[?25h
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[?25l[?25h[?25h
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+webpack compiled [1m[32msuccessfully[39m[22m (e83af032ebcd24e7)
+[0K
+[2m[32m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[32m NX [39m[22m[27m[0m  [32mSuccessfully ran target [1mbuild[22m for project audit-service[39m[2m (21s)[22m[0K
+[0K
+[0J[?25h[?25h[?25h[1m[31mDebugger listening on ws://localhost:9229/f866f218-95a8-4774-bb15-8dd2f658a52f[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 29951  - [39m01/05/2026, 2:04:23 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 29951  - [39m01/05/2026, 2:04:23 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMongooseModule dependencies initialized[39m[38;5;3m +51ms[39m
+[32m[Nest] 29951  - [39m01/05/2026, 2:04:23 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29951  - [39m01/05/2026, 2:04:23 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 29951  - [39m01/05/2026, 2:04:23 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:23 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (1)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:26 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (2)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ebe89f2107a00d6f)
+[0K
+[2m[32m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[32m NX [39m[22m[27m[0m  [32mSuccessfully ran target [1mbuild[22m for project audit-service[39m[2m (17s)[22m[0K
+[0K
+[0J[?25h[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:29 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (3)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[?25h[?25h[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:32 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (4)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:35 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (5)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:38 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (6)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:42 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (7)...[39m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:45 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (8)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:48 AM [31m  ERROR[39m[31m [38;5;3m[MongooseModule] [39m[31m[31mUnable to connect to the database. Retrying (9)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:557:17)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[22m
+[1m[31m    at Connection.command (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connection.ts:627:22)[39m[22m
+[1m[31m    at executeScram (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:113:20)[39m[22m
+[1m[31m    at ScramSHA256.auth (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/auth/scram.ts:60:12)[39m[22m
+[1m[31m    at performInitialHandshake (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:164:7)[39m[22m
+[1m[31m    at connect (/home/adminsima/sima-platform/node_modules/mongoose/node_modules/mongodb/src/cmap/connect.ts:43:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 29951  - [39m[31m01/05/2026, 2:04:48 AM [31m  ERROR[39m[31m [38;5;3m[ExceptionHandler] [39m[31mMongoServerError: Authentication failed.[39m[22m
+[1m[31m    at Connection.sendCommand [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connection.ts:557:17[90m)[39m[31m[39m[22m
+[1m[31m[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m[31m[39m[22m
+[1m[31m    at Connection.command [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connection.ts:627:22[90m)[39m[31m[39m[22m
+[1m[31m    at executeScram [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/auth/scram.ts:113:20[90m)[39m[31m[39m[22m
+[1m[31m    at ScramSHA256.auth [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/auth/scram.ts:60:12[90m)[39m[31m[39m[22m
+[1m[31m    at performInitialHandshake [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connect.ts:164:7[90m)[39m[31m[39m[22m
+[1m[31m    at connect [90m(/home/adminsima/sima-platform/[39m[31mnode_modules/[4mmongoose[24m/node_modules/[4mmongodb[24m/src/cmap/connect.ts:43:5[90m)[39m[31m {[39m[22m
+[1m[31m  errorLabelSet: Set(2) {[39m[22m
+[1m[31m    [32m'HandshakeError'[39m[31m,[39m[22m
+[1m[31m    [32m'ResetPool'[39m[31m[39m[22m
+[1m[31m  },[39m[22m
+[1m[31m  errorResponse: {[39m[22m
+[1m[31m    ok: [33m0[39m[31m,[39m[22m
+[1m[31m    errmsg: [32m'Authentication failed.'[39m[31m,[39m[22m
+[1m[31m    code: [33m18[39m[31m,[39m[22m
+[1m[31m    codeName: [32m'AuthenticationFailed'[39m[31m[39m[22m
+[1m[31m  },[39m[22m
+[1m[31m  ok: [33m0[39m[31m,[39m[22m
+[1m[31m  code: [33m18[39m[31m,[39m[22m
+[1m[31m  codeName: [32m'AuthenticationFailed'[39m[31m,[39m[22m
+[1m[31m  connectionGeneration: [33m0[39m[31m[39m[22m
+[1m[31m}[39m[22m
+[1m[31m[39m[22m
+
+[7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[?25l
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mRan target [1mbuild[22m for project [1maudit-service[22m[39m[2m (6s)[22m[0K
+[0K
+   [31m✖[39m  1/1 failed[0K
+   [2m✔[22m  0/1 succeeded [2m[0 read from cache][22m[0K
+[0K
+[0J[?25h[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+[?25h[?25h
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mRan target [1mbuild[22m for project [1maudit-service[22m[39m[2m (2s)[22m[0K
+[0K
+   [31m✖[39m  1/1 failed[0K
+   [2m✔[22m  0/1 succeeded [2m[0 read from cache][22m[0K
+[0K
+[0J[?25h[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+[?25h[?25h
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mRan target [1mbuild[22m for project [1maudit-service[22m[39m[2m (3s)[22m[0K
+[0K
+   [31m✖[39m  1/1 failed[0K
+   [2m✔[22m  0/1 succeeded [2m[0 read from cache][22m[0K
+[0K
+[0J[?25h
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[?25h[?25h
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.module.ts:[32m[1m23:21[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'Mongo'.
+  [0m [90m 21 |[39m         [36mconst[39m uri [33m=[39m [32m`mongodb://${user}:${pass}@${host}/${dbName}?authSource=admin&directConnection=true`[39m[33m;[39m
+   [90m 22 |[39m         
+  [31m[1m>[22m[39m[90m 23 |[39m         [33mLogger[39m[33m.[39mlog([32m` Mongo URI: mongodb://${user}:****@${host}/${dbName}?authSource=admin`[39m[33m,[39m [32m'MongooseModule'[39m)[33m;[39m
+   [90m    |[39m                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 24 |[39m         
+   [90m 25 |[39m         [36mreturn[39m { uri }[33m;[39m
+   [90m 26 |[39m       }[33m,[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.module.ts:[32m[1m23:27[22m[39m[1m[39m[22m
+[90mTS2552: [39mCannot find name 'URI'. Did you mean 'uri'?
+  [0m [90m 21 |[39m         [36mconst[39m uri [33m=[39m [32m`mongodb://${user}:${pass}@${host}/${dbName}?authSource=admin&directConnection=true`[39m[33m;[39m
+   [90m 22 |[39m         
+  [31m[1m>[22m[39m[90m 23 |[39m         [33mLogger[39m[33m.[39mlog([32m` Mongo URI: mongodb://${user}:****@${host}/${dbName}?authSource=admin`[39m[33m,[39m [32m'MongooseModule'[39m)[33m;[39m
+   [90m    |[39m                           [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 24 |[39m         
+   [90m 25 |[39m         [36mreturn[39m { uri }[33m;[39m
+   [90m 26 |[39m       }[33m,[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.module.ts:[32m[1m23:32[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'mongodb'.
+  [0m [90m 21 |[39m         [36mconst[39m uri [33m=[39m [32m`mongodb://${user}:${pass}@${host}/${dbName}?authSource=admin&directConnection=true`[39m[33m;[39m
+   [90m 22 |[39m         
+  [31m[1m>[22m[39m[90m 23 |[39m         [33mLogger[39m[33m.[39mlog([32m` Mongo URI: mongodb://${user}:****@${host}/${dbName}?authSource=admin`[39m[33m,[39m [32m'MongooseModule'[39m)[33m;[39m
+   [90m    |[39m                                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 24 |[39m         
+   [90m 25 |[39m         [36mreturn[39m { uri }[33m;[39m
+   [90m 26 |[39m       }[33m,[39m[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (0d06c78866e42c39)
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mRan target [1mbuild[22m for project [1maudit-service[22m[39m[2m (24s)[22m[0K
+[0K
+   [31m✖[39m  1/1 failed[0K
+   [2m✔[22m  0/1 succeeded [2m[0 read from cache][22m[0K
+[0K
+[0J[?25h[?25h[?25h[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+
+[7m[1m[36m NX [39m[22m[27m [1mFile change detected. Restarting...[22m
+
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K
+[0K
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mRan target [1mbuild[22m for project [1maudit-service[22m[39m[2m (12s)[22m[0K
+[0K
+   [31m✖[39m  1/1 failed[0K
+   [2m✔[22m  0/1 succeeded [2m[0 read from cache][22m[0K
+[0K
+[0J[?25h[?25l
+[2m> [22m[2mnx run[22m audit-service:build:development
+
+> webpack-cli build --node-env=development
+
+[?25h[?25h/home/adminsima/sima-platform/node_modules/@nx/js/src/executors/node/lib/coalescing-debounce.js:47
+                reject(new Error('Cancelled'));
+                       ^
+
+Error: Cancelled
+    at Object.cancel [90m(/home/adminsima/sima-platform/[39mnode_modules/[4m@nx/js[24m/src/executors/node/lib/coalescing-debounce.js:47:24[90m)[39m
+    at stopAllTasks [90m(/home/adminsima/sima-platform/[39mnode_modules/[4m@nx/js[24m/src/executors/node/node.impl.js:178:35[90m)[39m
+    at process.<anonymous> [90m(/home/adminsima/sima-platform/[39mnode_modules/[4m@nx/js[24m/src/executors/node/node.impl.js:199:19[90m)[39m
+[90m    at process.emit (node:events:524:28)[39m
+    at process.emit [90m(/home/adminsima/sima-platform/[39mnode_modules/[4mnx[24m/src/native/index.js:20:23[90m)[39m
+
+Node.js v20.19.6
+[0K
+[2m[31m—————————————————————————————————————————————————————————————————————————————————————————————————————[39m[22m[0K

@@ -15,6 +15,9 @@ services:
   mongo:
     image: mongo:6.0
     container_name: sima-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password123
     ports: ["27017:27017"]
     volumes: [mongo_data:/data/db]
     networks: [sima-net]

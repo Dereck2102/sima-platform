@@ -1,8 +1,8 @@
 {
   "run": {
     "command": "nx run api-gateway:build:development",
-    "startTime": "2026-01-05T06:39:12.089Z",
-    "endTime": "2026-01-05T06:39:28.057Z",
+    "startTime": "2026-01-05T07:19:19.697Z",
+    "endTime": "2026-01-05T07:19:19.798Z",
     "inner": false
   },
   "tasks": [
@@ -11,10 +11,10 @@
       "target": "build",
       "projectName": "api-gateway",
       "hash": "2984355594987898323",
-      "startTime": "2026-01-05T06:39:12.142Z",
-      "endTime": "2026-01-05T06:39:28.016Z",
+      "startTime": "2026-01-05T07:19:19.749Z",
+      "endTime": "2026-01-05T07:19:19.784Z",
       "params": "",
-      "cacheStatus": "cache-miss",
+      "cacheStatus": "local-cache-hit",
       "status": 0
     }
   ]
