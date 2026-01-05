@@ -1,0 +1,30 @@
+Compiling TypeScript files for project "domain"...
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m7[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'internalCode' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m7[0m   internalCode: string;[39m[22m
+[1m[31m[7m [0m [91m  ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m11[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'name' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m11[0m   name: string;[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~[0m[39m[22m
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m18[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'status' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m18[0m   status: AssetStatus;[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~~[0m[39m[22m
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m21[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'condition' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m21[0m   condition: AssetCondition;[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~~~~~[0m[39m[22m
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m24[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'acquisitionDate' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m24[0m   acquisitionDate: Date;[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m27[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'price' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m27[0m   price: number;[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~[0m[39m[22m
+[1m[31m[96mlibs/shared/domain/src/lib/dtos/asset.dto.ts[0m:[93m31[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'locationId' has no initializer and is not definitely assigned in the constructor.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m31[0m   locationId: string;[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m

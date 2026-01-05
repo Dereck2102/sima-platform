@@ -4629,6 +4629,1380 @@
       "nx/target-defaults"
     ]
   },
+  "libs/mobile-core": {
+    "root": [
+      "libs/mobile-core/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.cache": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.inputs": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.outputs": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.executor": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options.cwd": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options.command": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.technologies": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.technologies.0": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.description": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help.command": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help.example": [
+      "libs/mobile-core/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "projectType": [
+      "libs/mobile-core/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.cache": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.dependsOn": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.inputs": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.outputs": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.options.cwd": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.options.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.technologies": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.technologies.0": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.description": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.help": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.help.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.help.example": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.continuous": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.options.cwd": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.options.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.technologies": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.technologies.0": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.description": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.help": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.help.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.help.example": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.deprecated": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.continuous": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.options.cwd": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.options.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.technologies": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.technologies.0": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.description": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.help": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.help.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.help.example": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.continuous": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.dependsOn": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.options.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.cache": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.inputs": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.options.cwd": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.options.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.description": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.help": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build-deps": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "libs/mobile-core/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "name": [
+      "libs/mobile-core/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageVersion": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "libs/mobile-core/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "libs/mobile-core/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "libs/mobile-core/project.json",
+      "nx/core/project-json"
+    ],
+    "// targets": [
+      "libs/mobile-core/project.json",
+      "nx/core/project-json"
+    ]
+  },
+  "libs/shared/domain": {
+    "root": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.cache": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.inputs": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.outputs": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.executor": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options.cwd": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options.command": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.technologies": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.technologies.0": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.description": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help.command": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help.example": [
+      "libs/shared/domain/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.test": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.options": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.cache": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.inputs": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.outputs": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.executor": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.options.cwd": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.options.env": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.options.command": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata.technologies": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata.technologies.0": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata.description": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata.help": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata.help.command": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "targets.test.metadata.help.example": [
+      "libs/shared/domain/jest.config.cts",
+      "@nx/jest/plugin"
+    ],
+    "name": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageVersion": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "libs/shared/domain/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "sima-mobile": {
+    "root": [
+      "sima-mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.cache": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.inputs": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.outputs": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.executor": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options.cwd": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.options.command": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.technologies": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.technologies.0": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.description": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help.command": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.lint.metadata.help.example": [
+      "sima-mobile/eslint.config.mjs",
+      "@nx/eslint/plugin"
+    ],
+    "targets.start": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.start.continuous": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.start.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.start.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.start.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.start.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.pod-install": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.pod-install.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.pod-install.dependsOn": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.pod-install.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.pod-install.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.pod-install.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-ios": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-ios.continuous": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-ios.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-ios.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-ios.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-ios.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-android": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-android.continuous": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-android.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-android.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-android.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.run-android.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.cache": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.dependsOn": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.inputs": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.outputs": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-ios.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.cache": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.dependsOn": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.inputs": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.outputs": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.build-android.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle.dependsOn": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle.inputs": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.bundle.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.sync-deps": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.sync-deps.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.update": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.update.options": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.update.executor": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.update.options.cwd": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "targets.update.options.command": [
+      "sima-mobile/app.json",
+      "@nx/react-native/plugin"
+    ],
+    "projectType": [
+      "sima-mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.cache": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.dependsOn": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.inputs": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.outputs": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.options.cwd": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.options.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.technologies": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.technologies.0": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.description": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.help": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.help.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build.metadata.help.example": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.continuous": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.options.cwd": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.options.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.technologies": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.technologies.0": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.description": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.help": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.help.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.help.example": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve.metadata.deprecated": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.continuous": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.options.cwd": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.options.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.technologies": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.technologies.0": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.description": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.help": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.help.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.dev.metadata.help.example": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.continuous": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.dependsOn": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.options.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.cache": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.inputs": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.options.cwd": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.options.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.description": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.help": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build-deps": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "sima-mobile/vite.config.mts",
+      "@nx/vite/plugin"
+    ],
+    "name": [
+      "sima-mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageVersion": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "sima-mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "sima-mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "sima-mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "// targets": [
+      "sima-mobile/project.json",
+      "nx/core/project-json"
+    ]
+  },
   "apps/analytics-engine": {
     "root": [
       "apps/analytics-engine/project.json",

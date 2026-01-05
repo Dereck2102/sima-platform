@@ -2,4 +2,12 @@ autoInstallPeers: true
 
 onlyBuiltDependencies:
   - '@nestjs/core'
+  - '@parcel/watcher'
+  - '@swc/core'
   - bcrypt
+  - detox
+  - dtrace-provider
+  - esbuild
+  - less
+  - nx
+  - unrs-resolver

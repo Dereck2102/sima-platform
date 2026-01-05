@@ -1,28 +1,41 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ClientsModule, Transport } from '@nestjs/microservices'; 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { Asset } from './entities/asset.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthLibModule } from '@sima-platform/auth-lib';
+
+import { AssetEntity } from './assets/asset.entity';
+import { AssetsController } from './assets/assets.controller';
+import { AssetsService } from './assets/assets.service';
 
 @Module({
   imports: [
-    AuthLibModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'sima',
-      password: 'password123',
-      database: 'sima_core',
-      entities: [Asset],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-    TypeOrmModule.forFeature([Asset]),
-    ClientsModule.register([
+
+    AuthLibModule,
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: 'localhost',
+        port: 5432,
+        username: configService.get<string>('POSTGRES_USER'),
+        password: configService.get<string>('POSTGRES_PASSWORD'),
+        database: configService.get<string>('POSTGRES_DB'),
+        entities: [AssetEntity],
+        synchronize: true, 
+      }),
+      inject: [ConfigService],
+    }),
+
+    TypeOrmModule.forFeature([AssetEntity]),
+
+     ClientsModule.register([
       {
-        name: 'KAFKA_CLIENT', 
+        name: 'KAFKA_CLIENT',
         transport: Transport.KAFKA,
         options: {
           client: {
@@ -36,7 +49,7 @@ import { AuthLibModule } from '@sima-platform/auth-lib';
       },
     ]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AssetsController],
+  providers: [AssetsService],
 })
 export class AppModule {}

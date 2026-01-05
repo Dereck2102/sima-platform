@@ -1,0 +1,4 @@
+> nx run domain:build
+
+Compiling TypeScript files for project "domain"...
+Done compiling TypeScript files for project "domain".

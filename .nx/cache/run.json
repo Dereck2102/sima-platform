@@ -1,20 +1,42 @@
 {
   "run": {
-    "command": "nx run audit-service:build:development",
-    "startTime": "2026-01-04T16:36:58.638Z",
-    "endTime": "2026-01-04T16:37:09.757Z",
+    "command": "nx serve inventory-service",
+    "startTime": "2026-01-05T06:19:40.525Z",
+    "endTime": "2026-01-05T06:25:38.516Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "audit-service:build:development",
+      "taskId": "auth-lib:build",
       "target": "build",
-      "projectName": "audit-service",
-      "hash": "8390972328358823158",
-      "startTime": "2026-01-04T16:36:58.668Z",
-      "endTime": "2026-01-04T16:37:09.731Z",
+      "projectName": "auth-lib",
+      "hash": "7497366922833547366",
+      "startTime": "2026-01-05T06:19:40.673Z",
+      "endTime": "2026-01-05T06:19:40.744Z",
       "params": "",
-      "cacheStatus": "cache-miss",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "domain:build",
+      "target": "build",
+      "projectName": "domain",
+      "hash": "10747357269112355476",
+      "startTime": "2026-01-05T06:19:40.673Z",
+      "endTime": "2026-01-05T06:19:40.773Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "inventory-service:build",
+      "target": "build",
+      "projectName": "inventory-service",
+      "hash": "12180530386665325419",
+      "startTime": "2026-01-05T06:19:40.840Z",
+      "endTime": "2026-01-05T06:19:40.908Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
       "status": 0
     }
   ]
