@@ -74,8 +74,848 @@
                                                                                                                                                   "targetsCache": {
                                                                                                                                                     "targetsCache": {
                                                                                                                                                       "targetsCache": {
-                                                                                                                                                        "targetsCache": {},
-                                                                                                                                                        "6737772787387235536": {
+                                                                                                                                                        "targetsCache": {
+                                                                                                                                                          "targetsCache": {
+                                                                                                                                                            "targetsCache": {
+                                                                                                                                                              "targetsCache": {
+                                                                                                                                                                "targetsCache": {
+                                                                                                                                                                  "targetsCache": {
+                                                                                                                                                                    "targetsCache": {
+                                                                                                                                                                      "targetsCache": {
+                                                                                                                                                                        "targetsCache": {},
+                                                                                                                                                                        "6737772787387235536": {
+                                                                                                                                                                          "start": {
+                                                                                                                                                                            "command": "react-native start",
+                                                                                                                                                                            "continuous": true,
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            }
+                                                                                                                                                                          },
+                                                                                                                                                                          "pod-install": {
+                                                                                                                                                                            "command": "pod install",
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile/ios"
+                                                                                                                                                                            },
+                                                                                                                                                                            "dependsOn": [
+                                                                                                                                                                              "sync-deps"
+                                                                                                                                                                            ]
+                                                                                                                                                                          },
+                                                                                                                                                                          "run-ios": {
+                                                                                                                                                                            "command": "react-native run-ios",
+                                                                                                                                                                            "continuous": true,
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            }
+                                                                                                                                                                          },
+                                                                                                                                                                          "run-android": {
+                                                                                                                                                                            "command": "react-native run-android",
+                                                                                                                                                                            "continuous": true,
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            }
+                                                                                                                                                                          },
+                                                                                                                                                                          "build-ios": {
+                                                                                                                                                                            "command": "react-native build-ios",
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            },
+                                                                                                                                                                            "cache": true,
+                                                                                                                                                                            "dependsOn": [
+                                                                                                                                                                              "^build-ios"
+                                                                                                                                                                            ],
+                                                                                                                                                                            "inputs": [
+                                                                                                                                                                              "default",
+                                                                                                                                                                              "^production",
+                                                                                                                                                                              {
+                                                                                                                                                                                "externalDependencies": [
+                                                                                                                                                                                  "react-native"
+                                                                                                                                                                                ]
+                                                                                                                                                                              }
+                                                                                                                                                                            ],
+                                                                                                                                                                            "outputs": [
+                                                                                                                                                                              "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                            ]
+                                                                                                                                                                          },
+                                                                                                                                                                          "build-android": {
+                                                                                                                                                                            "command": "react-native build-android",
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            },
+                                                                                                                                                                            "cache": true,
+                                                                                                                                                                            "dependsOn": [
+                                                                                                                                                                              "^build-android"
+                                                                                                                                                                            ],
+                                                                                                                                                                            "inputs": [
+                                                                                                                                                                              "default",
+                                                                                                                                                                              "^production",
+                                                                                                                                                                              {
+                                                                                                                                                                                "externalDependencies": [
+                                                                                                                                                                                  "react-native"
+                                                                                                                                                                                ]
+                                                                                                                                                                              }
+                                                                                                                                                                            ],
+                                                                                                                                                                            "outputs": [
+                                                                                                                                                                              "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                            ]
+                                                                                                                                                                          },
+                                                                                                                                                                          "bundle": {
+                                                                                                                                                                            "command": "react-native bundle",
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            },
+                                                                                                                                                                            "dependsOn": [
+                                                                                                                                                                              "^bundle"
+                                                                                                                                                                            ],
+                                                                                                                                                                            "inputs": [
+                                                                                                                                                                              "default",
+                                                                                                                                                                              "^production",
+                                                                                                                                                                              {
+                                                                                                                                                                                "externalDependencies": [
+                                                                                                                                                                                  "react-native"
+                                                                                                                                                                                ]
+                                                                                                                                                                              }
+                                                                                                                                                                            ]
+                                                                                                                                                                          },
+                                                                                                                                                                          "sync-deps": {
+                                                                                                                                                                            "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                                          },
+                                                                                                                                                                          "update": {
+                                                                                                                                                                            "command": "react-native upgrade",
+                                                                                                                                                                            "options": {
+                                                                                                                                                                              "cwd": "sima-mobile"
+                                                                                                                                                                            }
+                                                                                                                                                                          }
+                                                                                                                                                                        }
+                                                                                                                                                                      },
+                                                                                                                                                                      "6737772787387235536": {
+                                                                                                                                                                        "start": {
+                                                                                                                                                                          "command": "react-native start",
+                                                                                                                                                                          "continuous": true,
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          }
+                                                                                                                                                                        },
+                                                                                                                                                                        "pod-install": {
+                                                                                                                                                                          "command": "pod install",
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile/ios"
+                                                                                                                                                                          },
+                                                                                                                                                                          "dependsOn": [
+                                                                                                                                                                            "sync-deps"
+                                                                                                                                                                          ]
+                                                                                                                                                                        },
+                                                                                                                                                                        "run-ios": {
+                                                                                                                                                                          "command": "react-native run-ios",
+                                                                                                                                                                          "continuous": true,
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          }
+                                                                                                                                                                        },
+                                                                                                                                                                        "run-android": {
+                                                                                                                                                                          "command": "react-native run-android",
+                                                                                                                                                                          "continuous": true,
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          }
+                                                                                                                                                                        },
+                                                                                                                                                                        "build-ios": {
+                                                                                                                                                                          "command": "react-native build-ios",
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          },
+                                                                                                                                                                          "cache": true,
+                                                                                                                                                                          "dependsOn": [
+                                                                                                                                                                            "^build-ios"
+                                                                                                                                                                          ],
+                                                                                                                                                                          "inputs": [
+                                                                                                                                                                            "default",
+                                                                                                                                                                            "^production",
+                                                                                                                                                                            {
+                                                                                                                                                                              "externalDependencies": [
+                                                                                                                                                                                "react-native"
+                                                                                                                                                                              ]
+                                                                                                                                                                            }
+                                                                                                                                                                          ],
+                                                                                                                                                                          "outputs": [
+                                                                                                                                                                            "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                          ]
+                                                                                                                                                                        },
+                                                                                                                                                                        "build-android": {
+                                                                                                                                                                          "command": "react-native build-android",
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          },
+                                                                                                                                                                          "cache": true,
+                                                                                                                                                                          "dependsOn": [
+                                                                                                                                                                            "^build-android"
+                                                                                                                                                                          ],
+                                                                                                                                                                          "inputs": [
+                                                                                                                                                                            "default",
+                                                                                                                                                                            "^production",
+                                                                                                                                                                            {
+                                                                                                                                                                              "externalDependencies": [
+                                                                                                                                                                                "react-native"
+                                                                                                                                                                              ]
+                                                                                                                                                                            }
+                                                                                                                                                                          ],
+                                                                                                                                                                          "outputs": [
+                                                                                                                                                                            "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                          ]
+                                                                                                                                                                        },
+                                                                                                                                                                        "bundle": {
+                                                                                                                                                                          "command": "react-native bundle",
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          },
+                                                                                                                                                                          "dependsOn": [
+                                                                                                                                                                            "^bundle"
+                                                                                                                                                                          ],
+                                                                                                                                                                          "inputs": [
+                                                                                                                                                                            "default",
+                                                                                                                                                                            "^production",
+                                                                                                                                                                            {
+                                                                                                                                                                              "externalDependencies": [
+                                                                                                                                                                                "react-native"
+                                                                                                                                                                              ]
+                                                                                                                                                                            }
+                                                                                                                                                                          ]
+                                                                                                                                                                        },
+                                                                                                                                                                        "sync-deps": {
+                                                                                                                                                                          "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                                        },
+                                                                                                                                                                        "update": {
+                                                                                                                                                                          "command": "react-native upgrade",
+                                                                                                                                                                          "options": {
+                                                                                                                                                                            "cwd": "sima-mobile"
+                                                                                                                                                                          }
+                                                                                                                                                                        }
+                                                                                                                                                                      }
+                                                                                                                                                                    },
+                                                                                                                                                                    "6737772787387235536": {
+                                                                                                                                                                      "start": {
+                                                                                                                                                                        "command": "react-native start",
+                                                                                                                                                                        "continuous": true,
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        }
+                                                                                                                                                                      },
+                                                                                                                                                                      "pod-install": {
+                                                                                                                                                                        "command": "pod install",
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile/ios"
+                                                                                                                                                                        },
+                                                                                                                                                                        "dependsOn": [
+                                                                                                                                                                          "sync-deps"
+                                                                                                                                                                        ]
+                                                                                                                                                                      },
+                                                                                                                                                                      "run-ios": {
+                                                                                                                                                                        "command": "react-native run-ios",
+                                                                                                                                                                        "continuous": true,
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        }
+                                                                                                                                                                      },
+                                                                                                                                                                      "run-android": {
+                                                                                                                                                                        "command": "react-native run-android",
+                                                                                                                                                                        "continuous": true,
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        }
+                                                                                                                                                                      },
+                                                                                                                                                                      "build-ios": {
+                                                                                                                                                                        "command": "react-native build-ios",
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        },
+                                                                                                                                                                        "cache": true,
+                                                                                                                                                                        "dependsOn": [
+                                                                                                                                                                          "^build-ios"
+                                                                                                                                                                        ],
+                                                                                                                                                                        "inputs": [
+                                                                                                                                                                          "default",
+                                                                                                                                                                          "^production",
+                                                                                                                                                                          {
+                                                                                                                                                                            "externalDependencies": [
+                                                                                                                                                                              "react-native"
+                                                                                                                                                                            ]
+                                                                                                                                                                          }
+                                                                                                                                                                        ],
+                                                                                                                                                                        "outputs": [
+                                                                                                                                                                          "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                        ]
+                                                                                                                                                                      },
+                                                                                                                                                                      "build-android": {
+                                                                                                                                                                        "command": "react-native build-android",
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        },
+                                                                                                                                                                        "cache": true,
+                                                                                                                                                                        "dependsOn": [
+                                                                                                                                                                          "^build-android"
+                                                                                                                                                                        ],
+                                                                                                                                                                        "inputs": [
+                                                                                                                                                                          "default",
+                                                                                                                                                                          "^production",
+                                                                                                                                                                          {
+                                                                                                                                                                            "externalDependencies": [
+                                                                                                                                                                              "react-native"
+                                                                                                                                                                            ]
+                                                                                                                                                                          }
+                                                                                                                                                                        ],
+                                                                                                                                                                        "outputs": [
+                                                                                                                                                                          "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                        ]
+                                                                                                                                                                      },
+                                                                                                                                                                      "bundle": {
+                                                                                                                                                                        "command": "react-native bundle",
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        },
+                                                                                                                                                                        "dependsOn": [
+                                                                                                                                                                          "^bundle"
+                                                                                                                                                                        ],
+                                                                                                                                                                        "inputs": [
+                                                                                                                                                                          "default",
+                                                                                                                                                                          "^production",
+                                                                                                                                                                          {
+                                                                                                                                                                            "externalDependencies": [
+                                                                                                                                                                              "react-native"
+                                                                                                                                                                            ]
+                                                                                                                                                                          }
+                                                                                                                                                                        ]
+                                                                                                                                                                      },
+                                                                                                                                                                      "sync-deps": {
+                                                                                                                                                                        "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                                      },
+                                                                                                                                                                      "update": {
+                                                                                                                                                                        "command": "react-native upgrade",
+                                                                                                                                                                        "options": {
+                                                                                                                                                                          "cwd": "sima-mobile"
+                                                                                                                                                                        }
+                                                                                                                                                                      }
+                                                                                                                                                                    }
+                                                                                                                                                                  },
+                                                                                                                                                                  "7970702025931673703": {
+                                                                                                                                                                    "start": {
+                                                                                                                                                                      "command": "react-native start",
+                                                                                                                                                                      "continuous": true,
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      }
+                                                                                                                                                                    },
+                                                                                                                                                                    "pod-install": {
+                                                                                                                                                                      "command": "pod install",
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile/ios"
+                                                                                                                                                                      },
+                                                                                                                                                                      "dependsOn": [
+                                                                                                                                                                        "sync-deps"
+                                                                                                                                                                      ]
+                                                                                                                                                                    },
+                                                                                                                                                                    "run-ios": {
+                                                                                                                                                                      "command": "react-native run-ios",
+                                                                                                                                                                      "continuous": true,
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      }
+                                                                                                                                                                    },
+                                                                                                                                                                    "run-android": {
+                                                                                                                                                                      "command": "react-native run-android",
+                                                                                                                                                                      "continuous": true,
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      }
+                                                                                                                                                                    },
+                                                                                                                                                                    "build-ios": {
+                                                                                                                                                                      "command": "react-native build-ios",
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      },
+                                                                                                                                                                      "cache": true,
+                                                                                                                                                                      "dependsOn": [
+                                                                                                                                                                        "^build-ios"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "inputs": [
+                                                                                                                                                                        "default",
+                                                                                                                                                                        "^production",
+                                                                                                                                                                        {
+                                                                                                                                                                          "externalDependencies": [
+                                                                                                                                                                            "react-native"
+                                                                                                                                                                          ]
+                                                                                                                                                                        }
+                                                                                                                                                                      ],
+                                                                                                                                                                      "outputs": [
+                                                                                                                                                                        "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                      ]
+                                                                                                                                                                    },
+                                                                                                                                                                    "build-android": {
+                                                                                                                                                                      "command": "react-native build-android",
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      },
+                                                                                                                                                                      "cache": true,
+                                                                                                                                                                      "dependsOn": [
+                                                                                                                                                                        "^build-android"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "inputs": [
+                                                                                                                                                                        "default",
+                                                                                                                                                                        "^production",
+                                                                                                                                                                        {
+                                                                                                                                                                          "externalDependencies": [
+                                                                                                                                                                            "react-native"
+                                                                                                                                                                          ]
+                                                                                                                                                                        }
+                                                                                                                                                                      ],
+                                                                                                                                                                      "outputs": [
+                                                                                                                                                                        "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                      ]
+                                                                                                                                                                    },
+                                                                                                                                                                    "bundle": {
+                                                                                                                                                                      "command": "react-native bundle",
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      },
+                                                                                                                                                                      "dependsOn": [
+                                                                                                                                                                        "^bundle"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "inputs": [
+                                                                                                                                                                        "default",
+                                                                                                                                                                        "^production",
+                                                                                                                                                                        {
+                                                                                                                                                                          "externalDependencies": [
+                                                                                                                                                                            "react-native"
+                                                                                                                                                                          ]
+                                                                                                                                                                        }
+                                                                                                                                                                      ]
+                                                                                                                                                                    },
+                                                                                                                                                                    "sync-deps": {
+                                                                                                                                                                      "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                                    },
+                                                                                                                                                                    "update": {
+                                                                                                                                                                      "command": "react-native upgrade",
+                                                                                                                                                                      "options": {
+                                                                                                                                                                        "cwd": "sima-mobile"
+                                                                                                                                                                      }
+                                                                                                                                                                    }
+                                                                                                                                                                  }
+                                                                                                                                                                },
+                                                                                                                                                                "7970702025931673703": {
+                                                                                                                                                                  "start": {
+                                                                                                                                                                    "command": "react-native start",
+                                                                                                                                                                    "continuous": true,
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    }
+                                                                                                                                                                  },
+                                                                                                                                                                  "pod-install": {
+                                                                                                                                                                    "command": "pod install",
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile/ios"
+                                                                                                                                                                    },
+                                                                                                                                                                    "dependsOn": [
+                                                                                                                                                                      "sync-deps"
+                                                                                                                                                                    ]
+                                                                                                                                                                  },
+                                                                                                                                                                  "run-ios": {
+                                                                                                                                                                    "command": "react-native run-ios",
+                                                                                                                                                                    "continuous": true,
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    }
+                                                                                                                                                                  },
+                                                                                                                                                                  "run-android": {
+                                                                                                                                                                    "command": "react-native run-android",
+                                                                                                                                                                    "continuous": true,
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    }
+                                                                                                                                                                  },
+                                                                                                                                                                  "build-ios": {
+                                                                                                                                                                    "command": "react-native build-ios",
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    },
+                                                                                                                                                                    "cache": true,
+                                                                                                                                                                    "dependsOn": [
+                                                                                                                                                                      "^build-ios"
+                                                                                                                                                                    ],
+                                                                                                                                                                    "inputs": [
+                                                                                                                                                                      "default",
+                                                                                                                                                                      "^production",
+                                                                                                                                                                      {
+                                                                                                                                                                        "externalDependencies": [
+                                                                                                                                                                          "react-native"
+                                                                                                                                                                        ]
+                                                                                                                                                                      }
+                                                                                                                                                                    ],
+                                                                                                                                                                    "outputs": [
+                                                                                                                                                                      "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                    ]
+                                                                                                                                                                  },
+                                                                                                                                                                  "build-android": {
+                                                                                                                                                                    "command": "react-native build-android",
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    },
+                                                                                                                                                                    "cache": true,
+                                                                                                                                                                    "dependsOn": [
+                                                                                                                                                                      "^build-android"
+                                                                                                                                                                    ],
+                                                                                                                                                                    "inputs": [
+                                                                                                                                                                      "default",
+                                                                                                                                                                      "^production",
+                                                                                                                                                                      {
+                                                                                                                                                                        "externalDependencies": [
+                                                                                                                                                                          "react-native"
+                                                                                                                                                                        ]
+                                                                                                                                                                      }
+                                                                                                                                                                    ],
+                                                                                                                                                                    "outputs": [
+                                                                                                                                                                      "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                    ]
+                                                                                                                                                                  },
+                                                                                                                                                                  "bundle": {
+                                                                                                                                                                    "command": "react-native bundle",
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    },
+                                                                                                                                                                    "dependsOn": [
+                                                                                                                                                                      "^bundle"
+                                                                                                                                                                    ],
+                                                                                                                                                                    "inputs": [
+                                                                                                                                                                      "default",
+                                                                                                                                                                      "^production",
+                                                                                                                                                                      {
+                                                                                                                                                                        "externalDependencies": [
+                                                                                                                                                                          "react-native"
+                                                                                                                                                                        ]
+                                                                                                                                                                      }
+                                                                                                                                                                    ]
+                                                                                                                                                                  },
+                                                                                                                                                                  "sync-deps": {
+                                                                                                                                                                    "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                                  },
+                                                                                                                                                                  "update": {
+                                                                                                                                                                    "command": "react-native upgrade",
+                                                                                                                                                                    "options": {
+                                                                                                                                                                      "cwd": "sima-mobile"
+                                                                                                                                                                    }
+                                                                                                                                                                  }
+                                                                                                                                                                }
+                                                                                                                                                              },
+                                                                                                                                                              "7970702025931673703": {
+                                                                                                                                                                "start": {
+                                                                                                                                                                  "command": "react-native start",
+                                                                                                                                                                  "continuous": true,
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  }
+                                                                                                                                                                },
+                                                                                                                                                                "pod-install": {
+                                                                                                                                                                  "command": "pod install",
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile/ios"
+                                                                                                                                                                  },
+                                                                                                                                                                  "dependsOn": [
+                                                                                                                                                                    "sync-deps"
+                                                                                                                                                                  ]
+                                                                                                                                                                },
+                                                                                                                                                                "run-ios": {
+                                                                                                                                                                  "command": "react-native run-ios",
+                                                                                                                                                                  "continuous": true,
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  }
+                                                                                                                                                                },
+                                                                                                                                                                "run-android": {
+                                                                                                                                                                  "command": "react-native run-android",
+                                                                                                                                                                  "continuous": true,
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  }
+                                                                                                                                                                },
+                                                                                                                                                                "build-ios": {
+                                                                                                                                                                  "command": "react-native build-ios",
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  },
+                                                                                                                                                                  "cache": true,
+                                                                                                                                                                  "dependsOn": [
+                                                                                                                                                                    "^build-ios"
+                                                                                                                                                                  ],
+                                                                                                                                                                  "inputs": [
+                                                                                                                                                                    "default",
+                                                                                                                                                                    "^production",
+                                                                                                                                                                    {
+                                                                                                                                                                      "externalDependencies": [
+                                                                                                                                                                        "react-native"
+                                                                                                                                                                      ]
+                                                                                                                                                                    }
+                                                                                                                                                                  ],
+                                                                                                                                                                  "outputs": [
+                                                                                                                                                                    "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                  ]
+                                                                                                                                                                },
+                                                                                                                                                                "build-android": {
+                                                                                                                                                                  "command": "react-native build-android",
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  },
+                                                                                                                                                                  "cache": true,
+                                                                                                                                                                  "dependsOn": [
+                                                                                                                                                                    "^build-android"
+                                                                                                                                                                  ],
+                                                                                                                                                                  "inputs": [
+                                                                                                                                                                    "default",
+                                                                                                                                                                    "^production",
+                                                                                                                                                                    {
+                                                                                                                                                                      "externalDependencies": [
+                                                                                                                                                                        "react-native"
+                                                                                                                                                                      ]
+                                                                                                                                                                    }
+                                                                                                                                                                  ],
+                                                                                                                                                                  "outputs": [
+                                                                                                                                                                    "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                  ]
+                                                                                                                                                                },
+                                                                                                                                                                "bundle": {
+                                                                                                                                                                  "command": "react-native bundle",
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  },
+                                                                                                                                                                  "dependsOn": [
+                                                                                                                                                                    "^bundle"
+                                                                                                                                                                  ],
+                                                                                                                                                                  "inputs": [
+                                                                                                                                                                    "default",
+                                                                                                                                                                    "^production",
+                                                                                                                                                                    {
+                                                                                                                                                                      "externalDependencies": [
+                                                                                                                                                                        "react-native"
+                                                                                                                                                                      ]
+                                                                                                                                                                    }
+                                                                                                                                                                  ]
+                                                                                                                                                                },
+                                                                                                                                                                "sync-deps": {
+                                                                                                                                                                  "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                                },
+                                                                                                                                                                "update": {
+                                                                                                                                                                  "command": "react-native upgrade",
+                                                                                                                                                                  "options": {
+                                                                                                                                                                    "cwd": "sima-mobile"
+                                                                                                                                                                  }
+                                                                                                                                                                }
+                                                                                                                                                              }
+                                                                                                                                                            },
+                                                                                                                                                            "18385593224744752963": {
+                                                                                                                                                              "start": {
+                                                                                                                                                                "command": "react-native start",
+                                                                                                                                                                "continuous": true,
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                }
+                                                                                                                                                              },
+                                                                                                                                                              "pod-install": {
+                                                                                                                                                                "command": "pod install",
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile/ios"
+                                                                                                                                                                },
+                                                                                                                                                                "dependsOn": [
+                                                                                                                                                                  "sync-deps"
+                                                                                                                                                                ]
+                                                                                                                                                              },
+                                                                                                                                                              "run-ios": {
+                                                                                                                                                                "command": "react-native run-ios",
+                                                                                                                                                                "continuous": true,
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                }
+                                                                                                                                                              },
+                                                                                                                                                              "run-android": {
+                                                                                                                                                                "command": "react-native run-android",
+                                                                                                                                                                "continuous": true,
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                }
+                                                                                                                                                              },
+                                                                                                                                                              "build-ios": {
+                                                                                                                                                                "command": "react-native build-ios",
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                },
+                                                                                                                                                                "cache": true,
+                                                                                                                                                                "dependsOn": [
+                                                                                                                                                                  "^build-ios"
+                                                                                                                                                                ],
+                                                                                                                                                                "inputs": [
+                                                                                                                                                                  "default",
+                                                                                                                                                                  "^production",
+                                                                                                                                                                  {
+                                                                                                                                                                    "externalDependencies": [
+                                                                                                                                                                      "react-native"
+                                                                                                                                                                    ]
+                                                                                                                                                                  }
+                                                                                                                                                                ],
+                                                                                                                                                                "outputs": [
+                                                                                                                                                                  "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                                ]
+                                                                                                                                                              },
+                                                                                                                                                              "build-android": {
+                                                                                                                                                                "command": "react-native build-android",
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                },
+                                                                                                                                                                "cache": true,
+                                                                                                                                                                "dependsOn": [
+                                                                                                                                                                  "^build-android"
+                                                                                                                                                                ],
+                                                                                                                                                                "inputs": [
+                                                                                                                                                                  "default",
+                                                                                                                                                                  "^production",
+                                                                                                                                                                  {
+                                                                                                                                                                    "externalDependencies": [
+                                                                                                                                                                      "react-native"
+                                                                                                                                                                    ]
+                                                                                                                                                                  }
+                                                                                                                                                                ],
+                                                                                                                                                                "outputs": [
+                                                                                                                                                                  "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                                ]
+                                                                                                                                                              },
+                                                                                                                                                              "bundle": {
+                                                                                                                                                                "command": "react-native bundle",
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                },
+                                                                                                                                                                "dependsOn": [
+                                                                                                                                                                  "^bundle"
+                                                                                                                                                                ],
+                                                                                                                                                                "inputs": [
+                                                                                                                                                                  "default",
+                                                                                                                                                                  "^production",
+                                                                                                                                                                  {
+                                                                                                                                                                    "externalDependencies": [
+                                                                                                                                                                      "react-native"
+                                                                                                                                                                    ]
+                                                                                                                                                                  }
+                                                                                                                                                                ]
+                                                                                                                                                              },
+                                                                                                                                                              "sync-deps": {
+                                                                                                                                                                "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                              },
+                                                                                                                                                              "update": {
+                                                                                                                                                                "command": "react-native upgrade",
+                                                                                                                                                                "options": {
+                                                                                                                                                                  "cwd": "sima-mobile"
+                                                                                                                                                                }
+                                                                                                                                                              }
+                                                                                                                                                            }
+                                                                                                                                                          },
+                                                                                                                                                          "18385593224744752963": {
+                                                                                                                                                            "start": {
+                                                                                                                                                              "command": "react-native start",
+                                                                                                                                                              "continuous": true,
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              }
+                                                                                                                                                            },
+                                                                                                                                                            "pod-install": {
+                                                                                                                                                              "command": "pod install",
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile/ios"
+                                                                                                                                                              },
+                                                                                                                                                              "dependsOn": [
+                                                                                                                                                                "sync-deps"
+                                                                                                                                                              ]
+                                                                                                                                                            },
+                                                                                                                                                            "run-ios": {
+                                                                                                                                                              "command": "react-native run-ios",
+                                                                                                                                                              "continuous": true,
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              }
+                                                                                                                                                            },
+                                                                                                                                                            "run-android": {
+                                                                                                                                                              "command": "react-native run-android",
+                                                                                                                                                              "continuous": true,
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              }
+                                                                                                                                                            },
+                                                                                                                                                            "build-ios": {
+                                                                                                                                                              "command": "react-native build-ios",
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              },
+                                                                                                                                                              "cache": true,
+                                                                                                                                                              "dependsOn": [
+                                                                                                                                                                "^build-ios"
+                                                                                                                                                              ],
+                                                                                                                                                              "inputs": [
+                                                                                                                                                                "default",
+                                                                                                                                                                "^production",
+                                                                                                                                                                {
+                                                                                                                                                                  "externalDependencies": [
+                                                                                                                                                                    "react-native"
+                                                                                                                                                                  ]
+                                                                                                                                                                }
+                                                                                                                                                              ],
+                                                                                                                                                              "outputs": [
+                                                                                                                                                                "{workspaceRoot}/sima-mobile/ios/build/Build/Products"
+                                                                                                                                                              ]
+                                                                                                                                                            },
+                                                                                                                                                            "build-android": {
+                                                                                                                                                              "command": "react-native build-android",
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              },
+                                                                                                                                                              "cache": true,
+                                                                                                                                                              "dependsOn": [
+                                                                                                                                                                "^build-android"
+                                                                                                                                                              ],
+                                                                                                                                                              "inputs": [
+                                                                                                                                                                "default",
+                                                                                                                                                                "^production",
+                                                                                                                                                                {
+                                                                                                                                                                  "externalDependencies": [
+                                                                                                                                                                    "react-native"
+                                                                                                                                                                  ]
+                                                                                                                                                                }
+                                                                                                                                                              ],
+                                                                                                                                                              "outputs": [
+                                                                                                                                                                "{workspaceRoot}/sima-mobile/android/app/build/outputs"
+                                                                                                                                                              ]
+                                                                                                                                                            },
+                                                                                                                                                            "bundle": {
+                                                                                                                                                              "command": "react-native bundle",
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              },
+                                                                                                                                                              "dependsOn": [
+                                                                                                                                                                "^bundle"
+                                                                                                                                                              ],
+                                                                                                                                                              "inputs": [
+                                                                                                                                                                "default",
+                                                                                                                                                                "^production",
+                                                                                                                                                                {
+                                                                                                                                                                  "externalDependencies": [
+                                                                                                                                                                    "react-native"
+                                                                                                                                                                  ]
+                                                                                                                                                                }
+                                                                                                                                                              ]
+                                                                                                                                                            },
+                                                                                                                                                            "sync-deps": {
+                                                                                                                                                              "executor": "@nx/react-native:sync-deps"
+                                                                                                                                                            },
+                                                                                                                                                            "update": {
+                                                                                                                                                              "command": "react-native upgrade",
+                                                                                                                                                              "options": {
+                                                                                                                                                                "cwd": "sima-mobile"
+                                                                                                                                                              }
+                                                                                                                                                            }
+                                                                                                                                                          }
+                                                                                                                                                        },
+                                                                                                                                                        "18385593224744752963": {
                                                                                                                                                           "start": {
                                                                                                                                                             "command": "react-native start",
                                                                                                                                                             "continuous": true,
@@ -179,7 +1019,7 @@
                                                                                                                                                           }
                                                                                                                                                         }
                                                                                                                                                       },
-                                                                                                                                                      "6737772787387235536": {
+                                                                                                                                                      "18385593224744752963": {
                                                                                                                                                         "start": {
                                                                                                                                                           "command": "react-native start",
                                                                                                                                                           "continuous": true,
@@ -283,7 +1123,7 @@
                                                                                                                                                         }
                                                                                                                                                       }
                                                                                                                                                     },
-                                                                                                                                                    "6737772787387235536": {
+                                                                                                                                                    "18385593224744752963": {
                                                                                                                                                       "start": {
                                                                                                                                                         "command": "react-native start",
                                                                                                                                                         "continuous": true,
@@ -387,7 +1227,7 @@
                                                                                                                                                       }
                                                                                                                                                     }
                                                                                                                                                   },
-                                                                                                                                                  "7970702025931673703": {
+                                                                                                                                                  "18385593224744752963": {
                                                                                                                                                     "start": {
                                                                                                                                                       "command": "react-native start",
                                                                                                                                                       "continuous": true,
@@ -491,7 +1331,7 @@
                                                                                                                                                     }
                                                                                                                                                   }
                                                                                                                                                 },
-                                                                                                                                                "7970702025931673703": {
+                                                                                                                                                "18385593224744752963": {
                                                                                                                                                   "start": {
                                                                                                                                                     "command": "react-native start",
                                                                                                                                                     "continuous": true,
@@ -595,7 +1435,7 @@
                                                                                                                                                   }
                                                                                                                                                 }
                                                                                                                                               },
-                                                                                                                                              "7970702025931673703": {
+                                                                                                                                              "18385593224744752963": {
                                                                                                                                                 "start": {
                                                                                                                                                   "command": "react-native start",
                                                                                                                                                   "continuous": true,
@@ -907,7 +1747,7 @@
                                                                                                                                             }
                                                                                                                                           }
                                                                                                                                         },
-                                                                                                                                        "18385593224744752963": {
+                                                                                                                                        "15829541640641036909": {
                                                                                                                                           "start": {
                                                                                                                                             "command": "react-native start",
                                                                                                                                             "continuous": true,
@@ -1011,7 +1851,7 @@
                                                                                                                                           }
                                                                                                                                         }
                                                                                                                                       },
-                                                                                                                                      "18385593224744752963": {
+                                                                                                                                      "15829541640641036909": {
                                                                                                                                         "start": {
                                                                                                                                           "command": "react-native start",
                                                                                                                                           "continuous": true,
@@ -1115,7 +1955,7 @@
                                                                                                                                         }
                                                                                                                                       }
                                                                                                                                     },
-                                                                                                                                    "18385593224744752963": {
+                                                                                                                                    "15829541640641036909": {
                                                                                                                                       "start": {
                                                                                                                                         "command": "react-native start",
                                                                                                                                         "continuous": true,
@@ -1219,7 +2059,7 @@
                                                                                                                                       }
                                                                                                                                     }
                                                                                                                                   },
-                                                                                                                                  "18385593224744752963": {
+                                                                                                                                  "15829541640641036909": {
                                                                                                                                     "start": {
                                                                                                                                       "command": "react-native start",
                                                                                                                                       "continuous": true,
@@ -1323,7 +2163,7 @@
                                                                                                                                     }
                                                                                                                                   }
                                                                                                                                 },
-                                                                                                                                "18385593224744752963": {
+                                                                                                                                "15829541640641036909": {
                                                                                                                                   "start": {
                                                                                                                                     "command": "react-native start",
                                                                                                                                     "continuous": true,
@@ -1427,7 +2267,7 @@
                                                                                                                                   }
                                                                                                                                 }
                                                                                                                               },
-                                                                                                                              "18385593224744752963": {
+                                                                                                                              "15829541640641036909": {
                                                                                                                                 "start": {
                                                                                                                                   "command": "react-native start",
                                                                                                                                   "continuous": true,
@@ -1531,7 +2371,7 @@
                                                                                                                                 }
                                                                                                                               }
                                                                                                                             },
-                                                                                                                            "18385593224744752963": {
+                                                                                                                            "15829541640641036909": {
                                                                                                                               "start": {
                                                                                                                                 "command": "react-native start",
                                                                                                                                 "continuous": true,
@@ -1635,7 +2475,7 @@
                                                                                                                               }
                                                                                                                             }
                                                                                                                           },
-                                                                                                                          "18385593224744752963": {
+                                                                                                                          "8327771917123872696": {
                                                                                                                             "start": {
                                                                                                                               "command": "react-native start",
                                                                                                                               "continuous": true,
@@ -1739,7 +2579,7 @@
                                                                                                                             }
                                                                                                                           }
                                                                                                                         },
-                                                                                                                        "15829541640641036909": {
+                                                                                                                        "8327771917123872696": {
                                                                                                                           "start": {
                                                                                                                             "command": "react-native start",
                                                                                                                             "continuous": true,
@@ -1843,7 +2683,7 @@
                                                                                                                           }
                                                                                                                         }
                                                                                                                       },
-                                                                                                                      "15829541640641036909": {
+                                                                                                                      "13843870937147174998": {
                                                                                                                         "start": {
                                                                                                                           "command": "react-native start",
                                                                                                                           "continuous": true,
@@ -1947,7 +2787,7 @@
                                                                                                                         }
                                                                                                                       }
                                                                                                                     },
-                                                                                                                    "15829541640641036909": {
+                                                                                                                    "9780253648149967479": {
                                                                                                                       "start": {
                                                                                                                         "command": "react-native start",
                                                                                                                         "continuous": true,
@@ -2051,7 +2891,7 @@
                                                                                                                       }
                                                                                                                     }
                                                                                                                   },
-                                                                                                                  "15829541640641036909": {
+                                                                                                                  "14719821591911880729": {
                                                                                                                     "start": {
                                                                                                                       "command": "react-native start",
                                                                                                                       "continuous": true,
@@ -2155,7 +2995,7 @@
                                                                                                                     }
                                                                                                                   }
                                                                                                                 },
-                                                                                                                "15829541640641036909": {
+                                                                                                                "14544571879819859404": {
                                                                                                                   "start": {
                                                                                                                     "command": "react-native start",
                                                                                                                     "continuous": true,
@@ -2259,7 +3099,7 @@
                                                                                                                   }
                                                                                                                 }
                                                                                                               },
-                                                                                                              "15829541640641036909": {
+                                                                                                              "5659403729473557380": {
                                                                                                                 "start": {
                                                                                                                   "command": "react-native start",
                                                                                                                   "continuous": true,
@@ -2363,7 +3203,7 @@
                                                                                                                 }
                                                                                                               }
                                                                                                             },
-                                                                                                            "15829541640641036909": {
+                                                                                                            "5659403729473557380": {
                                                                                                               "start": {
                                                                                                                 "command": "react-native start",
                                                                                                                 "continuous": true,
@@ -2467,7 +3307,7 @@
                                                                                                               }
                                                                                                             }
                                                                                                           },
-                                                                                                          "8327771917123872696": {
+                                                                                                          "5659403729473557380": {
                                                                                                             "start": {
                                                                                                               "command": "react-native start",
                                                                                                               "continuous": true,
@@ -2571,7 +3411,7 @@
                                                                                                             }
                                                                                                           }
                                                                                                         },
-                                                                                                        "8327771917123872696": {
+                                                                                                        "5659403729473557380": {
                                                                                                           "start": {
                                                                                                             "command": "react-native start",
                                                                                                             "continuous": true,
@@ -2675,7 +3515,7 @@
                                                                                                           }
                                                                                                         }
                                                                                                       },
-                                                                                                      "13843870937147174998": {
+                                                                                                      "8327771917123872696": {
                                                                                                         "start": {
                                                                                                           "command": "react-native start",
                                                                                                           "continuous": true,
@@ -2779,7 +3619,7 @@
                                                                                                         }
                                                                                                       }
                                                                                                     },
-                                                                                                    "9780253648149967479": {
+                                                                                                    "8327771917123872696": {
                                                                                                       "start": {
                                                                                                         "command": "react-native start",
                                                                                                         "continuous": true,
@@ -2883,7 +3723,7 @@
                                                                                                       }
                                                                                                     }
                                                                                                   },
-                                                                                                  "14719821591911880729": {
+                                                                                                  "8327771917123872696": {
                                                                                                     "start": {
                                                                                                       "command": "react-native start",
                                                                                                       "continuous": true,
@@ -2987,7 +3827,7 @@
                                                                                                     }
                                                                                                   }
                                                                                                 },
-                                                                                                "14544571879819859404": {
+                                                                                                "8327771917123872696": {
                                                                                                   "start": {
                                                                                                     "command": "react-native start",
                                                                                                     "continuous": true,
@@ -3091,7 +3931,7 @@
                                                                                                   }
                                                                                                 }
                                                                                               },
-                                                                                              "5659403729473557380": {
+                                                                                              "8327771917123872696": {
                                                                                                 "start": {
                                                                                                   "command": "react-native start",
                                                                                                   "continuous": true,
@@ -3195,7 +4035,7 @@
                                                                                                 }
                                                                                               }
                                                                                             },
-                                                                                            "5659403729473557380": {
+                                                                                            "8327771917123872696": {
                                                                                               "start": {
                                                                                                 "command": "react-native start",
                                                                                                 "continuous": true,
@@ -3299,7 +4139,7 @@
                                                                                               }
                                                                                             }
                                                                                           },
-                                                                                          "5659403729473557380": {
+                                                                                          "8327771917123872696": {
                                                                                             "start": {
                                                                                               "command": "react-native start",
                                                                                               "continuous": true,
@@ -3403,7 +4243,7 @@
                                                                                             }
                                                                                           }
                                                                                         },
-                                                                                        "5659403729473557380": {
+                                                                                        "1602156619562839858": {
                                                                                           "start": {
                                                                                             "command": "react-native start",
                                                                                             "continuous": true,
@@ -3507,7 +4347,7 @@
                                                                                           }
                                                                                         }
                                                                                       },
-                                                                                      "8327771917123872696": {
+                                                                                      "1602156619562839858": {
                                                                                         "start": {
                                                                                           "command": "react-native start",
                                                                                           "continuous": true,
@@ -3611,7 +4451,7 @@
                                                                                         }
                                                                                       }
                                                                                     },
-                                                                                    "8327771917123872696": {
+                                                                                    "1602156619562839858": {
                                                                                       "start": {
                                                                                         "command": "react-native start",
                                                                                         "continuous": true,
@@ -3715,7 +4555,7 @@
                                                                                       }
                                                                                     }
                                                                                   },
-                                                                                  "8327771917123872696": {
+                                                                                  "1602156619562839858": {
                                                                                     "start": {
                                                                                       "command": "react-native start",
                                                                                       "continuous": true,
@@ -3819,7 +4659,7 @@
                                                                                     }
                                                                                   }
                                                                                 },
-                                                                                "8327771917123872696": {
+                                                                                "1602156619562839858": {
                                                                                   "start": {
                                                                                     "command": "react-native start",
                                                                                     "continuous": true,
@@ -3923,7 +4763,7 @@
                                                                                   }
                                                                                 }
                                                                               },
-                                                                              "8327771917123872696": {
+                                                                              "1602156619562839858": {
                                                                                 "start": {
                                                                                   "command": "react-native start",
                                                                                   "continuous": true,
@@ -4027,7 +4867,7 @@
                                                                                 }
                                                                               }
                                                                             },
-                                                                            "8327771917123872696": {
+                                                                            "1602156619562839858": {
                                                                               "start": {
                                                                                 "command": "react-native start",
                                                                                 "continuous": true,
@@ -4131,7 +4971,7 @@
                                                                               }
                                                                             }
                                                                           },
-                                                                          "8327771917123872696": {
+                                                                          "1602156619562839858": {
                                                                             "start": {
                                                                               "command": "react-native start",
                                                                               "continuous": true,

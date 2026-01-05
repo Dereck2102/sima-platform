@@ -21595,6 +21595,11 @@
       },
       {
         "source": "api-gateway",
+        "target": "npm:http-proxy-middleware",
+        "type": "static"
+      },
+      {
+        "source": "api-gateway",
         "target": "npm:@nx/webpack",
         "type": "static"
       }
@@ -47295,5 +47300,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1767593987610
+  "computedAt": 1767595151893
 }
