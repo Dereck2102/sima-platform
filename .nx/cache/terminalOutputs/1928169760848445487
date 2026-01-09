@@ -1,8 +1,0 @@
-> webpack-cli build --node-env=production
-
-[1m[31mERROR[39m[22m in [1m/home/adminsima/sima-platform/apps/audit-service/src/main.ts[39m[22m
-[1m./src/main.ts[39m[22m [1m[32m17:3-4[39m[22m
-[90m[tsl] [39m[1m[31mERROR[39m[22m[1m[31m in [39m[22m[1m[36m/home/adminsima/sima-platform/apps/audit-service/src/main.ts(17,4)[39m[22m
-[1m[31m      TS1005: ',' expected.[39m[22m
-
-webpack compiled with [1m[31m1 error[39m[22m (78be0ccf10ee62fd)

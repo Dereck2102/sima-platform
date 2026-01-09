@@ -4068,9 +4068,9 @@
         "hash": "sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA=="
       }
     },
-    "npm:@tybys/wasm-util@0.10.1": {
+    "npm:@tybys/wasm-util": {
       "type": "npm",
-      "name": "npm:@tybys/wasm-util@0.10.1",
+      "name": "npm:@tybys/wasm-util",
       "data": {
         "version": "0.10.1",
         "packageName": "@tybys/wasm-util",
@@ -5409,9 +5409,9 @@
         "hash": "sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ=="
       }
     },
-    "npm:ajv-keywords": {
+    "npm:ajv-keywords@3.5.2": {
       "type": "npm",
-      "name": "npm:ajv-keywords",
+      "name": "npm:ajv-keywords@3.5.2",
       "data": {
         "version": "3.5.2",
         "packageName": "ajv-keywords",
@@ -17586,18 +17586,18 @@
         "hash": "sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A=="
       }
     },
-    "npm:yaml": {
+    "npm:yaml@1.10.2": {
       "type": "npm",
-      "name": "npm:yaml",
+      "name": "npm:yaml@1.10.2",
       "data": {
         "version": "1.10.2",
         "packageName": "yaml",
         "hash": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
       }
     },
-    "npm:yaml@2.8.2": {
+    "npm:yaml": {
       "type": "npm",
-      "name": "npm:yaml@2.8.2",
+      "name": "npm:yaml",
       "data": {
         "version": "2.8.2",
         "packageName": "yaml",
@@ -19035,7 +19035,7 @@
       "npm:@tsconfig/node16"
     ],
     "@tybys/wasm-util@0.10.1": [
-      "npm:@tybys/wasm-util@0.10.1"
+      "npm:@tybys/wasm-util"
     ],
     "@tybys/wasm-util@0.9.0": [
       "npm:@tybys/wasm-util@0.9.0"
@@ -19485,7 +19485,7 @@
       "npm:ajv-formats"
     ],
     "ajv-keywords@3.5.2(ajv@6.12.6)": [
-      "npm:ajv-keywords"
+      "npm:ajv-keywords@3.5.2"
     ],
     "ajv-keywords@5.1.0(ajv@8.17.1)": [
       "npm:ajv-keywords@5.1.0"
@@ -23541,10 +23541,10 @@
       "npm:yallist@4.0.0"
     ],
     "yaml@1.10.2": [
-      "npm:yaml"
+      "npm:yaml@1.10.2"
     ],
     "yaml@2.8.2": [
-      "npm:yaml@2.8.2"
+      "npm:yaml"
     ],
     "yargs-parser@18.1.3": [
       "npm:yargs-parser@18.1.3"

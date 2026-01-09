@@ -1,13 +1,0 @@
-> webpack-cli build --node-env=production
-
-[1m[31mERROR[39m[22m in [1m./src/main.ts:[32m[1m21:7[22m[39m[1m[39m[22m
-[90mTS2353: [39mObject literal may only specify known properties, and 'logLevel' does not exist in type 'Options<IncomingMessage, ServerResponse<IncomingMessage>>'.
-  [0m [90m 19 |[39m       target[33m:[39m [32m'http://localhost:3001'[39m[33m,[39m
-   [90m 20 |[39m       changeOrigin[33m:[39m [36mtrue[39m[33m,[39m
-  [31m[1m>[22m[39m[90m 21 |[39m       logLevel[33m:[39m [32m'debug'[39m[33m,[39m
-   [90m    |[39m       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
-   [90m 22 |[39m     })
-   [90m 23 |[39m   )[33m;[39m
-   [90m 24 |[39m   [36mconst[39m port [33m=[39m process[33m.[39menv[33m.[39m[33mPORT[39m [33m||[39m [35m3000[39m[33m;[39m[0m
-
-webpack compiled with [1m[31m1 error[39m[22m (17e5d8c6c01df828)

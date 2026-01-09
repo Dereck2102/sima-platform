@@ -7681,9 +7681,9 @@
         "hash": "sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA=="
       }
     },
-    "npm:@tybys/wasm-util@0.10.1": {
+    "npm:@tybys/wasm-util": {
       "type": "npm",
-      "name": "npm:@tybys/wasm-util@0.10.1",
+      "name": "npm:@tybys/wasm-util",
       "data": {
         "version": "0.10.1",
         "packageName": "@tybys/wasm-util",
@@ -9022,9 +9022,9 @@
         "hash": "sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ=="
       }
     },
-    "npm:ajv-keywords": {
+    "npm:ajv-keywords@3.5.2": {
       "type": "npm",
-      "name": "npm:ajv-keywords",
+      "name": "npm:ajv-keywords@3.5.2",
       "data": {
         "version": "3.5.2",
         "packageName": "ajv-keywords",
@@ -21199,18 +21199,18 @@
         "hash": "sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A=="
       }
     },
-    "npm:yaml": {
+    "npm:yaml@1.10.2": {
       "type": "npm",
-      "name": "npm:yaml",
+      "name": "npm:yaml@1.10.2",
       "data": {
         "version": "1.10.2",
         "packageName": "yaml",
         "hash": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
       }
     },
-    "npm:yaml@2.8.2": {
+    "npm:yaml": {
       "type": "npm",
-      "name": "npm:yaml@2.8.2",
+      "name": "npm:yaml",
       "data": {
         "version": "2.8.2",
         "packageName": "yaml",
@@ -21693,6 +21693,11 @@
       {
         "source": "sima-mobile",
         "target": "npm:metro-config",
+        "type": "static"
+      },
+      {
+        "source": "sima-mobile",
+        "target": "npm:axios",
         "type": "static"
       },
       {
@@ -26313,7 +26318,7 @@
       },
       {
         "source": "npm:@napi-rs/wasm-runtime@0.2.12",
-        "target": "npm:@tybys/wasm-util@0.10.1",
+        "target": "npm:@tybys/wasm-util",
         "type": "static"
       }
     ],
@@ -26347,7 +26352,7 @@
       },
       {
         "source": "npm:@napi-rs/wasm-runtime@1.0.7",
-        "target": "npm:@tybys/wasm-util@0.10.1",
+        "target": "npm:@tybys/wasm-util",
         "type": "static"
       }
     ],
@@ -28118,7 +28123,7 @@
       },
       {
         "source": "npm:@react-native-community/cli-doctor",
-        "target": "npm:yaml@2.8.2",
+        "target": "npm:yaml",
         "type": "static"
       }
     ],
@@ -29631,9 +29636,9 @@
         "type": "static"
       }
     ],
-    "npm:@tybys/wasm-util@0.10.1": [
+    "npm:@tybys/wasm-util": [
       {
-        "source": "npm:@tybys/wasm-util@0.10.1",
+        "source": "npm:@tybys/wasm-util",
         "target": "npm:tslib",
         "type": "static"
       }
@@ -31020,9 +31025,9 @@
         "type": "static"
       }
     ],
-    "npm:ajv-keywords": [
+    "npm:ajv-keywords@3.5.2": [
       {
-        "source": "npm:ajv-keywords",
+        "source": "npm:ajv-keywords@3.5.2",
         "target": "npm:ajv@6.12.6",
         "type": "static"
       }
@@ -32834,7 +32839,7 @@
       },
       {
         "source": "npm:cosmiconfig",
-        "target": "npm:yaml",
+        "target": "npm:yaml@1.10.2",
         "type": "static"
       }
     ],
@@ -33469,7 +33474,7 @@
       },
       {
         "source": "npm:cssnano",
-        "target": "npm:yaml",
+        "target": "npm:yaml@1.10.2",
         "type": "static"
       }
     ],
@@ -40822,7 +40827,7 @@
       },
       {
         "source": "npm:nx",
-        "target": "npm:yaml@2.8.2",
+        "target": "npm:yaml",
         "type": "static"
       },
       {
@@ -41757,7 +41762,7 @@
       },
       {
         "source": "npm:postcss-load-config",
-        "target": "npm:yaml",
+        "target": "npm:yaml@1.10.2",
         "type": "static"
       },
       {
@@ -43940,7 +43945,7 @@
       },
       {
         "source": "npm:schema-utils@3.3.0",
-        "target": "npm:ajv-keywords",
+        "target": "npm:ajv-keywords@3.5.2",
         "type": "static"
       }
     ],
@@ -46167,7 +46172,7 @@
       },
       {
         "source": "npm:vite",
-        "target": "npm:yaml@2.8.2",
+        "target": "npm:yaml",
         "type": "static"
       }
     ],
@@ -47300,5 +47305,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1767597559607
+  "computedAt": 1767938397054
 }

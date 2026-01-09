@@ -4186,7 +4186,7 @@
   },
   {
     "source": "npm:@napi-rs/wasm-runtime@0.2.12",
-    "target": "npm:@tybys/wasm-util@0.10.1",
+    "target": "npm:@tybys/wasm-util",
     "type": "static"
   },
   {
@@ -4216,7 +4216,7 @@
   },
   {
     "source": "npm:@napi-rs/wasm-runtime@1.0.7",
-    "target": "npm:@tybys/wasm-util@0.10.1",
+    "target": "npm:@tybys/wasm-util",
     "type": "static"
   },
   {
@@ -5911,7 +5911,7 @@
   },
   {
     "source": "npm:@react-native-community/cli-doctor",
-    "target": "npm:yaml@2.8.2",
+    "target": "npm:yaml",
     "type": "static"
   },
   {
@@ -7310,7 +7310,7 @@
     "type": "static"
   },
   {
-    "source": "npm:@tybys/wasm-util@0.10.1",
+    "source": "npm:@tybys/wasm-util",
     "target": "npm:tslib",
     "type": "static"
   },
@@ -8515,7 +8515,7 @@
     "type": "static"
   },
   {
-    "source": "npm:ajv-keywords",
+    "source": "npm:ajv-keywords@3.5.2",
     "target": "npm:ajv@6.12.6",
     "type": "static"
   },
@@ -10136,7 +10136,7 @@
   },
   {
     "source": "npm:cosmiconfig",
-    "target": "npm:yaml",
+    "target": "npm:yaml@1.10.2",
     "type": "static"
   },
   {
@@ -10731,7 +10731,7 @@
   },
   {
     "source": "npm:cssnano",
-    "target": "npm:yaml",
+    "target": "npm:yaml@1.10.2",
     "type": "static"
   },
   {
@@ -17466,7 +17466,7 @@
   },
   {
     "source": "npm:nx",
-    "target": "npm:yaml@2.8.2",
+    "target": "npm:yaml",
     "type": "static"
   },
   {
@@ -18281,7 +18281,7 @@
   },
   {
     "source": "npm:postcss-load-config",
-    "target": "npm:yaml",
+    "target": "npm:yaml@1.10.2",
     "type": "static"
   },
   {
@@ -20246,7 +20246,7 @@
   },
   {
     "source": "npm:schema-utils@3.3.0",
-    "target": "npm:ajv-keywords",
+    "target": "npm:ajv-keywords@3.5.2",
     "type": "static"
   },
   {
@@ -22261,7 +22261,7 @@
   },
   {
     "source": "npm:vite",
-    "target": "npm:yaml@2.8.2",
+    "target": "npm:yaml",
     "type": "static"
   },
   {
