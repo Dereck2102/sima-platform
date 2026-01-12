@@ -1,29 +1,39 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { User } from './entities/user.entity';
+import { User } from './users/user.entity';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'sima',
-      password: 'password123',
-      database: 'sima_core',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432'),
+      username: process.env.DB_USERNAME || 'sima',
+      password: process.env.DB_PASSWORD || 'password123',
+      database: process.env.DB_NAME || 'sima_core',
       entities: [User],
-      synchronize: true,
+      synchronize: true, // CAUTION: Disable in production
+      logging: false,
     }),
     TypeOrmModule.forFeature([User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'SUPER_SECRET_KEY_CHANGE_IN_PROD', // In prod use ENV variables
-      signOptions: { expiresIn: '1h' },
+      secret: process.env.JWT_SECRET || 'secret-key',
+      signOptions: { expiresIn: '15m' },
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AuthController],
+  providers: [AppService, AuthService, JwtStrategy],
 })
 export class AppModule {}

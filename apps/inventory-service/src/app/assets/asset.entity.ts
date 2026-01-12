@@ -1,12 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Index } from 'typeorm';
 import { IAsset, AssetStatus, AssetCondition } from '@sima/domain';
 
 @Entity('assets')
+@Index(['tenantId'])
+@Index(['tenantId', 'internalCode'], { unique: true })
 export class AssetEntity implements IAsset {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column({ unique: true })
+  @Column()
+  tenantId!: string;
+
+  @Column()
   internalCode!: string;
 
   @Column()
