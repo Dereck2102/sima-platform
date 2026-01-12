@@ -51,6 +51,54 @@ async function bootstrap() {
     })
   );
 
+  // Proxy for Search Service (port 3008)
+  app.use(
+    '/api/search',
+    createProxyMiddleware({
+      target: 'http://localhost:3008',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/': '/api/search/',
+      },
+    })
+  );
+
+  // Proxy for Notification Service (port 3006)
+  app.use(
+    '/api/notifications',
+    createProxyMiddleware({
+      target: 'http://localhost:3006',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/': '/api/notifications/',
+      },
+    })
+  );
+
+  // Proxy for Storage Service (port 3005)
+  app.use(
+    '/api/storage',
+    createProxyMiddleware({
+      target: 'http://localhost:3005',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/': '/api/storage/',
+      },
+    })
+  );
+
+  // Proxy for Report Service (port 3007)
+  app.use(
+    '/api/reports',
+    createProxyMiddleware({
+      target: 'http://localhost:3007',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/': '/api/reports/',
+      },
+    })
+  );
+
   // Swagger Configuration - API Gateway Documentation Hub
   const config = new DocumentBuilder()
     .setTitle('SIMA Platform API Gateway')
