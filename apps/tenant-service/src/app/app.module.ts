@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { Tenant } from './tenants/tenant.entity';
 import { TenantController } from './tenants/tenant.controller';
 import { TenantService } from './tenants/tenant.service';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -25,8 +26,9 @@ import { TenantService } from './tenants/tenant.service';
     }),
     TypeOrmModule.forFeature([Tenant]),
   ],
-  controllers: [AppController, TenantController],
+  controllers: [AppController, TenantController, HealthController],
   providers: [AppService, TenantService],
   exports: [TenantService],
 })
 export class AppModule {}
+

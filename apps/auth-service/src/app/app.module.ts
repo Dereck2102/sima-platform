@@ -3,12 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { User } from './users/user.entity';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -33,7 +32,9 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
       signOptions: { expiresIn: '15m' },
     }),
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, JwtStrategy],
+  controllers: [AuthController, HealthController],
+  providers: [AuthService, JwtStrategy],
 })
 export class AppModule {}
+
+

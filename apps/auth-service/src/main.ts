@@ -1,6 +1,6 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -9,24 +9,37 @@ async function bootstrap() {
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
+  // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
+      whitelist: true, // Strip unknown properties
+      forbidNonWhitelisted: true, // Throw error on unknown properties
+      transform: true, // Auto-transform payloads to DTO types
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     })
   );
 
+  // CORS configuration
   app.enableCors({
-    origin: true,
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  // Swagger Configuration
+  // Swagger documentation
   const config = new DocumentBuilder()
     .setTitle('SIMA Auth Service')
-    .setDescription('Authentication and Authorization API for SIMA Platform')
+    .setDescription('Authentication and Authorization Service for SIMA Platform')
     .setVersion('2.0.0')
+    .setContact(
+      'Dereck Amacoria',
+      'https://github.com/Dereck2102',
+      'amacoriadereck@gmail.com'
+    )
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .addBearerAuth(
       {
         type: 'http',

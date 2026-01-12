@@ -1,17 +1,69 @@
-node_modules
-dist
+# ===================================
+# NX Monorepo
+# ===================================
+.nx/cache
+.nx/workspace-data
+*.log
+
+# ===================================
+# Dependencies
+# ===================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ===================================
+# Build outputs
+# ===================================
+dist/
+dist-ssr/
+build/
+*.local
+
+# ===================================
+# Environment & Secrets
+# = =================================
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+!debug.keystore
+
+# ===================================
+# Testing
+# ===================================
+coverage/
+.nyc_output/
+*.lcov
+
+# ===================================
+# IDEs and Editors
+# ===================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
 
+# ===================================
 # React Native
+# ===================================
 
 # OSX
-#
 .DS_Store
 
 # Xcode
-#
-build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -20,58 +72,66 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata
+xcuserdata/
 *.xccheckout
 *.moved-aside
-DerivedData
+DerivedData/
 *.hmap
 *.ipa
 *.xcuserstate
 **/.xcode.env.local
 
 # Android/IntelliJ
-#
-build/
-.idea
-.gradle
+.gradle/
 local.properties
 *.iml
 *.hprof
 .cxx/
 *.keystore
-!debug.keystore
 
-# node.js
-#
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/
-
+# Fastlane
 **/fastlane/report.xml
 **/fastlane/Preview.html
 **/fastlane/screenshots
 **/fastlane/test_output
 
-# Bundle artifact
-*.jsbundle
+# Metro
+.metro-health-check*
 
-# Ruby / CocoaPods
+# CocoaPods
 **/Pods/
 **/vendor/bundle/
 
-# Temporary files created by Metro to check the health of the file watcher
-.metro-health-check*
+# Bundle artifacts
+*.jsbundle
 
-# testing
-/coverage
-
-
+# ===================================
+# Vite
+# ===================================
 vite.config.*.timestamp*
-/.nx/cache
+
+# ===================================
+# Docker & Infrastructure
+# ===================================
+docker-compose.override.yml
+
+# ===================================
+# Temporary files
+# ===================================
+*.tmp
+*.temp
+.cache/
+tmp/
+
+# ===================================
+# Documentation (generated)
+# ===================================
+# Uncomment if you auto-generate docs
+# docs/api/
+# .docusaurus/
+
+# ===================================
+# Project-specific
+# ===================================
+# Add any custom ignores here
+PROYECTO_COMPLETO.txt
