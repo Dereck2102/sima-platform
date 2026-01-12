@@ -40,7 +40,7 @@ async function bootstrap() {
     .setContact(
       'Dereck Stevens Amacoria Chávez',
       'https://github.com/Dereck2102',
-      'dereck.amacoria@uce.edu.ec'
+      'amacoriadereck@gmail.com'
     )
     .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
