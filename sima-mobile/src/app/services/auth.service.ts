@@ -18,7 +18,8 @@ interface TokenResponse {
 }
 
 export class AuthService {
-  private static readonly API_URL = 'http://192.168.0.168:3000/api/auth';
+  // Use relative URL - Vite proxy handles forwarding to localhost:3000
+  private static readonly API_URL = '/api/auth';
   private static readonly TOKEN_KEY = '@sima:accessToken';
   private static readonly REFRESH_TOKEN_KEY = '@sima:refreshToken';
   private static readonly USER_KEY = '@sima:user';

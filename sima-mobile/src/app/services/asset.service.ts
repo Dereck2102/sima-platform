@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { AuthService } from './auth.service';
 
-// Gateway connection - Use network IP for mobile testing
-const API_URL = 'http://192.168.0.168:3000/api';
+// Gateway connection - Use relative URL with Vite proxy
+const API_URL = '/api';
 
 export const AssetService = {
   getAll: async (): Promise<any[]> => {

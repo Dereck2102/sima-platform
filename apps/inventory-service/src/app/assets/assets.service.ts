@@ -2,7 +2,7 @@ import { Inject, Injectable, NotFoundException, Logger, BadRequestException } fr
 import { ClientKafka } from '@nestjs/microservices'; 
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateAssetDto } from '@sima/domain';
+import { CreateAssetDto, AssetStatus } from '@sima/domain';
 import { AssetEntity } from './asset.entity';
 
 @Injectable()
@@ -58,5 +58,43 @@ export class AssetsService {
     }
     
     return asset;
+  }
+
+  async update(id: string, updateAssetDto: Partial<AssetEntity>, tenantId: string): Promise<AssetEntity> {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    // First verify the asset exists and belongs to the tenant
+    const asset = await this.findOne(id, tenantId);
+
+    // Merge the updates
+    const updatedAsset = this.assetRepository.merge(asset, updateAssetDto);
+    const savedAsset = await this.assetRepository.save(updatedAsset);
+
+    // Emit Kafka event
+    this.kafkaClient.emit('asset.updated', JSON.stringify(savedAsset));
+    this.logger.log(`✅ Event emitted: asset.updated for ID ${savedAsset.id} (Tenant: ${tenantId})`);
+
+    return savedAsset;
+  }
+
+  async softDelete(id: string, tenantId: string): Promise<{ message: string }> {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    // First verify the asset exists and belongs to the tenant
+    const asset = await this.findOne(id, tenantId);
+
+    // Soft delete by setting status to DECOMMISSIONED
+    asset.status = AssetStatus.DECOMMISSIONED;
+    await this.assetRepository.save(asset);
+
+    // Emit Kafka event
+    this.kafkaClient.emit('asset.deleted', JSON.stringify({ id, tenantId }));
+    this.logger.log(`✅ Event emitted: asset.deleted for ID ${id} (Tenant: ${tenantId})`);
+
+    return { message: `Asset ${id} has been deactivated successfully` };
   }
 }

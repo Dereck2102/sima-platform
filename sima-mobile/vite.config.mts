@@ -53,10 +53,19 @@ export default defineConfig({
   },
   server: {
     port: 4200,
-    host: 'localhost',
+    host: '0.0.0.0', // Allow network access for mobile testing
+    cors: true,
     fs: {
       // Allow serving files from one level up to the project root
       allow: ['..'],
+    },
+    proxy: {
+      // Proxy API requests to avoid CORS issues when accessing from mobile
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
   preview: {

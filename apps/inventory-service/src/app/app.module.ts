@@ -7,6 +7,7 @@ import { AuthLibModule } from '@sima-platform/auth-lib';
 import { AssetEntity } from './assets/asset.entity';
 import { AssetsController } from './assets/assets.controller';
 import { AssetsService } from './assets/assets.service';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AssetsService } from './assets/assets.service';
     }),
 
     AuthLibModule,
+    HealthModule,
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
