@@ -24,25 +24,41 @@ export class AuthService {
   private static readonly USER_KEY = '@sima:user';
 
   static async login(credentials: LoginDto): Promise<TokenResponse> {
-    const response = await fetch(`${this.API_URL}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Invalid credentials');
-    }
-
-    const data: TokenResponse = await response.json();
+    console.log('[AuthService] Starting login...', credentials.email);
     
-    // Store tokens and user info
-    await AsyncStorage.setItem(this.TOKEN_KEY, data.accessToken);
-    await AsyncStorage.setItem(this.REFRESH_TOKEN_KEY, data.refreshToken);
-    await AsyncStorage.setItem(this.USER_KEY, JSON.stringify(data.user));
+    try {
+      const response = await fetch(`${this.API_URL}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
 
-    return data;
+      console.log('[AuthService] Response status:', response.status);
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('[AuthService] Login failed:', error);
+        throw new Error(error.message || 'Invalid credentials');
+      }
+
+      const data: TokenResponse = await response.json();
+      console.log('[AuthService] Login successful, storing tokens...');
+      
+      // Store tokens and user info
+      await AsyncStorage.setItem(this.TOKEN_KEY, data.accessToken);
+      console.log('[AuthService] Access token stored');
+      
+      await AsyncStorage.setItem(this.REFRESH_TOKEN_KEY, data.refreshToken);
+      console.log('[AuthService] Refresh token stored');
+      
+      await AsyncStorage.setItem(this.USER_KEY, JSON.stringify(data.user));
+      console.log('[AuthService] User data stored');
+
+      return data;
+    } catch (error) {
+      console.error('[AuthService] Login error:', error);
+      throw error;
+    }
   }
 
   static async logout(): Promise<void> {

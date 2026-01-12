@@ -18,18 +18,31 @@ export const LoginScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    console.log('[LoginScreen] handleLogin called');
+    
     if (!email || !password) {
+      console.log('[LoginScreen] Empty fields');
       Alert.alert('Error', 'Please fill all fields');
       return;
     }
 
+    console.log('[LoginScreen] Starting login with:', email);
     setLoading(true);
+    
     try {
-      await AuthService.login({ email, password });
-      navigation.replace('Home');
+      console.log('[LoginScreen] Calling AuthService.login...');
+      const result = await AuthService.login({ email, password });
+      console.log('[LoginScreen] Login successful:', result);
+      console.log('[LoginScreen] Reloading page to refresh auth state...');
+      // Reload page to refresh authentication state
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
     } catch (error: any) {
+      console.error('[LoginScreen] Login failed:', error);
       Alert.alert('Login Failed', error.message || 'Invalid credentials');
     } finally {
+      console.log('[LoginScreen] Setting loading to false');
       setLoading(false);
     }
   };

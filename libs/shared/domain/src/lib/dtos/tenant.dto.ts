@@ -75,19 +75,19 @@ export class TenantResponseDto {
     description: 'Tenant unique identifier (UUID)',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
-  id: string;
+  id!: string;
 
   @ApiProperty({
     description: 'Tenant organization name',
     example: 'Facultad de Ingeniería',
   })
-  name: string;
+  name!: string;
 
   @ApiProperty({
     description: 'Unique tenant code',
     example: 'engineering',
   })
-  code: string;
+  code!: string;
 
   @ApiPropertyOptional({
     description: 'Tenant description',
@@ -99,23 +99,23 @@ export class TenantResponseDto {
     description: 'Active status',
     example: true,
   })
-  isActive: boolean;
+  isActive!: boolean;
 
   @ApiProperty({
     description: 'Custom tenant settings',
     example: { theme: 'dark', locale: 'es-EC' },
   })
-  settings: Record<string, any>;
+  settings!: Record<string, any>;
 
   @ApiProperty({
     description: 'Creation timestamp',
     example: '2024-01-15T10:30:00Z',
   })
-  createdAt: Date;
+  createdAt!: Date;
 
   @ApiProperty({
     description: 'Last update timestamp',
     example: '2024-01-20T14:45:00Z',
   })
-  updatedAt: Date;
+  updatedAt!: Date;
 }

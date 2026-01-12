@@ -79,19 +79,19 @@ export class TokenResponseDto {
     description: 'JWT access token (valid for 15 minutes)',
     example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
   })
-  accessToken: string;
+  accessToken!: string;
 
   @ApiProperty({
     description: 'JWT refresh token (valid for 7 days)',
     example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
   })
-  refreshToken: string;
+  refreshToken!: string;
 
   @ApiProperty({
     description: 'Access token expiration time in seconds',
     example: 900,
   })
-  expiresIn: number;
+  expiresIn!: number;
 
   @ApiProperty({
     description: 'User information',
@@ -103,7 +103,7 @@ export class TokenResponseDto {
       tenantId: '123e4567-e89b-12d3-a456-426614174000',
     },
   })
-  user: {
+  user!: {
     id: string;
     email: string;
     fullName: string;
