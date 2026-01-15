@@ -57,6 +57,7 @@
     "@nx/web": "22.3.3",
     "@nx/webpack": "22.3.3",
     "@nx/workspace": "22.3.3",
+    "@originjs/vite-plugin-federation": "^1.4.1",
     "@react-native-community/cli": "~18.0.0",
     "@react-native-community/cli-platform-android": "~18.0.0",
     "@react-native-community/cli-platform-ios": "~18.0.0",

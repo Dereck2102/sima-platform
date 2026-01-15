@@ -1,0 +1,89 @@
+name: Deploy to QA
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to perform'
+        required: true
+        default: 'plan'
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+
+env:
+  TF_VERSION: '1.6.0'
+  AWS_REGION: 'us-east-1'
+
+jobs:
+  terraform:
+    name: 🚀 Terraform ${{ github.event.inputs.action }}
+    runs-on: ubuntu-latest
+    environment: qa
+    
+    defaults:
+      run:
+        working-directory: infrastructure/terraform/environments/qa
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: 🔐 Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: 📋 Terraform Format Check
+        run: terraform fmt -check -recursive
+        continue-on-error: true
+
+      - name: 🔄 Terraform Init
+        run: terraform init
+
+      - name: ✅ Terraform Validate
+        run: terraform validate
+
+      - name: 📝 Terraform Plan
+        if: github.event.inputs.action == 'plan' || github.event.inputs.action == 'apply'
+        run: terraform plan -out=qa.tfplan -no-color
+        continue-on-error: ${{ github.event.inputs.action == 'plan' }}
+
+      - name: 🚀 Terraform Apply
+        if: github.event.inputs.action == 'apply'
+        run: terraform apply -auto-approve qa.tfplan
+
+      - name: 💥 Terraform Destroy
+        if: github.event.inputs.action == 'destroy'
+        run: terraform destroy -auto-approve
+
+      - name: 📊 Output Summary
+        if: success() && github.event.inputs.action == 'apply'
+        run: |
+          echo "## 🚀 QA Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Outputs" >> $GITHUB_STEP_SUMMARY
+          terraform output -no-color >> $GITHUB_STEP_SUMMARY
+
+  notify:
+    name: 📢 Notify
+    runs-on: ubuntu-latest
+    needs: terraform
+    if: always()
+    
+    steps:
+      - name: Deployment Status
+        run: |
+          echo "## QA Deployment Status" >> $GITHUB_STEP_SUMMARY
+          echo "Action: ${{ github.event.inputs.action }}" >> $GITHUB_STEP_SUMMARY
+          echo "Result: ${{ needs.terraform.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "Triggered by: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY

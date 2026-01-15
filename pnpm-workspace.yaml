@@ -1,8 +1,14 @@
 autoInstallPeers: true
 
+packages:
+  - 'apps/*'
+  - 'libs/*'
+  - 'sima-mobile'
+
 onlyBuiltDependencies:
   - '@nestjs/core'
   - '@parcel/watcher'
+  - '@scarf/scarf'
   - '@swc/core'
   - bcrypt
   - detox

@@ -1,0 +1,177 @@
+# =============================================================================
+# SIMA Platform - Production Docker Compose
+# Used by PROD bootstrap script to run pre-built Docker images
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # --- DATABASES ---
+  postgres:
+    image: postgres:15-alpine
+    container_name: sima-prod-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sima}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sima-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sima}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+  
+  mongo:
+    image: mongo:6.0
+    container_name: sima-prod-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - sima-net
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  redis:
+    image: redis:alpine
+    container_name: sima-prod-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sima-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # --- MESSAGING ---
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: sima-prod-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - sima-net
+    restart: always
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    container_name: sima-prod-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      - sima-net
+    restart: always
+
+  # --- APPLICATION SERVICES (Pre-built images) ---
+  api-gateway:
+    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/api-gateway:${DOCKER_TAG:-latest}
+    container_name: sima-prod-api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    depends_on:
+      - auth-service
+      - tenant-service
+      - inventory-service
+    networks:
+      - sima-net
+    restart: always
+
+  auth-service:
+    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/auth-service:${DOCKER_TAG:-latest}
+    container_name: sima-prod-auth-service
+    ports:
+      - "3002:3002"
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-sima}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sima-net
+    restart: always
+
+  tenant-service:
+    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/tenant-service:${DOCKER_TAG:-latest}
+    container_name: sima-prod-tenant-service
+    ports:
+      - "3003:3003"
+    environment:
+      NODE_ENV: production
+      PORT: 3003
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-sima}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sima-net
+    restart: always
+
+  inventory-service:
+    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/inventory-service:${DOCKER_TAG:-latest}
+    container_name: sima-prod-inventory-service
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-sima}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
+      KAFKA_BROKER: kafka:9092
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    networks:
+      - sima-net
+    restart: always
+
+networks:
+  sima-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongo_data:

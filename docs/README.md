@@ -1,56 +1,51 @@
 # 📚 SIMA Platform Documentation
 
-This directory contains all technical and architectural documentation for the SIMA project.
+This directory contains all technical documentation for the SIMA project.
 
-## 📋 Documentation Index
+---
 
-### Core Documents
+## 📋 Documents
 
-- **[SIMA_MANIFEST.md](./SIMA_MANIFEST.md)** - **START HERE** - Definitive project manifest with complete status, architecture, and AI session initialization guide
+| Document                               | Description                                                        |
+| -------------------------------------- | ------------------------------------------------------------------ |
+| [SIMA_MANIFEST.md](./SIMA_MANIFEST.md) | **START HERE** - Complete project status & AI initialization guide |
+| [AWS-README.md](./AWS-README.md)       | AWS Academy constraints and restrictions                           |
 
-### Planned Documentation
+---
 
-- `ARCHITECTURE.md` - C4 diagrams and architecture patterns
-- `DEPLOYMENT.md` - AWS deployment guide with Terraform
-- `API.md` - Consolidated API reference (generated from Swagger)
-- `DATABASE.md` - Database schemas and migration guides
-- `SECURITY.md` - Security implementation details
-- `TESTING.md` - Testing strategy and chaos engineering
+## 🔗 Quick Links
 
-### ADRs (Architecture Decision Records)
+### For Developers
 
-- Future: `adr/001-microservices-architecture.md`
-- Future: `adr/002-multi-tenancy-strategy.md`
-- Future: `adr/003-event-driven-kafka.md`
+1. Start with **SIMA_MANIFEST.md** → Section "QUICK START FOR AI"
+2. Check **NEXT ACTIONS** for prioritized tasks
+3. See **TROUBLESHOOTING GUIDE** for common issues
 
-## 🎯 Quick Links
+### For AI Sessions
 
-**For Developers:**
+1. Read **SIMA_MANIFEST.md** at session start
+2. Check `task.md` for last session status
+3. Update manifest when project status changes
 
-- Start with [SIMA_MANIFEST.md](./SIMA_MANIFEST.md) - Section "QUICK START FOR AI"
-- Check "NEXT ACTIONS" for prioritized tasks
-- See "TROUBLESHOOTING GUIDE" for common issues
+### For AWS Deployment
 
-**For AI Sessions:**
+1. Read **AWS-README.md** for restrictions:
+   - Regions: `us-east-1` and `us-west-2` only
+   - Max 9 EC2 instances
+   - Use `LabRole` and `LabInstanceProfile`
+   - Instance types: nano/micro/small/medium/large
 
-- Read [SIMA_MANIFEST.md](./SIMA_MANIFEST.md) at session start
-- Follow "AI SESSION INITIALIZATION CHECKLIST"
-- Update manifest when project status changes by 5%+
+---
 
-**For Thesis/Academic:**
+## 📁 Related Directories
 
-- Architecture diagrams: (Coming soon)
-- Evaluation criteria: See manifest section "THESIS/ACADEMIC CONTEXT"
-- Demo requirements: See manifest section "DEMO REQUIREMENTS"
+| Path                         | Description            |
+| ---------------------------- | ---------------------- |
+| `/infrastructure/terraform/` | IaC for AWS deployment |
+| `/scripts/`                  | Automation scripts     |
+| `/.github/workflows/`        | CI/CD pipelines        |
 
-## 📝 Maintenance
+---
 
-**Manifest Updates:**
-
-- Update when microservice status changes
-- Update when new features are implemented
-- Update when critical bugs are fixed
-- Version format: v3.x (increment on major changes)
-
-**Last Updated:** 2026-01-12
-**Maintainer:** Dereck Amacoria + AI Agent
+**Last Updated:** 2026-01-15  
+**Maintainer:** Dereck Amacoria
