@@ -12,7 +12,7 @@ async function bootstrap() {
     origin: true,  // Allow all origins
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-tenant-id'],
   });
 
   // Proxy for Auth Service (port 3002)
@@ -99,6 +99,30 @@ async function bootstrap() {
     })
   );
 
+  // Proxy for Analytics Engine (port 3010) - Python/FastAPI
+  app.use(
+    '/api/analytics',
+    createProxyMiddleware({
+      target: 'http://localhost:3010',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/': '/api/analytics/',
+      },
+    })
+  );
+
+  // Proxy for Mobile BFF (port 3011)
+  app.use(
+    '/api/mobile',
+    createProxyMiddleware({
+      target: 'http://localhost:3011',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/': '/api/mobile/',
+      },
+    })
+  );
+
   // Swagger Configuration - API Gateway Documentation Hub
   const config = new DocumentBuilder()
     .setTitle('SIMA Platform API Gateway')
@@ -107,19 +131,27 @@ async function bootstrap() {
       
       This is the main API Gateway for the SIMA Platform, a SaaS Multi-Tenant B2B system for asset management.
       
-      **Architecture:** Event-Driven Microservices
+      **Architecture:** Event-Driven Microservices (12 services + 4 MFEs)
       
       **Individual Service Documentation:**
       - [Auth Service Docs](http://localhost:3002/api/docs) - Authentication & Authorization
       - [Tenant Service Docs](http://localhost:3003/api/docs) - Multi-Tenant Management  
       - [Inventory Service Docs](http://localhost:3001/api/docs) - Asset Inventory
+      - [Analytics Engine Docs](http://localhost:3010/docs) - Asset Analytics (Python/FastAPI)
+      - [Mobile BFF Docs](http://localhost:3011/api/docs) - Mobile Optimized API
       
       **Available Routes:**
       - \`/api/auth/*\` → Auth Service (port 3002)
       - \`/api/tenants/*\` → Tenant Service (port 3003)
       - \`/api/assets/*\` → Inventory Service (port 3001)
+      - \`/api/search/*\` → Search Service (port 3008)
+      - \`/api/notifications/*\` → Notification Service (port 3006)
+      - \`/api/storage/*\` → Storage Service (port 3005)
+      - \`/api/reports/*\` → Report Service (port 3007)
+      - \`/api/analytics/*\` → Analytics Engine (port 3010) **NEW**
+      - \`/api/mobile/*\` → Mobile BFF (port 3011) **NEW**
     `)
-    .setVersion('2.0.0')
+    .setVersion('3.0.0')
     .addBearerAuth(
       {
         type: 'http',
@@ -154,6 +186,9 @@ async function bootstrap() {
   Logger.log(`Route: /api/auth -> http://localhost:3002/api/auth`);
   Logger.log(`Route: /api/tenants -> http://localhost:3003/api/tenants`);
   Logger.log(`Route: /api/assets -> http://localhost:3001/api/assets`);
+  Logger.log(`Route: /api/analytics -> http://localhost:3010/api/analytics`);
+  Logger.log(`Route: /api/mobile -> http://localhost:3011/api/mobile`);
 }
 
 bootstrap();
+
