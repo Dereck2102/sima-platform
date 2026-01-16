@@ -112,6 +112,17 @@
 .user-name {
   color: var(--text-primary);
   font-weight: 500;
+  display: block;
+}
+
+.user-role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  margin-top: 4px;
 }
 
 /* Main Content */

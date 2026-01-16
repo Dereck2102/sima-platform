@@ -100,4 +100,31 @@ export class AuthController {
       tenantId: req.user.tenantId,
     };
   }
+
+  @Get('users')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ 
+    summary: 'Get all users for tenant',
+    description: 'Returns all users for the authenticated user tenant. Requires admin role.'
+  })
+  @ApiResponse({ 
+    status: 200, 
+    description: 'List of users retrieved successfully'
+  })
+  @ApiResponse({ 
+    status: 401, 
+    description: 'Unauthorized'
+  })
+  @ApiResponse({ 
+    status: 403, 
+    description: 'Forbidden - Admin role required'
+  })
+  async getUsers(@Request() req) {
+    const allowedRoles = ['super_admin', 'admin'];
+    if (!allowedRoles.includes(req.user.role)) {
+      return { error: 'Forbidden', message: 'Admin role required' };
+    }
+    return this.authService.findAllByTenant(req.user.tenantId);
+  }
 }

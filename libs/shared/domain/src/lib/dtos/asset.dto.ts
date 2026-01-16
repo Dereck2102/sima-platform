@@ -21,14 +21,19 @@ export class CreateAssetDto {
   condition!: AssetCondition;
 
   @IsDateString()
-  acquisitionDate!: Date;
+  @IsOptional()
+  acquisitionDate?: Date;
 
   @IsNumber()
   price!: number;
 
   @IsString()
-  @IsNotEmpty()
-  locationId!: string;
+  @IsOptional()
+  locationId?: string;
+
+  @IsString()
+  @IsOptional()
+  custodianId?: string;
 }
 
 export class UpdateAssetDto {

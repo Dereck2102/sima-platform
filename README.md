@@ -1,298 +1,423 @@
-# 🏢 SIMA: Integrated Asset Management System
+# 🏢 SIMA Platform
+
+**Sistema Integrado de Manejo de Activos** - Integrated Asset Management System
+
+A cloud-native, multi-tenant SaaS platform for enterprise asset management built with microservices architecture.
 
 [![CI Pipeline](https://github.com/Dereck2102/sima-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/Dereck2102/sima-platform/actions/workflows/ci.yml)
-[![Docker Publish](https://github.com/Dereck2102/sima-platform/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Dereck2102/sima-platform/actions/workflows/docker-publish.yml)
-
-**Institution:** Universidad Central del Ecuador (UCE)  
-**Author:** Dereck Stevens Amacoria Chávez  
-**Supervisor:** Ing. Juan Guevara  
-**Version:** 3.0.0
+[![Deploy QA](https://github.com/Dereck2102/sima-platform/actions/workflows/deploy-qa.yml/badge.svg)](https://github.com/Dereck2102/sima-platform/actions/workflows/deploy-qa.yml)
 
 ---
 
-## 📋 Overview
+## 📋 Table of Contents
 
-SIMA (Sistema Integrado de Manejo de Activos) is a **SaaS Multi-Tenant B2B platform** for fixed asset management built with **Event-Driven Microservices Architecture**.
-
-### ✨ Key Features
-
-- 🏢 **Multi-Tenancy** - Logical data isolation per organization
-- ⚡ **Event-Driven** - Apache Kafka for async communication
-- 🗄️ **Polyglot Persistence** - PostgreSQL, MongoDB, Redis
-- 📱 **Cross-Platform** - React Native (Web + Mobile)
-- 🔒 **Security** - JWT auth, CORS, Rate Limiting
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- **Node.js** v20+
-- **Docker Desktop** v24+
-- **pnpm** v9+ (`npm install -g pnpm`)
-
-### 1. Clone & Install
-
-```bash
-git clone https://github.com/Dereck2102/sima-platform.git
-cd sima-platform
-pnpm install
-```
-
-### 2. Configure Environment
-
-```bash
-cp .env.example .env
-# Edit .env with your settings (passwords, secrets, etc.)
-```
-
-### 3. Start Infrastructure
-
-```bash
-# Start all databases and message brokers
-docker compose up -d
-```
-
-### 4. Start Microservices
-
-Open separate terminals for each service:
-
-```bash
-# Terminal 1: API Gateway (entry point)
-npx nx serve api-gateway
-
-# Terminal 2: Auth Service
-npx nx serve auth-service
-
-# Terminal 3: Tenant Service
-npx nx serve tenant-service
-
-# Terminal 4: Inventory Service
-npx nx serve inventory-service
-```
-
-### 5. Access the Application
-
-| Service          | URL                            | Description       |
-| ---------------- | ------------------------------ | ----------------- |
-| **API Gateway**  | http://localhost:3000          | Main entry point  |
-| **Swagger Docs** | http://localhost:3000/api/docs | API documentation |
-| **Mobile App**   | http://localhost:4200          | React Native Web  |
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Prerequisites](#-prerequisites)
+- [Quick Start](#-quick-start)
+- [Development](#-development)
+- [Testing](#-testing)
+- [Deployment](#-deployment)
+- [API Documentation](#-api-documentation)
+- [Monitoring](#-monitoring)
 
 ---
 
-## 🎯 Port Reference
+## ✨ Features
 
-### Application Services
-
-| Service              | Port   | Status |
-| -------------------- | ------ | ------ |
-| API Gateway          | `3000` | 🟢     |
-| Inventory Service    | `3001` | 🟢     |
-| Auth Service         | `3002` | 🟢     |
-| Tenant Service       | `3003` | 🟢     |
-| Storage Service      | `3005` | 🟢     |
-| Notification Service | `3006` | 🟢     |
-| Report Service       | `3007` | 🟢     |
-| Search Service       | `3008` | 🟢     |
-| Mobile App           | `4200` | 🟢     |
-
-### Infrastructure Services
-
-| Service    | Port             | Description           |
-| ---------- | ---------------- | --------------------- |
-| PostgreSQL | `5432`           | Primary database      |
-| MongoDB    | `27017`          | Audit logs            |
-| Redis      | `6379`           | Cache                 |
-| Kafka      | `9092`           | Event streaming       |
-| RabbitMQ   | `5672` / `15672` | Message queue         |
-| MinIO      | `9000` / `9001`  | S3-compatible storage |
-| Prometheus | `9090`           | Metrics               |
-| Grafana    | `3001`           | Dashboards            |
-| n8n        | `5678`           | Automation            |
-
----
-
-## 🧪 Testing
-
-### Run All Tests
-
-```bash
-# Run tests for all affected projects
-npx nx affected -t test
-
-# Run tests for specific service
-npx nx test auth-service
-npx nx test tenant-service
-```
-
-### Run E2E Tests
-
-```bash
-# Requires infrastructure running
-docker compose up -d postgres
-
-# Run E2E tests
-npx nx e2e auth-service-e2e
-npx nx e2e tenant-service-e2e
-```
-
-### Test API Manually
-
-```bash
-# Health check
-curl http://localhost:3000/api/health
-
-# Register user
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@uce.edu.ec","password":"Test123!","fullName":"Test User","role":"admin","tenantId":"uce-001"}'
-
-# Login
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@uce.edu.ec","password":"Test123!"}'
-```
+- **Multi-Tenant Architecture** - Complete tenant isolation with role-based access
+- **Real-Time Tracking** - GPS-based asset geolocation with live updates
+- **Microservices** - 12 independent, scalable backend services
+- **Microfrontends** - Module Federation for dynamic UI composition
+- **Multi-Protocol** - REST, WebSocket, gRPC, SOAP, MQTT support
+- **Event-Driven** - Apache Kafka for asynchronous communication
+- **Mobile Ready** - React Native app for iOS/Android
+- **Automated Testing** - Load testing, unit tests, E2E tests with dashboard
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                  API Gateway (3000)                      │
-│           /api/auth  /api/tenants  /api/assets          │
-└──────────┬─────────────┬─────────────┬─────────────────┘
-           │             │             │
-     ┌─────▼─────┐ ┌─────▼─────┐ ┌─────▼───────┐
-     │   Auth    │ │  Tenant   │ │  Inventory  │
-     │  (3002)   │ │  (3003)   │ │   (3001)    │
-     └─────┬─────┘ └─────┬─────┘ └─────┬───────┘
-           │             │             │
-           └─────────────┴─────────────┘
-                         │
-                    ┌────▼────┐
-                    │ Kafka   │──→ Audit Service (MongoDB)
-                    └─────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                         SIMA Platform                                │
+├─────────────────────────────────────────────────────────────────────┤
+│  Frontend (Microfrontends)                                          │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐               │
+│  │Shell App │ │Assets MFE│ │Dashboard │ │Users MFE │               │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘               │
+├─────────────────────────────────────────────────────────────────────┤
+│  API Gateway (NestJS) - Authentication, Routing, Rate Limiting      │
+├─────────────────────────────────────────────────────────────────────┤
+│  Microservices                                                       │
+│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ │
+│  │  Auth  │ │ Tenant │ │Inventory│ │ Audit  │ │ Search │ │ Report │ │
+│  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ │
+│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ │
+│  │Storage │ │ Notify │ │  BFF   │ │  Geo   │ │Analytics│ │Testing │ │
+│  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ │
+├─────────────────────────────────────────────────────────────────────┤
+│  Infrastructure: PostgreSQL, MongoDB, Redis, Kafka, MinIO          │
+└─────────────────────────────────────────────────────────────────────┘
 ```
-
-### Services
-
-| Service                  | Tech             | Responsibility               |
-| ------------------------ | ---------------- | ---------------------------- |
-| **api-gateway**          | NestJS           | Reverse Proxy, Rate Limiting |
-| **auth-service**         | NestJS           | JWT Auth, User Management    |
-| **tenant-service**       | NestJS           | Multi-Tenancy, Organization  |
-| **inventory-service**    | NestJS           | Asset CRUD, Events           |
-| **audit-service**        | NestJS + MongoDB | Immutable Logs               |
-| **search-service**       | NestJS           | Full-text Search             |
-| **report-service**       | NestJS           | PDF/Excel Generation         |
-| **notification-service** | NestJS           | Email, Push Alerts           |
-| **storage-service**      | NestJS + MinIO   | File Storage                 |
-| **geo-tracker**          | **Go**           | Location Tracking            |
-| **analytics-engine**     | **Python**       | Financial Analytics          |
 
 ---
 
-## 📁 Project Structure
+## 📦 Prerequisites
+
+- **Node.js** 20.x or higher
+- **pnpm** 8.x or higher (or npm/yarn)
+- **Docker** and Docker Compose
+- **Git**
+
+Optional for AWS deployment:
+
+- **AWS CLI** configured
+- **Terraform** 1.5+
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Dereck2102/sima-platform.git
+cd sima-platform
+```
+
+### 2. Install Dependencies
+
+```bash
+pnpm install
+# or
+npm install
+```
+
+### 3. Configure Environment
+
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+### 4. Start Infrastructure
+
+```bash
+docker-compose up -d
+```
+
+### 5. Start All Services
+
+```bash
+# Start backend services
+npm run start:backend
+
+# In separate terminals, start frontend
+npx nx serve shell-app
+npx nx serve assets-mfe
+npx nx serve dashboard-mfe
+npx nx serve users-mfe
+```
+
+### 6. Access Application
+
+| Application  | URL                       |
+| ------------ | ------------------------- |
+| Shell App    | http://localhost:4100     |
+| API Gateway  | http://localhost:3000     |
+| Swagger Docs | http://localhost:3000/api |
+
+**Default Admin Credentials:**
+
+- Email: `admin@uce.edu.ec`
+- Password: `Admin123!`
+
+---
+
+## 💻 Development
+
+### Project Structure
 
 ```
 sima-platform/
-├── apps/                    # Microservices
-│   ├── api-gateway/
-│   ├── auth-service/
-│   ├── tenant-service/
-│   ├── inventory-service/
-│   └── ...
-├── libs/                    # Shared libraries
-│   └── shared/
-│       ├── domain/          # DTOs, Interfaces
-│       └── auth-lib/        # Guards, Strategies
-├── infrastructure/          # IaC (Terraform)
-│   └── terraform/
-│       ├── modules/         # Reusable modules
-│       └── environments/    # QA, PROD configs
-├── scripts/                 # Automation scripts
-├── sima-mobile/             # React Native app
-├── docs/                    # Documentation
-├── docker-compose.yml       # Local development
-└── docker-compose.prod.yml  # Production deployment
+├── apps/
+│   ├── api-gateway/         # API Gateway (NestJS)
+│   ├── auth-service/        # Authentication (NestJS)
+│   ├── tenant-service/      # Multi-tenancy (NestJS)
+│   ├── inventory-service/   # Asset management (NestJS)
+│   ├── audit-service/       # Audit logging (NestJS)
+│   ├── search-service/      # Search (NestJS)
+│   ├── report-service/      # Reports + SOAP (NestJS)
+│   ├── notification-service/# Notifications + MQTT (NestJS)
+│   ├── storage-service/     # File storage (NestJS)
+│   ├── mobile-bff/          # Mobile backend (NestJS)
+│   ├── geo-tracker/         # Geolocation (Go)
+│   ├── analytics-engine/    # Analytics (Python/FastAPI)
+│   ├── shell-app/           # Main frontend
+│   ├── assets-mfe/          # Assets microfrontend
+│   ├── dashboard-mfe/       # Dashboard microfrontend
+│   ├── users-mfe/           # Users microfrontend
+│   └── testing-dashboard/   # Testing interface
+├── libs/
+│   ├── shared/              # Shared DTOs, entities
+│   └── mobile-core/         # Mobile shared code
+├── infrastructure/
+│   ├── terraform/           # IaC modules
+│   └── scripts/             # Automation scripts
+├── tests/
+│   └── load/                # k6 load tests
+└── sima-mobile/             # React Native app
+```
+
+### Useful Commands
+
+```bash
+# Generate new app/library
+npx nx g @nx/nest:application my-service
+npx nx g @nx/react:library my-lib
+
+# Build specific project
+npx nx build api-gateway
+
+# Run tests
+npx nx test auth-service
+
+# Lint
+npx nx lint api-gateway
+
+# View dependency graph
+npx nx graph
+```
+
+### Service Ports
+
+| Service              | Port |
+| -------------------- | ---- |
+| API Gateway          | 3000 |
+| Auth Service         | 3002 |
+| Tenant Service       | 3003 |
+| Inventory Service    | 3004 |
+| Storage Service      | 3005 |
+| Notification Service | 3006 |
+| Report Service       | 3007 |
+| Search Service       | 3008 |
+| Geo Tracker (Go)     | 3009 |
+| Analytics (Python)   | 3010 |
+| Mobile BFF           | 3011 |
+| Audit Service        | 3012 |
+| Shell App            | 4100 |
+| Assets MFE           | 4101 |
+| Dashboard MFE        | 4102 |
+| Users MFE            | 4103 |
+| Testing Dashboard    | 4200 |
+
+---
+
+## 🧪 Testing
+
+### Unit Tests
+
+```bash
+# Run all tests
+npm run test
+
+# Run specific service tests
+npx nx test auth-service
+
+# Watch mode
+npx nx test auth-service --watch
+```
+
+### Load Testing (k6)
+
+```bash
+# Install k6
+# Windows: choco install k6
+# Mac: brew install k6
+
+# Run login stress test
+k6 run tests/load/scenarios/login-stress.js
+
+# Run asset CRUD load test
+k6 run tests/load/scenarios/asset-crud-load.js \
+  --env API_URL=http://localhost:3000
+```
+
+### Testing Dashboard
+
+```bash
+npx nx serve testing-dashboard
+# Access at http://localhost:4200
 ```
 
 ---
 
-## 🔒 Environment Variables
+## 🚀 Deployment
 
-Copy `.env.example` to `.env` and configure:
+### AWS Deployment (QA)
+
+#### Prerequisites
+
+1. AWS Academy account with credentials
+2. GitHub repository secrets configured:
+   - `AWS_ACCESS_KEY_ID`
+   - `AWS_SECRET_ACCESS_KEY`
+   - `AWS_SESSION_TOKEN`
+   - `DB_PASSWORD`
+   - `DOCKERHUB_USERNAME`
+   - `DOCKERHUB_TOKEN`
+
+#### Deploy via GitHub Actions
 
 ```bash
-# Database
-POSTGRES_USER=sima
-POSTGRES_PASSWORD=your-secure-password
-POSTGRES_DB=sima_core
+# Push to qa branch triggers automatic deployment
+git checkout qa
+git merge develop
+git push origin qa
 
-# MongoDB
-MONGO_USER=root
-MONGO_PASSWORD=your-mongo-password
-
-# JWT
-JWT_SECRET=your-jwt-secret
-JWT_REFRESH_SECRET=your-refresh-secret
-
-# Grafana
-GRAFANA_PASSWORD=admin123
-
-# n8n
-N8N_PASSWORD=admin123
+# Or use workflow dispatch from GitHub Actions UI
 ```
 
----
-
-## 🚀 CI/CD
-
-### Workflows
-
-| Workflow             | Trigger           | Purpose                    |
-| -------------------- | ----------------- | -------------------------- |
-| `ci.yml`             | Push/PR           | Lint, Build, Test          |
-| `docker-publish.yml` | Push to main      | Build & Push Docker images |
-| `deploy-qa.yml`      | Manual            | Deploy to QA environment   |
-| `deploy-prod.yml`    | Manual + Approval | Deploy to Production       |
-
-### Deploy to AWS
+#### Manual Deployment
 
 ```bash
-# From GitHub Actions (recommended)
-# 1. Go to Actions tab
-# 2. Select "Deploy to QA" or "Deploy to Production"
-# 3. Choose action (plan/apply/destroy)
-# 4. Run workflow
-
-# Or locally with Terraform
 cd infrastructure/terraform/environments/qa
+
+# Initialize
 terraform init
-terraform plan
+
+# Plan
+terraform plan -var="db_password=YourSecurePassword"
+
+# Apply
 terraform apply
+
+# Get outputs
+terraform output
+```
+
+### Infrastructure Scripts
+
+```bash
+# Check existing infrastructure
+./infrastructure/scripts/check-infra.sh qa
+
+# Deploy containers
+./infrastructure/scripts/deploy-containers.sh qa
+
+# Health check
+./infrastructure/scripts/health-check.sh qa
+
+# Cleanup (use with caution!)
+./infrastructure/scripts/cleanup.sh qa
 ```
 
 ---
 
-## 📚 Documentation
+## 📖 API Documentation
 
-- **[SIMA Manifest](./docs/SIMA_MANIFEST.md)** - Complete project status
-- **[AWS README](./docs/AWS-README.md)** - AWS Academy constraints
-- **[API Docs](http://localhost:3000/api/docs)** - Interactive Swagger UI
+### REST API
+
+Swagger documentation available at: `http://localhost:3000/api`
+
+### SOAP Services
+
+WSDL available at: `http://localhost:3000/api/reports/soap?wsdl`
+
+### gRPC
+
+Proto definitions in: `libs/shared/proto/`
+
+### MQTT Topics
+
+```
+sima/assets/+/location    # Asset location updates
+sima/assets/+/status      # Asset status changes
+sima/sensors/+/data       # Sensor data
+sima/notifications        # System notifications
+```
+
+---
+
+## 📊 Monitoring
+
+### Local Development
+
+| Service    | URL                   | Credentials |
+| ---------- | --------------------- | ----------- |
+| Prometheus | http://localhost:9090 | -           |
+| Grafana    | http://localhost:3001 | admin/admin |
+
+### Logs
+
+```bash
+# View all logs
+docker-compose logs -f
+
+# View specific service
+docker-compose logs -f api-gateway
+```
+
+---
+
+## 🔧 Troubleshooting
+
+### Database Connection Issues
+
+```bash
+# Check PostgreSQL
+docker-compose ps postgres
+docker-compose logs postgres
+
+# Restart
+docker-compose restart postgres
+```
+
+### Kafka Issues
+
+```bash
+# Check broker
+docker-compose logs kafka
+
+# Create topic manually
+docker-compose exec kafka kafka-topics --create \
+  --topic asset.events \
+  --bootstrap-server localhost:9092
+```
+
+### Reset Everything
+
+```bash
+# Stop all containers
+docker-compose down -v
+
+# Remove all docker artifacts
+docker system prune -a
+
+# Reinstall dependencies
+rm -rf node_modules
+pnpm install
+```
 
 ---
 
 ## 📄 License
 
-Private Repository. Property of Universidad Central del Ecuador.
+This project is developed as part of a university thesis at UCE (Universidad Central del Ecuador).
 
 ---
 
-## 👥 Contributors
+## 👥 Authors
 
-- **Dereck Amacoria** - Lead Developer
-- **Ing. Juan Guevara** - Thesis Supervisor
+- **Dereck Amacoria** - Initial development
+- **Supervisor:** Ing. Juan Guevara
+
+---
+
+## 📚 Additional Resources
+
+- [Architecture Design](docs/ARCHITECTURE-DESIGN.pdf)
+- [Technical Report](docs/TECHNICAL-REPORT.pdf)
+- [SIMA Manifest](docs/SIMA_MANIFEST.md)
+- [Audit Report](docs/AUDIT_REPORT.md)

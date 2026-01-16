@@ -68,6 +68,13 @@ variable "github_branch" {
   default = "develop"
 }
 
+variable "db_password" {
+  description = "Password for RDS database"
+  type        = string
+  sensitive   = true
+  default     = "SimaQA2026!" # Change via terraform.tfvars or secrets
+}
+
 locals {
   common_tags = {
     Project     = "SIMA Platform"
@@ -105,6 +112,45 @@ module "security" {
 }
 
 # =============================================================================
+# RDS Module (PostgreSQL)
+# =============================================================================
+
+module "rds" {
+  source = "../../modules/rds"
+
+  project_name            = var.project_name
+  environment             = var.environment
+  vpc_id                  = module.vpc.vpc_id
+  subnet_ids              = module.vpc.public_subnet_ids
+  security_group_ids      = [module.security.rds_security_group_id]
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  db_name                 = "sima_qa"
+  db_username             = "sima_admin"
+  db_password             = var.db_password
+  backup_retention_period = 7
+  multi_az                = false
+  common_tags             = local.common_tags
+}
+
+# =============================================================================
+# ElastiCache Module (Redis)
+# =============================================================================
+
+module "elasticache" {
+  source = "../../modules/elasticache"
+
+  project_name       = var.project_name
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  subnet_ids         = module.vpc.public_subnet_ids
+  security_group_ids = [module.security.redis_security_group_id]
+  node_type          = "cache.t3.micro"
+  num_cache_nodes    = 1
+  common_tags        = local.common_tags
+}
+
+# =============================================================================
 # ELB Module
 # =============================================================================
 
@@ -138,9 +184,15 @@ module "ec2_asg" {
 
   # QA: Downloads from GitHub, builds from source
   user_data = templatefile("${path.module}/../../scripts/bootstrap-qa.sh.tpl", {
-    github_repo   = var.github_repo
-    github_branch = var.github_branch
-    environment   = var.environment
+    github_repo     = var.github_repo
+    github_branch   = var.github_branch
+    environment     = var.environment
+    rds_endpoint    = module.rds.endpoint
+    rds_username    = module.rds.username
+    rds_password    = var.db_password
+    rds_database    = module.rds.db_name
+    redis_endpoint  = module.elasticache.endpoint
+    redis_port      = module.elasticache.port
   })
 
   asg_min_size         = 1
@@ -170,4 +222,14 @@ output "alb_url" {
 output "elastic_ip" {
   description = "Elastic IP for reference"
   value       = module.elb.elastic_ip
+}
+
+output "rds_endpoint" {
+  description = "RDS PostgreSQL endpoint"
+  value       = module.rds.endpoint
+}
+
+output "redis_endpoint" {
+  description = "ElastiCache Redis endpoint"
+  value       = module.elasticache.endpoint
 }

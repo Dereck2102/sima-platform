@@ -93,6 +93,15 @@ export class AuthService {
     return user;
   }
 
+  async findAllByTenant(tenantId: string) {
+    const users = await this.userRepository.find({
+      where: { tenantId },
+      select: ['id', 'email', 'fullName', 'role', 'isActive', 'tenantId', 'createdAt', 'updatedAt'],
+      order: { createdAt: 'DESC' },
+    });
+    return users;
+  }
+
   private generateTokens(user: User): TokenResponseDto {
     const payload: JwtPayload = {
       sub: user.id,

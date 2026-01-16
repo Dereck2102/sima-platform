@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator, View } from 'react-native';
@@ -6,29 +6,34 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AuthService } from '../services/auth.service';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const AppNavigator = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [initialRoute, setInitialRoute] = useState<'Login' | 'Home' | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const authenticated = await AuthService.isAuthenticated();
-      setIsAuthenticated(authenticated);
+      setInitialRoute(authenticated ? 'Home' : 'Login');
     } catch (error) {
       console.error('Auth check error:', error);
-      setIsAuthenticated(false);
+      setInitialRoute('Login');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  if (isLoading) {
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (isLoading || !initialRoute) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#007AFF" />
@@ -39,6 +44,8 @@ export const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        id="RootStack"
+        initialRouteName={initialRoute}
         screenOptions={{
           headerStyle: {
             backgroundColor: '#007AFF',
@@ -49,24 +56,21 @@ export const AppNavigator = () => {
           },
         }}
       >
-        {isAuthenticated ? (
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              title: 'SIMA - Assets',
-              headerShown: false, // HomeScreen has its own header
-            }}
-          />
-        ) : (
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-        )}
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: 'SIMA - Assets',
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

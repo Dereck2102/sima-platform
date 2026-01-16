@@ -2,67 +2,85 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [main]
+    branches: [main, qa]
     tags: ['v*']
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment tag'
+        required: true
+        default: 'latest'
+        type: choice
+        options:
+          - latest
+          - qa
+          - prod
 
 env:
   GHCR_REGISTRY: ghcr.io
   DOCKERHUB_REGISTRY: docker.io
-  IMAGE_PREFIX: ${{ github.repository }}
 
 jobs:
-  build-and-push:
-    name: Build and Push
+  # =============================================================================
+  # NestJS Services
+  # =============================================================================
+  build-nestjs:
+    name: 🏗️ Build NestJS - ${{ matrix.service }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     strategy:
+      fail-fast: false
       matrix:
         service:
-          - auth-service
           - api-gateway
-          - inventory-service
+          - auth-service
           - tenant-service
+          - inventory-service
+          - storage-service
+          - notification-service
+          - report-service
+          - search-service
+          - audit-service
+          - mobile-bff
 
     steps:
-      - name: Checkout
+      - name: 📥 Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
+      - name: 🔧 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Login to GitHub Container Registry
-      - name: Log in to GHCR
+      - name: 🔐 Log in to GHCR
         uses: docker/login-action@v3
         with:
           registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Login to DockerHub
-      - name: Log in to DockerHub
+      - name: 🔐 Log in to DockerHub
         uses: docker/login-action@v3
         with:
           registry: ${{ env.DOCKERHUB_REGISTRY }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract metadata
+      - name: 📝 Extract metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_PREFIX }}/${{ matrix.service }}
+            ${{ env.GHCR_REGISTRY }}/${{ github.repository }}/${{ matrix.service }}
             ${{ env.DOCKERHUB_REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/sima-${{ matrix.service }}
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
             type=sha,prefix=
+            type=raw,value=${{ github.event.inputs.environment || 'latest' }}
 
-      - name: Build and push
+      - name: 🏗️ Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -72,20 +90,198 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            SERVICE_NAME=${{ matrix.service }}
 
-  notify:
-    name: Notify Success
+  # =============================================================================
+  # Go Service (Geo Tracker)
+  # =============================================================================
+  build-go:
+    name: 🏗️ Build Go - geo-tracker
     runs-on: ubuntu-latest
-    needs: build-and-push
-    if: success()
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Summary
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.GHCR_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔐 Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKERHUB_REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: 📝 Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.GHCR_REGISTRY }}/${{ github.repository }}/geo-tracker
+            ${{ env.DOCKERHUB_REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/sima-geo-tracker
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=sha,prefix=
+            type=raw,value=${{ github.event.inputs.environment || 'latest' }}
+
+      - name: 🏗️ Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: apps/geo-tracker
+          file: apps/geo-tracker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # =============================================================================
+  # Python Service (Analytics Engine)
+  # =============================================================================
+  build-python:
+    name: 🏗️ Build Python - analytics-engine
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.GHCR_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔐 Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKERHUB_REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: 📝 Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.GHCR_REGISTRY }}/${{ github.repository }}/analytics-engine
+            ${{ env.DOCKERHUB_REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/sima-analytics-engine
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=sha,prefix=
+            type=raw,value=${{ github.event.inputs.environment || 'latest' }}
+
+      - name: 🏗️ Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: apps/analytics-engine
+          file: apps/analytics-engine/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # =============================================================================
+  # Frontend Apps
+  # =============================================================================
+  build-frontend:
+    name: 🏗️ Build Frontend - ${{ matrix.app }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - shell-app
+          - assets-mfe
+          - dashboard-mfe
+          - users-mfe
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKERHUB_REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: 📝 Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.DOCKERHUB_REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/sima-${{ matrix.app }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix=
+            type=raw,value=${{ github.event.inputs.environment || 'latest' }}
+
+      - name: 🏗️ Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: apps/${{ matrix.app }}/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # =============================================================================
+  # Summary
+  # =============================================================================
+  summary:
+    name: 📊 Build Summary
+    runs-on: ubuntu-latest
+    needs: [build-nestjs, build-go, build-python, build-frontend]
+    if: always()
+
+    steps:
+      - name: 📊 Generate Summary
         run: |
-          echo "## 🐳 Docker Images Published" >> $GITHUB_STEP_SUMMARY
+          echo "## 🐳 Docker Images Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Category | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| NestJS Services (10) | ${{ needs.build-nestjs.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Go Service (1) | ${{ needs.build-go.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Python Service (1) | ${{ needs.build-python.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend Apps (4) | ${{ needs.build-frontend.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Registries" >> $GITHUB_STEP_SUMMARY
           echo "- **GHCR:** ghcr.io/${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
           echo "- **DockerHub:** docker.io/${{ secrets.DOCKERHUB_USERNAME }}/sima-*" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Triggered by: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-
+          echo "Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY

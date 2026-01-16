@@ -107,7 +107,7 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
         <div className="login-header">
           <span className="login-logo">🏢</span>
           <h1>SIMA Platform</h1>
-          <p>Sistema Integrado de Manejo de Activos</p>
+          <p>Integrated Asset Management System</p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
@@ -148,16 +148,52 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
   );
 };
 
-// Navigation component with logout
+// Role-based permissions
+const ROLE_PERMISSIONS: Record<string, string[]> = {
+  super_admin: ['home', 'dashboard', 'assets', 'users', 'tenants', 'settings'],
+  admin: ['home', 'dashboard', 'assets', 'users'],
+  auditor: ['home', 'dashboard', 'assets'],
+  operator: ['home', 'assets'],
+  viewer: ['home', 'dashboard'],
+};
+
+const getRoleLabel = (role: string) => {
+  const labels: Record<string, string> = {
+    super_admin: '👑 Super Admin',
+    admin: '🔑 Administrador',
+    auditor: '📋 Auditor',
+    operator: '⚙️ Operador',
+    viewer: '👁️ Visualizador',
+  };
+  return labels[role] || role;
+};
+
+const getRoleBadgeColor = (role: string) => {
+  const colors: Record<string, string> = {
+    super_admin: '#ef4444',
+    admin: '#8b5cf6',
+    auditor: '#f59e0b',
+    operator: '#3b82f6',
+    viewer: '#64748b',
+  };
+  return colors[role] || '#64748b';
+};
+
+// Navigation component with role-based menu
 const Navigation = ({ user, onLogout }: { user: User; onLogout: () => void }) => {
   const location = useLocation();
+  const permissions = ROLE_PERMISSIONS[user.role] || ['home', 'dashboard'];
   
-  const navItems = [
-    { path: '/', label: '🏠 Home', icon: '🏠' },
-    { path: '/dashboard', label: '📊 Dashboard', icon: '📊' },
-    { path: '/assets', label: '📦 Assets', icon: '📦' },
-    { path: '/users', label: '👥 Users', icon: '👥' },
+  const allNavItems = [
+    { path: '/', key: 'home', label: 'Home', icon: '🏠' },
+    { path: '/dashboard', key: 'dashboard', label: 'Dashboard', icon: '📊' },
+    { path: '/assets', key: 'assets', label: 'Assets', icon: '📦' },
+    { path: '/users', key: 'users', label: 'Users', icon: '👥' },
+    { path: '/tenants', key: 'tenants', label: 'Tenants', icon: '🏢' },
+    { path: '/settings', key: 'settings', label: 'Settings', icon: '⚙️' },
   ];
+
+  const navItems = allNavItems.filter(item => permissions.includes(item.key));
 
   return (
     <nav className="main-nav">
@@ -173,7 +209,7 @@ const Navigation = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
               className={location.pathname === item.path ? 'active' : ''}
             >
               <span className="nav-icon">{item.icon}</span>
-              <span className="nav-label">{item.label.split(' ').slice(1).join(' ')}</span>
+              <span className="nav-label">{item.label}</span>
             </Link>
           </li>
         ))}
@@ -181,7 +217,9 @@ const Navigation = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
       <div className="nav-user">
         <div className="user-info">
           <span className="user-name">{user.fullName}</span>
-          <span className="user-role">{user.role}</span>
+          <span className="user-role-badge" style={{ backgroundColor: getRoleBadgeColor(user.role) }}>
+            {getRoleLabel(user.role)}
+          </span>
         </div>
         <button onClick={onLogout} className="btn-logout" title="Logout">
           🚪
@@ -196,7 +234,7 @@ const HomePage = ({ user }: { user: User }) => (
   <div className="home-page">
     <div className="hero-section">
       <h1>Welcome, {user.fullName}! 👋</h1>
-      <p>Sistema Integrado de Manejo de Activos</p>
+      <p>Integrated Asset Management System</p>
       <div className="user-badge">
         <span className="badge-role">{user.role}</span>
         <span className="badge-tenant">📍 {user.tenantId}</span>
