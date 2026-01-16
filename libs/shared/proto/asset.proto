@@ -1,0 +1,188 @@
+// =============================================================================
+// SIMA Platform - gRPC Service Definition
+// Protocol Buffers definition for high-performance RPC
+// =============================================================================
+
+syntax = "proto3";
+
+package sima.inventory;
+
+option go_package = "github.com/sima-platform/proto/inventory";
+
+// Asset service for gRPC communication
+service AssetService {
+  // Get a single asset by ID
+  rpc GetAsset(GetAssetRequest) returns (Asset);
+  
+  // List all assets for a tenant
+  rpc ListAssets(ListAssetsRequest) returns (ListAssetsResponse);
+  
+  // Create a new asset
+  rpc CreateAsset(CreateAssetRequest) returns (Asset);
+  
+  // Update an existing asset
+  rpc UpdateAsset(UpdateAssetRequest) returns (Asset);
+  
+  // Delete an asset (soft delete)
+  rpc DeleteAsset(DeleteAssetRequest) returns (DeleteAssetResponse);
+  
+  // Stream asset updates in real-time
+  rpc StreamAssetUpdates(StreamRequest) returns (stream AssetUpdate);
+  
+  // Bulk import assets
+  rpc BulkImport(stream Asset) returns (BulkImportResponse);
+}
+
+// Asset status enum
+enum AssetStatus {
+  ASSET_STATUS_UNSPECIFIED = 0;
+  ASSET_STATUS_ACTIVE = 1;
+  ASSET_STATUS_MAINTENANCE = 2;
+  ASSET_STATUS_DECOMMISSIONED = 3;
+  ASSET_STATUS_DISPOSED = 4;
+}
+
+// Asset condition enum
+enum AssetCondition {
+  ASSET_CONDITION_UNSPECIFIED = 0;
+  ASSET_CONDITION_NEW = 1;
+  ASSET_CONDITION_GOOD = 2;
+  ASSET_CONDITION_FAIR = 3;
+  ASSET_CONDITION_POOR = 4;
+  ASSET_CONDITION_DAMAGED = 5;
+}
+
+// Core Asset message
+message Asset {
+  string id = 1;
+  string internal_code = 2;
+  string name = 3;
+  string description = 4;
+  AssetStatus status = 5;
+  AssetCondition condition = 6;
+  double price = 7;
+  string location_id = 8;
+  string custodian_id = 9;
+  string tenant_id = 10;
+  string created_at = 11;
+  string updated_at = 12;
+  
+  // GPS coordinates for geo-tracking
+  GeoLocation location = 13;
+  
+  // Custom metadata
+  map<string, string> metadata = 14;
+}
+
+// Geographic location
+message GeoLocation {
+  double latitude = 1;
+  double longitude = 2;
+  double altitude = 3;
+  double accuracy = 4;
+}
+
+// Request messages
+message GetAssetRequest {
+  string id = 1;
+  string tenant_id = 2;
+}
+
+message ListAssetsRequest {
+  string tenant_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  AssetStatus status_filter = 4;
+  string location_filter = 5;
+}
+
+message ListAssetsResponse {
+  repeated Asset assets = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message CreateAssetRequest {
+  string internal_code = 1;
+  string name = 2;
+  string description = 3;
+  AssetStatus status = 4;
+  AssetCondition condition = 5;
+  double price = 6;
+  string location_id = 7;
+  string custodian_id = 8;
+  string tenant_id = 9;
+  GeoLocation location = 10;
+  map<string, string> metadata = 11;
+}
+
+message UpdateAssetRequest {
+  string id = 1;
+  string tenant_id = 2;
+  // Fields to update (use field masks for partial updates)
+  Asset asset = 3;
+  repeated string update_mask = 4;
+}
+
+message DeleteAssetRequest {
+  string id = 1;
+  string tenant_id = 2;
+}
+
+message DeleteAssetResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Streaming messages
+message StreamRequest {
+  string tenant_id = 1;
+  repeated string asset_ids = 2;  // Empty means all assets
+}
+
+message AssetUpdate {
+  enum UpdateType {
+    UPDATE_TYPE_UNSPECIFIED = 0;
+    UPDATE_TYPE_CREATED = 1;
+    UPDATE_TYPE_UPDATED = 2;
+    UPDATE_TYPE_DELETED = 3;
+    UPDATE_TYPE_LOCATION_CHANGED = 4;
+  }
+  
+  UpdateType type = 1;
+  Asset asset = 2;
+  string timestamp = 3;
+}
+
+message BulkImportResponse {
+  int32 total_processed = 1;
+  int32 successful = 2;
+  int32 failed = 3;
+  repeated ImportError errors = 4;
+}
+
+message ImportError {
+  int32 row_number = 1;
+  string asset_code = 2;
+  string error_message = 3;
+}
+
+// Health check service
+service Health {
+  rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+  rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse);
+}
+
+message HealthCheckRequest {
+  string service = 1;
+}
+
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3;
+  }
+  ServingStatus status = 1;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "auth-lib",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/auth-lib/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/auth-lib",
+        "tsConfig": "libs/shared/auth-lib/tsconfig.lib.json",
+        "packageJson": "libs/shared/auth-lib/package.json",
+        "main": "libs/shared/auth-lib/src/index.ts",
+        "assets": ["libs/shared/auth-lib/*.md"]
+      }
+    }
+  }
+}

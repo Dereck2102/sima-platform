@@ -1,0 +1,14 @@
+{
+  "name": "geo-tracker",
+  "projectType": "application",
+  "sourceRoot": "apps/geo-tracker",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go run main.go",
+        "cwd": "apps/geo-tracker"
+      }
+    }
+  }
+}
