@@ -142,10 +142,10 @@ async def fetch_assets(tenant_id: str) -> List[Dict]:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan handler."""
-    print(f"🔬 Analytics Engine starting on port {PORT}")
-    print(f"📊 Inventory Service: {INVENTORY_SERVICE_URL}")
+    print(f"[Analytics Engine] Starting on port {PORT}")
+    print(f"[Analytics Engine] Inventory Service: {INVENTORY_SERVICE_URL}")
     yield
-    print("Analytics Engine shutting down...")
+    print("[Analytics Engine] Shutting down...")
 
 
 app = FastAPI(
