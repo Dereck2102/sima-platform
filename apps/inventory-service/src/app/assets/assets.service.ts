@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException, Logger, BadRequestException } from '@nestjs/common'; 
+import { Inject, Injectable, NotFoundException, Logger, BadRequestException, OnModuleInit, Optional } from '@nestjs/common'; 
 import { ClientKafka } from '@nestjs/microservices'; 
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -6,14 +6,39 @@ import { CreateAssetDto, AssetStatus } from '@sima/domain';
 import { AssetEntity } from './asset.entity';
 
 @Injectable()
-export class AssetsService {
+export class AssetsService implements OnModuleInit {
   private readonly logger = new Logger(AssetsService.name);
+  private kafkaConnected = false;
 
   constructor(
     @InjectRepository(AssetEntity)
     private readonly assetRepository: Repository<AssetEntity>,
-    @Inject('KAFKA_CLIENT') private readonly kafkaClient: ClientKafka 
+    @Inject('KAFKA_CLIENT') @Optional() private readonly kafkaClient?: ClientKafka 
   ) {}
+
+  async onModuleInit() {
+    if (this.kafkaClient) {
+      try {
+        await this.kafkaClient.connect();
+        this.kafkaConnected = true;
+        this.logger.log('✅ Kafka client connected successfully');
+      } catch (error) {
+        this.logger.warn('⚠️ Kafka client connection failed - events will not be emitted');
+        this.kafkaConnected = false;
+      }
+    }
+  }
+
+  private emitEvent(topic: string, data: any) {
+    if (this.kafkaConnected && this.kafkaClient) {
+      try {
+        this.kafkaClient.emit(topic, JSON.stringify(data));
+        this.logger.log(`✅ Event emitted: ${topic}`);
+      } catch (error) {
+        this.logger.warn(`⚠️ Failed to emit event: ${topic}`);
+      }
+    }
+  }
 
   async create(createAssetDto: CreateAssetDto, tenantId: string): Promise<AssetEntity> {
     if (!tenantId) {
@@ -27,9 +52,7 @@ export class AssetsService {
     
     const savedAsset = await this.assetRepository.save(newAsset);
 
-    this.kafkaClient.emit('asset.created', JSON.stringify(savedAsset));
-    
-    this.logger.log(`✅ Event emitted: asset.created for ID ${savedAsset.id} (Tenant: ${tenantId})`);
+    this.emitEvent('asset.created', savedAsset);
 
     return savedAsset;
   }
@@ -72,9 +95,7 @@ export class AssetsService {
     const updatedAsset = this.assetRepository.merge(asset, updateAssetDto);
     const savedAsset = await this.assetRepository.save(updatedAsset);
 
-    // Emit Kafka event
-    this.kafkaClient.emit('asset.updated', JSON.stringify(savedAsset));
-    this.logger.log(`✅ Event emitted: asset.updated for ID ${savedAsset.id} (Tenant: ${tenantId})`);
+    this.emitEvent('asset.updated', savedAsset);
 
     return savedAsset;
   }
@@ -91,9 +112,7 @@ export class AssetsService {
     asset.status = AssetStatus.DECOMMISSIONED;
     await this.assetRepository.save(asset);
 
-    // Emit Kafka event
-    this.kafkaClient.emit('asset.deleted', JSON.stringify({ id, tenantId }));
-    this.logger.log(`✅ Event emitted: asset.deleted for ID ${id} (Tenant: ${tenantId})`);
+    this.emitEvent('asset.deleted', { id, tenantId });
 
     return { message: `Asset ${id} has been deactivated successfully` };
   }

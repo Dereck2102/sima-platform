@@ -21,12 +21,12 @@ async function bootstrap() {
     })
   );
 
-  // CORS configuration
+  // CORS configuration - allow all origins in development
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    origin: true, // Allow all origins for development
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-tenant-id'],
   });
 
   // Swagger documentation

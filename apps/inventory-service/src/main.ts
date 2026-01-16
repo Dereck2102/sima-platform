@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
   const globalPrefix = 'api';
-  const defaultPort = 3001; // Inventory Service Port
+  const defaultPort = 3004; // Inventory Service Port (changed from 3001 to avoid conflicts)
   const port = process.env.PORT || defaultPort;
 
   app.setGlobalPrefix(globalPrefix);
@@ -19,6 +19,14 @@ async function bootstrap() {
       transform: true,
     })
   );
+
+  // CORS - allow all origins in development
+  app.enableCors({
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-tenant-id'],
+  });
 
   // Swagger Configuration
   const config = new DocumentBuilder()

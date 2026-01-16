@@ -2,11 +2,28 @@
   "name": "sima-mobile",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "web": "npx react-native start --web",
+    "test": "jest"
+  },
   "dependencies": {
     "@react-native/metro-config": "*",
+    "@react-navigation/native": "^7.0.0",
+    "@react-navigation/native-stack": "^7.0.0",
+    "axios": "^1.7.0",
     "react": "*",
     "react-native": "*",
+    "react-native-safe-area-context": "^5.0.0",
+    "react-native-screens": "^4.0.0",
     "react-native-svg": "*",
+    "@react-native-async-storage/async-storage": "^2.0.0",
     "metro-config": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
   }
 }

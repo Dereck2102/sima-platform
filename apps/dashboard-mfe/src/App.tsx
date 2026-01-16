@@ -1,47 +1,103 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './styles.css';
 
-interface MetricCard {
-  title: string;
-  value: string | number;
-  change: string;
-  changeType: 'positive' | 'negative' | 'neutral';
-  icon: string;
+const API_URL = 'http://localhost:3000/api';
+
+interface DashboardStats {
+  totalAssets: number;
+  totalValue: number;
+  activeAssets: number;
+  inMaintenance: number;
 }
 
-const metrics: MetricCard[] = [
-  { title: 'Total Assets', value: '2,847', change: '+12.5%', changeType: 'positive', icon: '📦' },
-  { title: 'Total Value', value: '$1.2M', change: '+8.2%', changeType: 'positive', icon: '💰' },
-  { title: 'Active Users', value: '156', change: '+3.1%', changeType: 'positive', icon: '👥' },
-  { title: 'Pending Tasks', value: '23', change: '-5.4%', changeType: 'negative', icon: '📋' },
-];
+interface Asset {
+  id: string;
+  name: string;
+  status: string;
+  price: number;
+  createdAt: string;
+}
 
-const recentActivity = [
-  { id: 1, action: 'Asset added', asset: 'MacBook Pro 16"', user: 'John Doe', time: '2 min ago' },
-  { id: 2, action: 'Status changed', asset: 'Dell Monitor', user: 'Jane Smith', time: '15 min ago' },
-  { id: 3, action: 'Maintenance scheduled', asset: 'HP Printer', user: 'Admin', time: '1 hour ago' },
-  { id: 4, action: 'Asset retired', asset: 'Old Server', user: 'IT Team', time: '3 hours ago' },
-];
-
-const assetsByCategory = [
-  { category: 'Electronics', count: 1245, percentage: 44 },
-  { category: 'Furniture', count: 856, percentage: 30 },
-  { category: 'Vehicles', count: 423, percentage: 15 },
-  { category: 'Equipment', count: 323, percentage: 11 },
-];
+const getAuthToken = () => localStorage.getItem('token') || '';
 
 function App() {
+  const [stats, setStats] = useState<DashboardStats>({ totalAssets: 0, totalValue: 0, activeAssets: 0, inMaintenance: 0 });
+  const [recentAssets, setRecentAssets] = useState<Asset[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchDashboardData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const token = getAuthToken();
+      const response = await fetch(`${API_URL}/assets`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          setError('Please login to view dashboard');
+          return;
+        }
+        throw new Error('Failed to fetch');
+      }
+
+      const assets: Asset[] = await response.json();
+      
+      // Calculate stats from assets
+      const totalAssets = assets.length;
+      const totalValue = assets.reduce((sum, a) => sum + (Number(a.price) || 0), 0);
+      const activeAssets = assets.filter(a => a.status === 'ACTIVE').length;
+      const inMaintenance = assets.filter(a => a.status === 'IN_MAINTENANCE').length;
+
+      setStats({ totalAssets, totalValue, activeAssets, inMaintenance });
+      setRecentAssets(assets.slice(0, 5)); // Last 5 assets
+    } catch {
+      setError('Unable to load dashboard data');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, [fetchDashboardData]);
+
+  const metrics = [
+    { title: 'Total Assets', value: stats.totalAssets, icon: '📦', color: '#3b82f6' },
+    { title: 'Total Value', value: `$${stats.totalValue.toLocaleString()}`, icon: '💰', color: '#10b981' },
+    { title: 'Active', value: stats.activeAssets, icon: '✅', color: '#8b5cf6' },
+    { title: 'Maintenance', value: stats.inMaintenance, icon: '🔧', color: '#f59e0b' },
+  ];
+
+  if (loading) {
+    return (
+      <div className="dashboard-container">
+        <div className="loading">⏳ Loading dashboard...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
         <div>
           <h1>📊 Dashboard</h1>
-          <p className="subtitle">Overview of your asset management</p>
+          <p className="subtitle">Real-time asset management overview</p>
         </div>
-        <div className="date-range">
-          <span>📅 Last 30 days</span>
-        </div>
+        <button className="btn-refresh" onClick={fetchDashboardData}>🔄 Refresh</button>
       </div>
+
+      {error && (
+        <div className="error-banner">
+          ⚠️ {error}
+          <button onClick={fetchDashboardData}>🔄 Retry</button>
+        </div>
+      )}
 
       {/* Metrics Grid */}
       <div className="metrics-grid">
@@ -50,10 +106,7 @@ function App() {
             <div className="metric-icon">{metric.icon}</div>
             <div className="metric-content">
               <span className="metric-title">{metric.title}</span>
-              <span className="metric-value">{metric.value}</span>
-              <span className={`metric-change ${metric.changeType}`}>
-                {metric.change}
-              </span>
+              <span className="metric-value" style={{ color: metric.color }}>{metric.value}</span>
             </div>
           </div>
         ))}
@@ -63,64 +116,52 @@ function App() {
       <div className="dashboard-grid">
         {/* Chart Placeholder */}
         <div className="chart-card">
-          <h3>Asset Value Trend</h3>
+          <h3>📈 Asset Status Distribution</h3>
           <div className="chart-placeholder">
-            <div className="chart-bars">
-              {[65, 45, 75, 55, 85, 70, 90].map((height, i) => (
-                <div
-                  key={i}
-                  className="chart-bar"
-                  style={{ height: `${height}%` }}
-                />
-              ))}
-            </div>
-            <div className="chart-labels">
-              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-                <span key={day}>{day}</span>
-              ))}
+            <div className="status-bars">
+              <div className="status-bar">
+                <span>Active</span>
+                <div className="bar-container">
+                  <div className="bar-fill active" style={{ width: `${stats.totalAssets > 0 ? (stats.activeAssets / stats.totalAssets) * 100 : 0}%` }} />
+                </div>
+                <span>{stats.activeAssets}</span>
+              </div>
+              <div className="status-bar">
+                <span>Maintenance</span>
+                <div className="bar-container">
+                  <div className="bar-fill maintenance" style={{ width: `${stats.totalAssets > 0 ? (stats.inMaintenance / stats.totalAssets) * 100 : 0}%` }} />
+                </div>
+                <span>{stats.inMaintenance}</span>
+              </div>
+              <div className="status-bar">
+                <span>Other</span>
+                <div className="bar-container">
+                  <div className="bar-fill other" style={{ width: `${stats.totalAssets > 0 ? ((stats.totalAssets - stats.activeAssets - stats.inMaintenance) / stats.totalAssets) * 100 : 0}%` }} />
+                </div>
+                <span>{stats.totalAssets - stats.activeAssets - stats.inMaintenance}</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Categories */}
+        {/* Recent Assets */}
         <div className="categories-card">
-          <h3>Assets by Category</h3>
+          <h3>🆕 Recent Assets</h3>
           <div className="categories-list">
-            {assetsByCategory.map((item, index) => (
-              <div key={index} className="category-item">
-                <div className="category-info">
-                  <span className="category-name">{item.category}</span>
-                  <span className="category-count">{item.count} items</span>
+            {recentAssets.length === 0 ? (
+              <p className="empty-message">No assets yet. Create your first asset!</p>
+            ) : (
+              recentAssets.map((asset) => (
+                <div key={asset.id} className="category-item">
+                  <div className="category-info">
+                    <span className="category-name">{asset.name}</span>
+                    <span className="category-count">${Number(asset.price).toLocaleString()}</span>
+                  </div>
+                  <span className={`status-badge ${asset.status.toLowerCase()}`}>{asset.status}</span>
                 </div>
-                <div className="category-bar">
-                  <div
-                    className="category-fill"
-                    style={{ width: `${item.percentage}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="activity-card">
-        <h3>Recent Activity</h3>
-        <div className="activity-list">
-          {recentActivity.map((item) => (
-            <div key={item.id} className="activity-item">
-              <div className="activity-dot" />
-              <div className="activity-content">
-                <span className="activity-action">{item.action}</span>
-                <span className="activity-asset">{item.asset}</span>
-              </div>
-              <div className="activity-meta">
-                <span className="activity-user">{item.user}</span>
-                <span className="activity-time">{item.time}</span>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>

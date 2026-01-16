@@ -2,10 +2,11 @@ import { IsEmail, IsNotEmpty, IsString, MinLength, IsEnum, IsOptional } from 'cl
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export enum UserRole {
-  ADMIN = 'admin',
-  AUDITOR = 'auditor',
-  OPERATOR = 'operator',
-  VIEWER = 'viewer',
+  SUPER_ADMIN = 'super_admin', // Full system access: backups, services, features, all users
+  ADMIN = 'admin',             // Tenant admin: manage users within tenant
+  AUDITOR = 'auditor',         // Read-only access to audit logs
+  OPERATOR = 'operator',       // Can manage inventory/assets
+  VIEWER = 'viewer',           // Read-only access
 }
 
 export class RegisterDto {

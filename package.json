@@ -2,7 +2,20 @@
   "name": "@sima-platform/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test:unit": "jest --config tests/jest.unit.config.ts",
+    "test:e2e": "jest --config tests/jest.e2e.config.ts --runInBand",
+    "test:all": "npm run test:unit && npm run test:e2e",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:ps": "docker-compose ps",
+    "start:infra": "docker-compose up -d postgres mongo redis kafka zookeeper",
+    "start:backend": "npx nx run-many --target=serve --projects=api-gateway,auth-service,tenant-service,inventory-service --parallel=4",
+    "start:all-services": "npx nx run-many --target=serve --all --parallel=10",
+    "lint": "npx nx run-many --target=lint --all",
+    "build": "npx nx run-many --target=build --all"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/axios": "^4.0.1",

@@ -248,3 +248,111 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* New Styles */
+.btn-refresh {
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-refresh:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.error-banner {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #94a3b8;
+  font-size: 18px;
+}
+
+.empty-message {
+  color: #94a3b8;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Status Bars */
+.status-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.status-bar span:first-child {
+  width: 100px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.status-bar span:last-child {
+  width: 40px;
+  text-align: right;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.bar-container {
+  flex: 1;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.5s ease;
+}
+
+.bar-fill.active {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+}
+
+.bar-fill.maintenance {
+  background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+.bar-fill.other {
+  background: linear-gradient(90deg, #64748b 0%, #94a3b8 100%);
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.active { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.status-badge.in_maintenance { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.status-badge.decommissioned { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+

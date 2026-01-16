@@ -39,11 +39,11 @@ async function bootstrap() {
     })
   );
 
-  // Proxy for Inventory Service (port 3001)
+  // Proxy for Inventory Service (port 3004)
   app.use(
     '/api/assets',
     createProxyMiddleware({
-      target: 'http://localhost:3001',
+      target: 'http://localhost:3004',
       changeOrigin: true,
       pathRewrite: {
         '^/': '/api/assets/',
@@ -185,7 +185,7 @@ async function bootstrap() {
   Logger.log(`API Gateway running on: http://localhost:${port}`);
   Logger.log(`Route: /api/auth -> http://localhost:3002/api/auth`);
   Logger.log(`Route: /api/tenants -> http://localhost:3003/api/tenants`);
-  Logger.log(`Route: /api/assets -> http://localhost:3001/api/assets`);
+  Logger.log(`Route: /api/assets -> http://localhost:3004/api/assets`);
   Logger.log(`Route: /api/analytics -> http://localhost:3010/api/analytics`);
   Logger.log(`Route: /api/mobile -> http://localhost:3011/api/mobile`);
 }

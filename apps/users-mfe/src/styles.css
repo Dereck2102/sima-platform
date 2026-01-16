@@ -217,3 +217,39 @@
     display: none;
   }
 }
+
+/* Additional Styles */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #94a3b8;
+  font-size: 18px;
+}
+
+.error-banner {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+.col-tenant {
+  color: #8b5cf6;
+  font-size: 13px;
+}
+
+/* Adjust table for 4 columns instead of 5 */
+.table-header,
+.table-row {
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+}
+
