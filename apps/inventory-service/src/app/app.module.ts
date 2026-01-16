@@ -28,7 +28,7 @@ import { HealthModule } from './health/health.module';
         password: configService.get<string>('POSTGRES_PASSWORD'),
         database: configService.get<string>('POSTGRES_DB'),
         entities: [AssetEntity],
-        synchronize: true, 
+        synchronize: configService.get('NODE_ENV') !== 'production', // SAFE: Disabled in production
       }),
       inject: [ConfigService],
     }),

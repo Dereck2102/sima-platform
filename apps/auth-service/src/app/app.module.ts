@@ -22,7 +22,7 @@ import { HealthController } from './health/health.controller';
       password: process.env.DB_PASSWORD || 'password123',
       database: process.env.DB_NAME || 'sima_core',
       entities: [User],
-      synchronize: true, // CAUTION: Disable in production
+      synchronize: process.env.NODE_ENV !== 'production', // SAFE: Disabled in production
       logging: false,
     }),
     TypeOrmModule.forFeature([User]),

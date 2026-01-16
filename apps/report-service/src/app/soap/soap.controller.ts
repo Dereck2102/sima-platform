@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Res, Header } from '@nestjs/common';
+import { Controller, Post, Get, Body, Res, Header } from '@nestjs/common';
 import { Response } from 'express';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import * as xml2js from 'xml2js';
@@ -63,7 +63,7 @@ export class SoapController {
   /**
    * Generate WSDL for the SOAP service
    */
-  @Post('wsdl')
+  @Get('wsdl')
   @Header('Content-Type', 'application/xml')
   @ApiOperation({ summary: 'Get WSDL definition' })
   async getWsdl(@Res() res: Response): Promise<void> {
