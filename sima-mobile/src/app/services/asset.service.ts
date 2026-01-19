@@ -13,6 +13,8 @@ export interface CreateAssetDto {
   condition: string;
   locationId?: string;
   acquisitionDate?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface Asset {
@@ -27,6 +29,8 @@ export interface Asset {
   locationId?: string;
   custodianId?: string;
   acquisitionDate?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export const AssetService = {

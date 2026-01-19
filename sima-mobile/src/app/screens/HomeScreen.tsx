@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { AssetService, Asset, CreateAssetDto } from '../services/asset.service';
 import { AuthService } from '../services/auth.service';
+import { GeoService } from '../services/geo.service';
 
 interface IUser {
   id: string;
@@ -34,6 +35,8 @@ export const HomeScreen = ({ navigation }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [saving, setSaving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [gettingLocation, setGettingLocation] = useState(false);
   
   // Form state
   const [form, setForm] = useState<CreateAssetDto>({
@@ -45,7 +48,20 @@ export const HomeScreen = ({ navigation }: any) => {
     condition: 'NEW',
     locationId: '',
     acquisitionDate: new Date().toISOString().split('T')[0],
+    latitude: undefined,
+    longitude: undefined,
   });
+
+  // Filtered assets based on search
+  const filteredAssets = useMemo(() => {
+    if (!searchQuery.trim()) return assets;
+    const query = searchQuery.toLowerCase();
+    return assets.filter(a => 
+      a.name.toLowerCase().includes(query) ||
+      a.internalCode.toLowerCase().includes(query) ||
+      a.description?.toLowerCase().includes(query)
+    );
+  }, [assets, searchQuery]);
 
   useEffect(() => {
     loadData();
@@ -112,8 +128,32 @@ export const HomeScreen = ({ navigation }: any) => {
       condition: 'NEW',
       locationId: '',
       acquisitionDate: new Date().toISOString().split('T')[0],
+      latitude: undefined,
+      longitude: undefined,
     });
     setShowModal(true);
+  };
+
+  const handleGetLocation = async () => {
+    if (!GeoService.isAvailable()) {
+      Alert.alert('Error', 'Geolocation is not available on this device');
+      return;
+    }
+    
+    setGettingLocation(true);
+    try {
+      const coords = await GeoService.getCurrentPosition();
+      setForm(prev => ({
+        ...prev,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      }));
+      Alert.alert('Location Captured', GeoService.formatCoordinates(coords.latitude, coords.longitude));
+    } catch (error: any) {
+      Alert.alert('Location Error', error.message || 'Could not get location');
+    } finally {
+      setGettingLocation(false);
+    }
   };
 
   const openEditModal = (asset: Asset) => {
@@ -127,6 +167,8 @@ export const HomeScreen = ({ navigation }: any) => {
       condition: asset.condition,
       locationId: asset.locationId || '',
       acquisitionDate: asset.acquisitionDate?.split('T')[0] || '',
+      latitude: asset.latitude,
+      longitude: asset.longitude,
     });
     setShowModal(true);
   };
@@ -205,6 +247,17 @@ export const HomeScreen = ({ navigation }: any) => {
         </View>
       </View>
 
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="🔍 Search assets..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          placeholderTextColor="#8E8E93"
+        />
+      </View>
+
       {/* Assets List */}
       {loading ? (
         <ActivityIndicator size="large" color="#007AFF" style={styles.loader} />
@@ -215,16 +268,18 @@ export const HomeScreen = ({ navigation }: any) => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          {assets.length === 0 ? (
+          {filteredAssets.length === 0 ? (
             <View style={styles.emptyContainer}>
               <Text style={styles.emptyIcon}>📦</Text>
-              <Text style={styles.emptyText}>No assets found</Text>
-              <TouchableOpacity style={styles.createButton} onPress={openCreateModal}>
-                <Text style={styles.createButtonText}>+ Create Asset</Text>
-              </TouchableOpacity>
+              <Text style={styles.emptyText}>{searchQuery ? 'No matching assets' : 'No assets found'}</Text>
+              {!searchQuery && (
+                <TouchableOpacity style={styles.createButton} onPress={openCreateModal}>
+                  <Text style={styles.createButtonText}>+ Create Asset</Text>
+                </TouchableOpacity>
+              )}
             </View>
           ) : (
-            assets.map((asset) => (
+            filteredAssets.map((asset) => (
               <TouchableOpacity key={asset.id} style={styles.card} onPress={() => openEditModal(asset)}>
                 <View style={styles.cardHeader}>
                   <Text style={styles.cardTitle}>{asset.name}</Text>
@@ -241,6 +296,9 @@ export const HomeScreen = ({ navigation }: any) => {
                     <Text style={styles.conditionText}>{asset.condition}</Text>
                   </View>
                 </View>
+                {asset.latitude && asset.longitude && (
+                  <Text style={styles.locationText}>📍 {asset.latitude.toFixed(4)}, {asset.longitude.toFixed(4)}</Text>
+                )}
                 <TouchableOpacity style={styles.deleteBtn} onPress={() => handleDelete(asset)}>
                   <Text style={styles.deleteBtnText}>🗑️</Text>
                 </TouchableOpacity>
@@ -296,6 +354,23 @@ export const HomeScreen = ({ navigation }: any) => {
               value={form.locationId}
               onChangeText={(v) => setForm({...form, locationId: v})}
             />
+            
+            {/* Get Location Button */}
+            <TouchableOpacity 
+              style={[styles.locationBtn, gettingLocation && styles.locationBtnDisabled]} 
+              onPress={handleGetLocation}
+              disabled={gettingLocation}
+            >
+              <Text style={styles.locationBtnText}>
+                {gettingLocation ? '📡 Getting location...' : '📍 Get Current Location'}
+              </Text>
+            </TouchableOpacity>
+            
+            {form.latitude && form.longitude && (
+              <Text style={styles.coordsText}>
+                📍 {form.latitude.toFixed(6)}, {form.longitude.toFixed(6)}
+              </Text>
+            )}
             
             <View style={styles.modalActions}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowModal(false)}>
@@ -369,4 +444,18 @@ const styles = StyleSheet.create({
   cancelBtnText: { fontWeight: '600', color: '#666' },
   saveBtn: { flex: 1, backgroundColor: '#007AFF', padding: 14, borderRadius: 10, alignItems: 'center' },
   saveBtnText: { fontWeight: '700', color: '#fff' },
+  searchContainer: { paddingHorizontal: 16, marginBottom: 8 },
+  searchInput: { 
+    backgroundColor: '#fff', borderRadius: 10, padding: 14, fontSize: 16, 
+    borderWidth: 1, borderColor: '#E5E5EA',
+  },
+  locationText: { color: '#007AFF', fontSize: 12, marginTop: 8 },
+  locationBtn: { 
+    backgroundColor: '#E8F5E9', padding: 14, borderRadius: 10, alignItems: 'center', marginBottom: 12,
+  },
+  locationBtnDisabled: { backgroundColor: '#F5F5F5' },
+  locationBtnText: { color: '#2E7D32', fontWeight: '600', fontSize: 14 },
+  coordsText: { 
+    color: '#007AFF', fontSize: 13, textAlign: 'center', marginBottom: 12, fontWeight: '500',
+  },
 });

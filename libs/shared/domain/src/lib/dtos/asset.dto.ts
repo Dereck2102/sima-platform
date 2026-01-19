@@ -34,6 +34,14 @@ export class CreateAssetDto {
   @IsString()
   @IsOptional()
   custodianId?: string;
+
+  @IsNumber()
+  @IsOptional()
+  latitude?: number;
+
+  @IsNumber()
+  @IsOptional()
+  longitude?: number;
 }
 
 export class UpdateAssetDto {
@@ -48,4 +56,12 @@ export class UpdateAssetDto {
   @IsOptional()
   @IsString()
   locationId?: string;
+
+  @IsNumber()
+  @IsOptional()
+  latitude?: number;
+
+  @IsNumber()
+  @IsOptional()
+  longitude?: number;
 }

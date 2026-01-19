@@ -46,6 +46,15 @@ export class AssetEntity implements IAsset {
   @Column({ nullable: true })
   custodianId?: string;
 
+  @Column({ type: 'decimal', precision: 10, scale: 8, nullable: true })
+  latitude?: number;
+
+  @Column({ type: 'decimal', precision: 11, scale: 8, nullable: true })
+  longitude?: number;
+
+  @Column({ type: 'timestamp', nullable: true })
+  locationUpdatedAt?: Date;
+
   @CreateDateColumn()
   createdAt!: Date;
 
