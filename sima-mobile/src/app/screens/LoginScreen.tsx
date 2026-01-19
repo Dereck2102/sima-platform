@@ -93,15 +93,6 @@ export const LoginScreen = ({ navigation }: any) => {
               <Text style={styles.buttonText}>Sign In</Text>
             )}
           </TouchableOpacity>
-
-          <View style={styles.hintContainer}>
-            <Text style={styles.hintTitle}>Demo Credentials:</Text>
-            <Text style={styles.hint}>Email: test@uce.edu.ec</Text>
-            <Text style={styles.hint}>Password: Test123!</Text>
-            <Text style={styles.hintNote}>
-              (Create user via Auth Service first)
-            </Text>
-          </View>
         </View>
       </View>
     </KeyboardAvoidingView>

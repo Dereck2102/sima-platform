@@ -17,10 +17,12 @@ export default defineConfig({
   server: {
     port: 4103,
     cors: true,
+    host: true,
   },
   preview: {
     port: 4103,
     cors: true,
+    host: true,
   },
   build: {
     modulePreload: false,

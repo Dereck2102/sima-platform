@@ -8,13 +8,33 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   RefreshControl,
-  Alert,
+  Alert as RNAlert,
   Modal,
   TextInput,
+  Platform,
 } from 'react-native';
 import { AssetService, Asset, CreateAssetDto } from '../services/asset.service';
 import { AuthService } from '../services/auth.service';
 import { GeoService } from '../services/geo.service';
+
+// Web-compatible Alert helper
+const Alert = {
+  alert: (title: string, message?: string, buttons?: Array<{text: string; onPress?: () => void; style?: string}>) => {
+    if (Platform.OS === 'web') {
+      const confirmed = window.confirm(`${title}\n\n${message || ''}`);
+      if (confirmed && buttons && buttons.length > 1) {
+        // Find the destructive or non-cancel button and execute it
+        const actionButton = buttons.find(b => b.style === 'destructive') || buttons.find(b => b.style !== 'cancel');
+        if (actionButton?.onPress) actionButton.onPress();
+      } else if (!confirmed && buttons) {
+        const cancelButton = buttons.find(b => b.style === 'cancel');
+        if (cancelButton?.onPress) cancelButton.onPress();
+      }
+    } else {
+      RNAlert.alert(title, message, buttons);
+    }
+  }
+};
 
 interface IUser {
   id: string;
@@ -37,6 +57,7 @@ export const AssetsScreen = ({ navigation }: any) => {
   const [saving, setSaving] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [gettingLocation, setGettingLocation] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   // Form state
   const [form, setForm] = useState<CreateAssetDto>({
@@ -52,15 +73,20 @@ export const AssetsScreen = ({ navigation }: any) => {
     longitude: undefined,
   });
 
-  // Filtered assets based on search
+  // Filtered assets based on search - with null safety
   const filteredAssets = useMemo(() => {
+    if (!assets || !Array.isArray(assets)) return [];
     if (!searchQuery.trim()) return assets;
     const query = searchQuery.toLowerCase();
-    return assets.filter(a => 
-      a.name.toLowerCase().includes(query) ||
-      a.internalCode.toLowerCase().includes(query) ||
-      a.description?.toLowerCase().includes(query)
-    );
+    return assets.filter(a => {
+      if (!a) return false;
+      const name = a.name || '';
+      const code = a.internalCode || '';
+      const desc = a.description || '';
+      return name.toLowerCase().includes(query) ||
+        code.toLowerCase().includes(query) ||
+        desc.toLowerCase().includes(query);
+    });
   }, [assets, searchQuery]);
 
   useEffect(() => {

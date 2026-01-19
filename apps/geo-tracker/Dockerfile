@@ -3,11 +3,11 @@ FROM golang:1.21-alpine AS builder
 WORKDIR /app
 
 # Copy go mod files
-COPY go.mod go.sum ./
+COPY apps/geo-tracker/go.mod apps/geo-tracker/go.sum ./
 RUN go mod download
 
 # Copy source code
-COPY *.go ./
+COPY apps/geo-tracker/*.go ./
 
 # Build binary
 RUN CGO_ENABLED=0 GOOS=linux go build -o geo-tracker

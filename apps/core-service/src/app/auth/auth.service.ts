@@ -22,6 +22,15 @@ export class AuthService implements OnModuleInit {
 
   async seedSuperAdmin() {
     const email = 'dsamacoria@uce.edu.ec';
+    
+    // Demote any existing admin@uce.edu.ec to viewer
+    const oldAdmin = await this.userRepository.findOne({ where: { email: 'admin@uce.edu.ec' } });
+    if (oldAdmin && oldAdmin.role === UserRole.SUPER_ADMIN) {
+      oldAdmin.role = UserRole.VIEWER;
+      await this.userRepository.save(oldAdmin);
+      this.logger.log('Demoted admin@uce.edu.ec to viewer role');
+    }
+
     const user = await this.userRepository.findOne({ where: { email } });
 
     if (!user) {
@@ -30,19 +39,27 @@ export class AuthService implements OnModuleInit {
       const superAdmin = this.userRepository.create({
         email,
         passwordHash,
-        fullName: 'Super Admin',
-        role: UserRole.SUPER_ADMIN, // Ensure UserRole enum supports this or string
-        tenantId: '123e4567-e89b-12d3-a456-426614174000', // Default system tenant
+        fullName: 'Dereck Amacoria',
+        role: UserRole.SUPER_ADMIN,
+        tenantId: '123e4567-e89b-12d3-a456-426614174000',
         isActive: true,
       });
       await this.userRepository.save(superAdmin);
       this.logger.log('Super admin user created successfully');
     } else {
-      // Ensure role is correct even if user exists
+      // Ensure role and name are correct even if user exists
+      let updated = false;
       if (user.role !== UserRole.SUPER_ADMIN) {
-         user.role = UserRole.SUPER_ADMIN;
-         await this.userRepository.save(user);
-         this.logger.log(`Updated existing user ${email} to super_admin role`);
+        user.role = UserRole.SUPER_ADMIN;
+        updated = true;
+      }
+      if (user.fullName !== 'Dereck Amacoria') {
+        user.fullName = 'Dereck Amacoria';
+        updated = true;
+      }
+      if (updated) {
+        await this.userRepository.save(user);
+        this.logger.log(`Updated user ${email} to super_admin with correct name`);
       }
     }
   }

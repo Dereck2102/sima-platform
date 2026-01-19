@@ -30,18 +30,38 @@ export const HomeScreen = ({ navigation }: any) => {
     activeAssets: 0,
     maintenanceAssets: 0,
   });
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
+    setError(null);
+    
+    // Validate token exists
+    const token = await AuthService.getAccessToken();
+    if (!token) {
+      console.log('[HomeScreen] No token, redirecting to login');
+      navigation.replace('Login');
+      return;
+    }
+
     const currentUser = await AuthService.getCurrentUser();
+    if (!currentUser) {
+      console.log('[HomeScreen] No user data, clearing session');
+      await AuthService.logout();
+      navigation.replace('Login');
+      return;
+    }
+    
     setUser(currentUser);
     
     // Fetch stats (we'll calculate from all assets for now, ideally backend provides this)
     try {
       const assets = await AssetService.getAll();
+      console.log('[HomeScreen] Loaded assets:', assets.length);
       const totalValue = assets.reduce((sum, a) => sum + (Number(a.price) || 0), 0);
       const active = assets.filter(a => a.status === 'ACTIVE').length;
       const maintenance = assets.filter(a => a.status === 'IN_MAINTENANCE').length;
@@ -52,9 +72,22 @@ export const HomeScreen = ({ navigation }: any) => {
         activeAssets: active,
         maintenanceAssets: maintenance,
       });
-    } catch (e) {
+    } catch (e: any) {
       console.error('Failed to load stats', e);
+      // If unauthorized, force re-login
+      if (e?.response?.status === 401) {
+        await AuthService.logout();
+        navigation.replace('Login');
+        return;
+      }
+      setError('Failed to load data. Pull down to refresh.');
     }
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await loadData();
+    setRefreshing(false);
   };
 
   const menuItems = [
