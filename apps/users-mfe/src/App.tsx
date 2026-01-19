@@ -23,6 +23,19 @@ const roleColors: Record<string, string> = {
 
 const getAuthToken = () => localStorage.getItem('token') || '';
 
+const getUserInfo = () => {
+  const token = getAuthToken();
+  if (!token) return { role: 'viewer', userId: null, tenantId: null };
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return {
+      role: payload.role || 'viewer',
+      userId: payload.sub || null,
+      tenantId: payload.tenantId || null,
+    };
+  } catch { return { role: 'viewer', userId: null, tenantId: null }; }
+};
+
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -87,7 +100,16 @@ function App() {
     fetchUsers();
   }, [fetchUsers]);
 
+  // Role-based filtering
+  const currentUser = getUserInfo();
+  const isSuperAdmin = currentUser.role === 'super_admin';
+  
   const filteredUsers = users.filter((user) => {
+    // Admin only sees users from their tenant
+    if (!isSuperAdmin && user.tenantId !== currentUser.tenantId) {
+      return false;
+    }
+    
     const matchesSearch =
       user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email?.toLowerCase().includes(searchTerm.toLowerCase());

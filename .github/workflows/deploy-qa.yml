@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: 'Deployment action'
+        description: "Deployment action"
         required: true
-        default: 'deploy'
+        default: "deploy"
         type: choice
         options:
           - plan
@@ -16,9 +16,9 @@ on:
           - destroy
 
 env:
-  TF_VERSION: '1.6.0'
-  AWS_REGION: 'us-east-1'
-  ENVIRONMENT: 'qa'
+  TF_VERSION: "1.6.0"
+  AWS_REGION: "us-east-1"
+  ENVIRONMENT: "qa"
 
 jobs:
   # =============================================================================
@@ -33,13 +33,9 @@ jobs:
       matrix:
         service:
           - api-gateway
-          - auth-service
-          - tenant-service
+          - core-service
+          - shared-service
           - inventory-service
-          - storage-service
-          - notification-service
-          - report-service
-          - search-service
           - audit-service
           - mobile-bff
           - geo-tracker

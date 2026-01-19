@@ -4,11 +4,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator, View } from 'react-native';
 import { LoginScreen } from '../screens/LoginScreen';
 import { HomeScreen } from '../screens/HomeScreen';
+import { AssetsScreen } from '../screens/AssetsScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
+import { PlaceholderScreen } from '../screens/PlaceholderScreen';
 import { AuthService } from '../services/auth.service';
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
+  Assets: undefined;
+  Profile: undefined;
+  Placeholder: { title: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -67,7 +73,27 @@ export const AppNavigator = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            title: 'SIMA - Assets',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Assets"
+          component={AssetsScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Placeholder"
+          component={PlaceholderScreen}
+          options={{
             headerShown: false,
           }}
         />

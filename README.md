@@ -38,6 +38,8 @@ A cloud-native, multi-tenant SaaS platform for enterprise asset management built
 
 ## 🏗️ Architecture
 
+## 🏗️ Architecture
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         SIMA Platform                                │
@@ -50,12 +52,16 @@ A cloud-native, multi-tenant SaaS platform for enterprise asset management built
 │  API Gateway (NestJS) - Authentication, Routing, Rate Limiting      │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Microservices                                                       │
-│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ │
-│  │  Auth  │ │ Tenant │ │Inventory│ │ Audit  │ │ Search │ │ Report │ │
-│  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ │
-│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ │
-│  │Storage │ │ Notify │ │  BFF   │ │  Geo   │ │Analytics│ │Testing │ │
-│  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ │
+│  ┌────────────┐  ┌────────────┐  ┌──────────────┐                    │
+│  │Core Service│  │Shared Srv  │  │Inventory Srv │                    │
+│  │(Auth+Tent) │  │(Not+Rep+St)│  │(Asset+Search)│                    │
+│  └────────────┘  └────────────┘  └──────────────┘                    │
+│  ┌────────────┐  ┌────────────┐  ┌──────────────┐                    │
+│  │ Audit Srv  │  │ Mobile BFF │  │ Geo Tracker  │                    │
+│  └────────────┘  └────────────┘  └──────────────┘                    │
+│  ┌────────────┐  ┌────────────┐                                      │
+│  │ Analytics  │  │Testing Dash│                                      │
+│  └────────────┘  └────────────┘                                      │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Infrastructure: PostgreSQL, MongoDB, Redis, Kafka, MinIO          │
 └─────────────────────────────────────────────────────────────────────┘
@@ -143,14 +149,10 @@ npx nx serve users-mfe
 sima-platform/
 ├── apps/
 │   ├── api-gateway/         # API Gateway (NestJS)
-│   ├── auth-service/        # Authentication (NestJS)
-│   ├── tenant-service/      # Multi-tenancy (NestJS)
-│   ├── inventory-service/   # Asset management (NestJS)
+│   ├── core-service/        # Auth + Tenant (NestJS)
+│   ├── shared-service/      # Notify + Report + Storage (NestJS)
+│   ├── inventory-service/   # Asset management + Search (NestJS)
 │   ├── audit-service/       # Audit logging (NestJS)
-│   ├── search-service/      # Search (NestJS)
-│   ├── report-service/      # Reports + SOAP (NestJS)
-│   ├── notification-service/# Notifications + MQTT (NestJS)
-│   ├── storage-service/     # File storage (NestJS)
 │   ├── mobile-bff/          # Mobile backend (NestJS)
 │   ├── geo-tracker/         # Geolocation (Go)
 │   ├── analytics-engine/    # Analytics (Python/FastAPI)
@@ -181,7 +183,7 @@ npx nx g @nx/react:library my-lib
 npx nx build api-gateway
 
 # Run tests
-npx nx test auth-service
+npx nx test core-service
 
 # Lint
 npx nx lint api-gateway
@@ -192,25 +194,21 @@ npx nx graph
 
 ### Service Ports
 
-| Service              | Port |
-| -------------------- | ---- |
-| API Gateway          | 3000 |
-| Auth Service         | 3002 |
-| Tenant Service       | 3003 |
-| Inventory Service    | 3004 |
-| Storage Service      | 3005 |
-| Notification Service | 3006 |
-| Report Service       | 3007 |
-| Search Service       | 3008 |
-| Geo Tracker (Go)     | 3009 |
-| Analytics (Python)   | 3010 |
-| Mobile BFF           | 3011 |
-| Audit Service        | 3012 |
-| Shell App            | 4100 |
-| Assets MFE           | 4101 |
-| Dashboard MFE        | 4102 |
-| Users MFE            | 4103 |
-| Testing Dashboard    | 4200 |
+| Service            | Port |
+| ------------------ | ---- |
+| API Gateway        | 3000 |
+| Core Service       | 3002 |
+| Inventory Service  | 3004 |
+| Shared Service     | 3006 |
+| Geo Tracker (Go)   | 3009 |
+| Analytics (Python) | 3010 |
+| Mobile BFF         | 3011 |
+| Audit Service      | 3012 |
+| Shell App          | 4100 |
+| Assets MFE         | 4101 |
+| Dashboard MFE      | 4102 |
+| Users MFE          | 4103 |
+| Testing Dashboard  | 4200 |
 
 ---
 

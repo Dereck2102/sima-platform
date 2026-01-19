@@ -87,6 +87,7 @@ services:
     restart: always
 
   # --- APPLICATION SERVICES (Pre-built images) ---
+  # --- APPLICATION SERVICES ---
   api-gateway:
     image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/api-gateway:${DOCKER_TAG:-latest}
     container_name: sima-prod-api-gateway
@@ -96,26 +97,26 @@ services:
       NODE_ENV: production
       PORT: 3000
     depends_on:
-      - auth-service
-      - tenant-service
+      - core-service
+      - shared-service
       - inventory-service
     networks:
       - sima-net
     restart: always
 
-  auth-service:
-    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/auth-service:${DOCKER_TAG:-latest}
-    container_name: sima-prod-auth-service
+  core-service:
+    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/core-service:${DOCKER_TAG:-latest}
+    container_name: sima-prod-core-service
     ports:
       - "3002:3002"
     environment:
       NODE_ENV: production
       PORT: 3002
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: ${POSTGRES_USER:-sima}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${POSTGRES_USER:-sima}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB:-sima_core}
       JWT_SECRET: ${JWT_SECRET}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
     depends_on:
@@ -125,22 +126,24 @@ services:
       - sima-net
     restart: always
 
-  tenant-service:
-    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/tenant-service:${DOCKER_TAG:-latest}
-    container_name: sima-prod-tenant-service
+  shared-service:
+    image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/shared-service:${DOCKER_TAG:-latest}
+    container_name: sima-prod-shared-service
     ports:
-      - "3003:3003"
+      - "3006:3006"
     environment:
       NODE_ENV: production
-      PORT: 3003
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: ${POSTGRES_USER:-sima}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
+      PORT: 3006
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-sima}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET: ${MINIO_BUCKET:-sima-uploads}
     depends_on:
-      postgres:
-        condition: service_healthy
+      minio:
+        condition: service_started # Prod minio might need healthcheck or external S3
+      kafka:
+        condition: service_started
     networks:
       - sima-net
     restart: always
@@ -149,16 +152,16 @@ services:
     image: ${DOCKER_REGISTRY:-ghcr.io/dereck2102/sima-platform}/inventory-service:${DOCKER_TAG:-latest}
     container_name: sima-prod-inventory-service
     ports:
-      - "3001:3001"
+      - "3004:3004"
     environment:
       NODE_ENV: production
-      PORT: 3001
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: ${POSTGRES_USER:-sima}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-sima_core}
-      KAFKA_BROKER: kafka:9092
+      PORT: 3004
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${POSTGRES_USER:-sima}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB:-sima_core}
+      KAFKA_BROKERS: kafka:9092
     depends_on:
       postgres:
         condition: service_healthy

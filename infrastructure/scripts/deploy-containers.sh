@@ -40,15 +40,13 @@ echo ""
 # =============================================================================
 SERVICES=(
   "api-gateway"
-  "auth-service"
-  "tenant-service"
+  "core-service"
+  "shared-service"
   "inventory-service"
-  "storage-service"
-  "notification-service"
-  "report-service"
-  "search-service"
   "audit-service"
   "mobile-bff"
+  "geo-tracker"
+  "analytics-engine"
 )
 
 # =============================================================================

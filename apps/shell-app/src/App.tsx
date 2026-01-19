@@ -7,6 +7,10 @@ const API_URL = 'http://localhost:3000/api';
 const AssetsMfe = lazy(() => import('assetsMfe/App'));
 const DashboardMfe = lazy(() => import('dashboardMfe/App'));
 const UsersMfe = lazy(() => import('usersMfe/App'));
+const TenantsMfe = lazy(() => import('tenantsMfe/App'));
+const AuditMfe = lazy(() => import('auditMfe/App'));
+const ReportsMfe = lazy(() => import('reportsMfe/App'));
+const SettingsMfe = lazy(() => import('settingsMfe/App'));
 
 // Auth context types
 interface User {
@@ -150,9 +154,9 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
 
 // Role-based permissions
 const ROLE_PERMISSIONS: Record<string, string[]> = {
-  super_admin: ['home', 'dashboard', 'assets', 'users', 'tenants', 'settings'],
-  admin: ['home', 'dashboard', 'assets', 'users'],
-  auditor: ['home', 'dashboard', 'assets'],
+  super_admin: ['home', 'dashboard', 'assets', 'users', 'tenants', 'audit', 'reports', 'settings'],
+  admin: ['home', 'dashboard', 'assets', 'users', 'reports', 'settings'],
+  auditor: ['home', 'dashboard', 'assets', 'reports'],
   operator: ['home', 'assets'],
   viewer: ['home', 'dashboard'],
 };
@@ -190,6 +194,8 @@ const Navigation = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
     { path: '/assets', key: 'assets', label: 'Assets', icon: '📦' },
     { path: '/users', key: 'users', label: 'Users', icon: '👥' },
     { path: '/tenants', key: 'tenants', label: 'Tenants', icon: '🏢' },
+    { path: '/audit', key: 'audit', label: 'Audit Logs', icon: '📋' },
+    { path: '/reports', key: 'reports', label: 'Reports', icon: '📈' },
     { path: '/settings', key: 'settings', label: 'Settings', icon: '⚙️' },
   ];
 
@@ -352,6 +358,46 @@ function App() {
                 <ErrorBoundary fallback={<MfeFallback name="Users" />}>
                   <Suspense fallback={<Loading />}>
                     <UsersMfe />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/tenants/*"
+              element={
+                <ErrorBoundary fallback={<MfeFallback name="Tenants" />}>
+                  <Suspense fallback={<Loading />}>
+                    <TenantsMfe />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/audit/*"
+              element={
+                <ErrorBoundary fallback={<MfeFallback name="Audit" />}>
+                  <Suspense fallback={<Loading />}>
+                    <AuditMfe />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/reports/*"
+              element={
+                <ErrorBoundary fallback={<MfeFallback name="Reports" />}>
+                  <Suspense fallback={<Loading />}>
+                    <ReportsMfe />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/settings/*"
+              element={
+                <ErrorBoundary fallback={<MfeFallback name="Settings" />}>
+                  <Suspense fallback={<Loading />}>
+                    <SettingsMfe />
                   </Suspense>
                 </ErrorBoundary>
               }

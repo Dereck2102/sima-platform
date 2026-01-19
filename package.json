@@ -11,7 +11,7 @@
     "docker:logs": "docker-compose logs -f",
     "docker:ps": "docker-compose ps",
     "start:infra": "docker-compose up -d postgres mongo redis kafka zookeeper",
-    "start:backend": "npx nx run-many --target=serve --projects=api-gateway,auth-service,tenant-service,inventory-service --parallel=4",
+    "start:backend": "npx nx run-many --target=serve --projects=api-gateway,core-service,shared-service,inventory-service --parallel=4",
     "start:all-services": "npx nx run-many --target=serve --all --parallel=10",
     "lint": "npx nx run-many --target=lint --all",
     "build": "npx nx run-many --target=build --all"

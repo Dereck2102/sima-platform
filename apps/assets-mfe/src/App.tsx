@@ -63,14 +63,21 @@ const conditionLabels: Record<string, string> = {
 };
 
 const getAuthToken = () => localStorage.getItem('token') || '';
-const getUserRole = () => {
+
+const getUserInfo = () => {
   const token = getAuthToken();
-  if (!token) return 'viewer';
+  if (!token) return { role: 'viewer', userId: null, tenantId: null };
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.role || 'viewer';
-  } catch { return 'viewer'; }
+    return {
+      role: payload.role || 'viewer',
+      userId: payload.sub || payload.userId || null,
+      tenantId: payload.tenantId || null,
+    };
+  } catch { return { role: 'viewer', userId: null, tenantId: null }; }
 };
+
+const getUserRole = () => getUserInfo().role;
 
 const emptyForm: AssetFormData = {
   internalCode: '',
@@ -254,8 +261,23 @@ function App() {
     }
   };
 
-  // Filtering
+  // Filtering with role-based access
+  const userInfo = getUserInfo();
+  const isBasicUser = ['viewer', 'operator'].includes(userInfo.role);
+  const isSuperAdmin = userInfo.role === 'super_admin';
+  
   const filteredAssets = assets.filter((asset) => {
+    // 1. Basic users only see assets assigned to them
+    if (isBasicUser && asset.custodianId !== userInfo.userId) {
+      return false;
+    }
+
+    // 2. Admins (non-super) only see assets from their tenant
+    if (!isSuperAdmin && !isBasicUser && asset.tenantId !== userInfo.tenantId) {
+       // Note: In a real app backend should filter this, but frontend safety is good
+       return false;
+    }
+    
     const matchesSearch = 
       asset.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       asset.internalCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||

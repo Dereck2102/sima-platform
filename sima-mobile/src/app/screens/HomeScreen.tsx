@@ -1,461 +1,295 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
-  RefreshControl,
-  Alert,
-  Modal,
-  TextInput,
+  ScrollView,
+  StatusBar,
+  Image,
+  Dimensions,
 } from 'react-native';
-import { AssetService, Asset, CreateAssetDto } from '../services/asset.service';
 import { AuthService } from '../services/auth.service';
-import { GeoService } from '../services/geo.service';
+import { AssetService } from '../services/asset.service';
 
-interface IUser {
-  id: string;
-  email: string;
-  fullName: string;
-  role: string;
-  tenantId: string;
+const { width } = Dimensions.get('window');
+
+interface DashboardStats {
+  totalAssets: number;
+  totalValue: number;
+  activeAssets: number;
+  maintenanceAssets: number;
 }
 
-const STATUSES = ['ACTIVE', 'IN_MAINTENANCE', 'DECOMMISSIONED'];
-const CONDITIONS = ['NEW', 'EXCELLENT', 'GOOD', 'FAIR', 'POOR'];
-
 export const HomeScreen = ({ navigation }: any) => {
-  const [assets, setAssets] = useState<Asset[]>([]);
-  const [user, setUser] = useState<IUser | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [gettingLocation, setGettingLocation] = useState(false);
-  
-  // Form state
-  const [form, setForm] = useState<CreateAssetDto>({
-    internalCode: '',
-    name: '',
-    description: '',
-    price: 0,
-    status: 'ACTIVE',
-    condition: 'NEW',
-    locationId: '',
-    acquisitionDate: new Date().toISOString().split('T')[0],
-    latitude: undefined,
-    longitude: undefined,
+  const [user, setUser] = useState<any>(null);
+  const [stats, setStats] = useState<DashboardStats>({
+    totalAssets: 0,
+    totalValue: 0,
+    activeAssets: 0,
+    maintenanceAssets: 0,
   });
-
-  // Filtered assets based on search
-  const filteredAssets = useMemo(() => {
-    if (!searchQuery.trim()) return assets;
-    const query = searchQuery.toLowerCase();
-    return assets.filter(a => 
-      a.name.toLowerCase().includes(query) ||
-      a.internalCode.toLowerCase().includes(query) ||
-      a.description?.toLowerCase().includes(query)
-    );
-  }, [assets, searchQuery]);
 
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
-    await Promise.all([loadUser(), fetchAssets()]);
-  };
-
-  const loadUser = async () => {
-    try {
-      const currentUser = await AuthService.getCurrentUser();
-      setUser(currentUser);
-    } catch (error) {
-      console.error('Error loading user:', error);
-    }
-  };
-
-  const fetchAssets = async () => {
-    setLoading(true);
-    try {
-      const data = await AssetService.getAll();
-      setAssets(data);
-    } catch (error: any) {
-      console.error('Fetch error:', error);
-      if (error.response?.status === 401) {
-        Alert.alert('Session Expired', 'Please login again', [
-          { text: 'OK', onPress: handleLogout },
-        ]);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await fetchAssets();
-    setRefreshing(false);
-  };
-
-  const handleLogout = async () => {
-    Alert.alert('Logout', 'Are you sure you want to logout?', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Logout',
-        style: 'destructive',
-        onPress: async () => {
-          await AuthService.logout();
-          navigation.replace('Login');
-        },
-      },
-    ]);
-  };
-
-  const openCreateModal = () => {
-    setSelectedAsset(null);
-    setForm({
-      internalCode: '',
-      name: '',
-      description: '',
-      price: 0,
-      status: 'ACTIVE',
-      condition: 'NEW',
-      locationId: '',
-      acquisitionDate: new Date().toISOString().split('T')[0],
-      latitude: undefined,
-      longitude: undefined,
-    });
-    setShowModal(true);
-  };
-
-  const handleGetLocation = async () => {
-    if (!GeoService.isAvailable()) {
-      Alert.alert('Error', 'Geolocation is not available on this device');
-      return;
-    }
+    const currentUser = await AuthService.getCurrentUser();
+    setUser(currentUser);
     
-    setGettingLocation(true);
+    // Fetch stats (we'll calculate from all assets for now, ideally backend provides this)
     try {
-      const coords = await GeoService.getCurrentPosition();
-      setForm(prev => ({
-        ...prev,
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-      }));
-      Alert.alert('Location Captured', GeoService.formatCoordinates(coords.latitude, coords.longitude));
-    } catch (error: any) {
-      Alert.alert('Location Error', error.message || 'Could not get location');
-    } finally {
-      setGettingLocation(false);
+      const assets = await AssetService.getAll();
+      const totalValue = assets.reduce((sum, a) => sum + (Number(a.price) || 0), 0);
+      const active = assets.filter(a => a.status === 'ACTIVE').length;
+      const maintenance = assets.filter(a => a.status === 'IN_MAINTENANCE').length;
+      
+      setStats({
+        totalAssets: assets.length,
+        totalValue,
+        activeAssets: active,
+        maintenanceAssets: maintenance,
+      });
+    } catch (e) {
+      console.error('Failed to load stats', e);
     }
   };
 
-  const openEditModal = (asset: Asset) => {
-    setSelectedAsset(asset);
-    setForm({
-      internalCode: asset.internalCode,
-      name: asset.name,
-      description: asset.description || '',
-      price: asset.price,
-      status: asset.status,
-      condition: asset.condition,
-      locationId: asset.locationId || '',
-      acquisitionDate: asset.acquisitionDate?.split('T')[0] || '',
-      latitude: asset.latitude,
-      longitude: asset.longitude,
-    });
-    setShowModal(true);
-  };
+  const menuItems = [
+    { title: 'Assets Inventory', icon: '📦', route: 'Assets', params: undefined, color: '#4CAF50' },
+    { title: 'Scan QR', icon: '📷', route: 'Placeholder', params: { title: 'QR Scanner' }, color: '#2196F3' },
+    { title: 'Reports', icon: '📊', route: 'Placeholder', params: { title: 'Reports' }, color: '#FF9800' },
+    { title: 'My Profile', icon: '👤', route: 'Profile', params: undefined, color: '#9C27B0' },
+  ];
 
-  const handleSave = async () => {
-    if (!form.internalCode || !form.name) {
-      Alert.alert('Error', 'Code and name are required');
-      return;
-    }
-    
-    setSaving(true);
-    try {
-      if (selectedAsset) {
-        await AssetService.update(selectedAsset.id, form);
-        Alert.alert('Success', 'Asset updated');
-      } else {
-        await AssetService.create(form);
-        Alert.alert('Success', 'Asset created');
-      }
-      setShowModal(false);
-      fetchAssets();
-    } catch (error: any) {
-      Alert.alert('Error', error.message || 'Could not save');
-    } finally {
-      setSaving(false);
-    }
+  const handleProfileClick = () => {
+    navigation.navigate('Profile');
   };
-
-  const handleDelete = (asset: Asset) => {
-    Alert.alert('Delete Asset', `Delete "${asset.name}"?`, [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          try {
-            await AssetService.delete(asset.id);
-            fetchAssets();
-          } catch {
-            Alert.alert('Error', 'Could not delete');
-          }
-        },
-      },
-    ]);
-  };
-
-  const totalValue = assets.reduce((sum, a) => sum + (Number(a.price) || 0), 0);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.userInfo}>
-          <Text style={styles.welcomeText}>Welcome,</Text>
-          <Text style={styles.userName}>{user?.fullName || 'User'}</Text>
-          <View style={styles.badgeRow}>
-            <View style={styles.roleBadge}>
-              <Text style={styles.roleBadgeText}>{user?.role}</Text>
-            </View>
+      <StatusBar barStyle="dark-content" backgroundColor="#F5F7FA" />
+      
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {/* Header Section */}
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.greeting}>Hello,</Text>
+            <Text style={styles.userName}>{user?.fullName || 'User'}</Text>
           </View>
-        </View>
-        <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Logout</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Stats */}
-      <View style={styles.statsContainer}>
-        <View style={styles.statCard}>
-          <Text style={styles.statNumber}>{assets.length}</Text>
-          <Text style={styles.statLabel}>Assets</Text>
-        </View>
-        <View style={[styles.statCard, { backgroundColor: '#34C759' }]}>
-          <Text style={styles.statNumber}>${totalValue.toLocaleString()}</Text>
-          <Text style={styles.statLabel}>Total Value</Text>
-        </View>
-      </View>
-
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="🔍 Search assets..."
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          placeholderTextColor="#8E8E93"
-        />
-      </View>
-
-      {/* Assets List */}
-      {loading ? (
-        <ActivityIndicator size="large" color="#007AFF" style={styles.loader} />
-      ) : (
-        <ScrollView
-          contentContainerStyle={styles.list}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
-          {filteredAssets.length === 0 ? (
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyIcon}>📦</Text>
-              <Text style={styles.emptyText}>{searchQuery ? 'No matching assets' : 'No assets found'}</Text>
-              {!searchQuery && (
-                <TouchableOpacity style={styles.createButton} onPress={openCreateModal}>
-                  <Text style={styles.createButtonText}>+ Create Asset</Text>
-                </TouchableOpacity>
-              )}
-            </View>
-          ) : (
-            filteredAssets.map((asset) => (
-              <TouchableOpacity key={asset.id} style={styles.card} onPress={() => openEditModal(asset)}>
-                <View style={styles.cardHeader}>
-                  <Text style={styles.cardTitle}>{asset.name}</Text>
-                  <Text style={styles.price}>${Number(asset.price).toLocaleString()}</Text>
-                </View>
-                <Text style={styles.code}>📋 {asset.internalCode}</Text>
-                <View style={styles.badgeContainer}>
-                  <View style={[styles.statusBadge, { backgroundColor: asset.status === 'ACTIVE' ? '#E8F5E9' : '#FFF3E0' }]}>
-                    <Text style={[styles.statusBadgeText, { color: asset.status === 'ACTIVE' ? '#2E7D32' : '#E65100' }]}>
-                      {asset.status}
-                    </Text>
-                  </View>
-                  <View style={styles.conditionBadge}>
-                    <Text style={styles.conditionText}>{asset.condition}</Text>
-                  </View>
-                </View>
-                {asset.latitude && asset.longitude && (
-                  <Text style={styles.locationText}>📍 {asset.latitude.toFixed(4)}, {asset.longitude.toFixed(4)}</Text>
-                )}
-                <TouchableOpacity style={styles.deleteBtn} onPress={() => handleDelete(asset)}>
-                  <Text style={styles.deleteBtnText}>🗑️</Text>
-                </TouchableOpacity>
-              </TouchableOpacity>
-            ))
-          )}
-        </ScrollView>
-      )}
-
-      {/* FAB */}
-      <TouchableOpacity style={styles.fab} onPress={openCreateModal}>
-        <Text style={styles.fabText}>+</Text>
-      </TouchableOpacity>
-
-      {/* Modal */}
-      <Modal visible={showModal} animationType="slide" transparent>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
-              {selectedAsset ? '✏️ Edit Asset' : '➕ New Asset'}
+          <TouchableOpacity onPress={handleProfileClick} style={styles.profileBtn}>
+            <Text style={styles.profileInitials}>
+              {user?.fullName?.charAt(0) || 'U'}
             </Text>
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Internal Code *"
-              value={form.internalCode}
-              onChangeText={(v) => setForm({...form, internalCode: v})}
-              editable={!selectedAsset}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Name *"
-              value={form.name}
-              onChangeText={(v) => setForm({...form, name: v})}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Description"
-              value={form.description}
-              onChangeText={(v) => setForm({...form, description: v})}
-              multiline
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Price"
-              value={String(form.price)}
-              onChangeText={(v) => setForm({...form, price: parseFloat(v) || 0})}
-              keyboardType="numeric"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Location"
-              value={form.locationId}
-              onChangeText={(v) => setForm({...form, locationId: v})}
-            />
-            
-            {/* Get Location Button */}
-            <TouchableOpacity 
-              style={[styles.locationBtn, gettingLocation && styles.locationBtnDisabled]} 
-              onPress={handleGetLocation}
-              disabled={gettingLocation}
-            >
-              <Text style={styles.locationBtnText}>
-                {gettingLocation ? '📡 Getting location...' : '📍 Get Current Location'}
-              </Text>
-            </TouchableOpacity>
-            
-            {form.latitude && form.longitude && (
-              <Text style={styles.coordsText}>
-                📍 {form.latitude.toFixed(6)}, {form.longitude.toFixed(6)}
-              </Text>
-            )}
-            
-            <View style={styles.modalActions}>
-              <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowModal(false)}>
-                <Text style={styles.cancelBtnText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.saveBtn} onPress={handleSave} disabled={saving}>
-                <Text style={styles.saveBtnText}>{saving ? 'Saving...' : 'Save'}</Text>
-              </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
+
+        {/* Overview Cards */}
+        <View style={styles.statsContainer}>
+          <View style={[styles.statCard, styles.primaryCard]}>
+            <Text style={styles.statLabelLight}>Total Value</Text>
+            <Text style={styles.statValueLight}>${stats.totalValue.toLocaleString()}</Text>
+            <View style={styles.statFooter}>
+              <Text style={styles.statFooterText}>Across {stats.totalAssets} assets</Text>
+            </View>
+          </View>
+          
+          <View style={styles.row}>
+            <View style={[styles.statCard, styles.halfCard]}>
+              <Text style={styles.icon}>✅</Text>
+              <Text style={styles.statValue}>{stats.activeAssets}</Text>
+              <Text style={styles.statLabel}>Active</Text>
+            </View>
+            <View style={[styles.statCard, styles.halfCard]}>
+              <Text style={styles.icon}>🔧</Text>
+              <Text style={styles.statValue}>{stats.maintenanceAssets}</Text>
+              <Text style={styles.statLabel}>In Maint.</Text>
             </View>
           </View>
         </View>
-      </Modal>
+
+        {/* Quick Actions Grid */}
+        <Text style={styles.sectionTitle}>Quick Actions</Text>
+        <View style={styles.grid}>
+          {menuItems.map((item, index) => (
+            <TouchableOpacity 
+              key={index} 
+              style={styles.gridItem}
+              onPress={() => navigation.navigate(item.route, item.params)}
+            >
+              <View style={[styles.iconContainer, { backgroundColor: `${item.color}20` }]}>
+                <Text style={styles.gridIcon}>{item.icon}</Text>
+              </View>
+              <Text style={styles.gridTitle}>{item.title}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Recent Activity Placeholder */}
+        <Text style={styles.sectionTitle}>Recent Activity</Text>
+        <View style={styles.activityCard}>
+          <Text style={styles.emptyText}>No recent activity</Text>
+        </View>
+
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F2F2F7' },
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F7FA',
+  },
+  scrollContent: {
+    padding: 20,
+  },
   header: {
-    backgroundColor: '#FFFFFF', padding: 20, borderBottomWidth: 1, borderColor: '#E5E5EA',
-    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
   },
-  userInfo: { flex: 1 },
-  welcomeText: { fontSize: 14, color: '#8E8E93', marginBottom: 4 },
-  userName: { fontSize: 24, fontWeight: '800', color: '#000', marginBottom: 8 },
-  badgeRow: { flexDirection: 'row', gap: 8 },
-  roleBadge: { backgroundColor: '#E1F5FE', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12 },
-  roleBadgeText: { fontSize: 11, fontWeight: '700', color: '#0288D1', textTransform: 'uppercase' },
-  logoutButton: { backgroundColor: '#FF3B30', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8 },
-  logoutText: { color: '#fff', fontWeight: '700', fontSize: 14 },
-  statsContainer: { flexDirection: 'row', padding: 16, gap: 12 },
-  statCard: { flex: 1, backgroundColor: '#007AFF', borderRadius: 12, padding: 16, alignItems: 'center' },
-  statNumber: { fontSize: 28, fontWeight: '800', color: '#fff' },
-  statLabel: { fontSize: 14, color: '#fff', marginTop: 4, opacity: 0.9 },
-  loader: { marginTop: 40 },
-  list: { paddingHorizontal: 16, paddingBottom: 100 },
-  card: {
-    backgroundColor: 'white', padding: 16, marginBottom: 12, borderRadius: 12,
-    shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2,
+  greeting: {
+    fontSize: 16,
+    color: '#64748B',
+    marginBottom: 4,
   },
-  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
-  cardTitle: { fontSize: 18, fontWeight: '700', color: '#1C1C1E', flex: 1 },
-  price: { fontSize: 18, color: '#34C759', fontWeight: '800' },
-  code: { color: '#8E8E93', fontSize: 13, marginBottom: 12 },
-  badgeContainer: { flexDirection: 'row', gap: 8 },
-  statusBadge: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 6 },
-  statusBadgeText: { fontSize: 11, fontWeight: '700' },
-  conditionBadge: { backgroundColor: '#F3E5F5', paddingHorizontal: 10, paddingVertical: 6, borderRadius: 6 },
-  conditionText: { fontSize: 11, fontWeight: '600', color: '#7B1FA2' },
-  deleteBtn: { position: 'absolute', top: 12, right: 12 },
-  deleteBtnText: { fontSize: 18 },
-  emptyContainer: { alignItems: 'center', marginTop: 60 },
-  emptyIcon: { fontSize: 64, marginBottom: 16 },
-  emptyText: { fontSize: 18, fontWeight: '600', color: '#8E8E93', marginBottom: 16 },
-  createButton: { backgroundColor: '#007AFF', paddingHorizontal: 24, paddingVertical: 12, borderRadius: 8 },
-  createButtonText: { color: '#fff', fontWeight: '700', fontSize: 16 },
-  fab: {
-    position: 'absolute', bottom: 30, right: 20, width: 60, height: 60, borderRadius: 30,
-    backgroundColor: '#007AFF', justifyContent: 'center', alignItems: 'center',
-    shadowColor: '#000', shadowOpacity: 0.3, shadowRadius: 6, shadowOffset: { width: 0, height: 3 }, elevation: 5,
+  userName: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#1E293B',
   },
-  fabText: { color: '#fff', fontSize: 32, fontWeight: '600', marginTop: -2 },
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', padding: 20 },
-  modalContent: { backgroundColor: '#fff', borderRadius: 16, padding: 24, width: '100%', maxWidth: 400 },
-  modalTitle: { fontSize: 22, fontWeight: '700', marginBottom: 20, textAlign: 'center' },
-  input: {
-    backgroundColor: '#F2F2F7', borderRadius: 10, padding: 14, marginBottom: 12, fontSize: 16, borderWidth: 1, borderColor: '#E5E5EA',
+  profileBtn: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#3B82F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
-  modalActions: { flexDirection: 'row', gap: 12, marginTop: 8 },
-  cancelBtn: { flex: 1, backgroundColor: '#E5E5EA', padding: 14, borderRadius: 10, alignItems: 'center' },
-  cancelBtnText: { fontWeight: '600', color: '#666' },
-  saveBtn: { flex: 1, backgroundColor: '#007AFF', padding: 14, borderRadius: 10, alignItems: 'center' },
-  saveBtnText: { fontWeight: '700', color: '#fff' },
-  searchContainer: { paddingHorizontal: 16, marginBottom: 8 },
-  searchInput: { 
-    backgroundColor: '#fff', borderRadius: 10, padding: 14, fontSize: 16, 
-    borderWidth: 1, borderColor: '#E5E5EA',
+  profileInitials: {
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: '700',
   },
-  locationText: { color: '#007AFF', fontSize: 12, marginTop: 8 },
-  locationBtn: { 
-    backgroundColor: '#E8F5E9', padding: 14, borderRadius: 10, alignItems: 'center', marginBottom: 12,
+  statsContainer: {
+    gap: 16,
+    marginBottom: 32,
   },
-  locationBtnDisabled: { backgroundColor: '#F5F5F5' },
-  locationBtnText: { color: '#2E7D32', fontWeight: '600', fontSize: 14 },
-  coordsText: { 
-    color: '#007AFF', fontSize: 13, textAlign: 'center', marginBottom: 12, fontWeight: '500',
+  statCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  primaryCard: {
+    backgroundColor: '#1E293B',
+  },
+  row: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  halfCard: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  statLabel: {
+    fontSize: 14,
+    color: '#64748B',
+    marginTop: 4,
+  },
+  statLabelLight: {
+    fontSize: 14,
+    color: '#94A3B8',
+    marginBottom: 8,
+  },
+  statValue: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#1E293B',
+  },
+  statValueLight: {
+    fontSize: 36,
+    fontWeight: '800',
+    color: '#FFF',
+  },
+  statFooter: {
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#334155',
+  },
+  statFooterText: {
+    color: '#94A3B8',
+    fontSize: 12,
+  },
+  icon: {
+    fontSize: 24,
+    marginBottom: 8,
+  },
+  iconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginBottom: 16,
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 16,
+    marginBottom: 32,
+  },
+  gridItem: {
+    width: (width - 56) / 2,
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 16,
+    alignItems: 'center',
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  gridIcon: {
+    fontSize: 28,
+  },
+  gridTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#1E293B',
+  },
+  activityCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 24,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    borderStyle: 'dashed',
+  },
+  emptyText: {
+    color: '#94A3B8',
+    fontSize: 14,
   },
 });

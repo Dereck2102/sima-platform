@@ -161,22 +161,175 @@ services:
       - sima-net
     restart: unless-stopped
 
-  # --- AUTOMATION ---
-  n8n:
-    image: n8nio/n8n
-    container_name: sima-n8n
-    ports:
-      - "5678:5678"
+  # --- CORE SERVICES ---
+  core-service:
+    image: sima/core-service:latest
+    container_name: sima-core-service
+    build:
+      context: .
+      dockerfile: apps/core-service/Dockerfile
     environment:
-      N8N_BASIC_AUTH_ACTIVE: true
-      N8N_BASIC_AUTH_USER: admin
-      N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD:-admin123}
-      WEBHOOK_URL: http://localhost:5678/
-    volumes:
-      - n8n_data:/home/node/.n8n
+      - PORT=3002
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=${POSTGRES_USER:-sima}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB:-sima_core}
+      - JWT_SECRET=${JWT_SECRET:-secret-key}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET:-refresh-secret-key}
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
     networks:
       - sima-net
     restart: unless-stopped
+
+  shared-service:
+    image: sima/shared-service:latest
+    container_name: sima-shared-service
+    build:
+      context: .
+      dockerfile: apps/shared-service/Dockerfile
+    environment:
+      - PORT=3006
+      - MINIO_ENDPOINT=minio
+      - MINIO_PORT=9000
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-sima}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - MINIO_BUCKET=${MINIO_BUCKET:-sima-uploads}
+    ports:
+      - "3006:3006"
+    depends_on:
+      - minio
+      - kafka
+    networks:
+      - sima-net
+    restart: unless-stopped
+
+  inventory-service:
+    image: sima/inventory-service:latest
+    container_name: sima-inventory-service
+    build:
+      context: .
+      dockerfile: apps/inventory-service/Dockerfile
+    environment:
+      - PORT=3004
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=${POSTGRES_USER:-sima}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB:-sima_core}
+      - KAFKA_BROKERS=kafka:9092
+    ports:
+      - "3004:3004"
+    depends_on:
+      - postgres
+      - kafka
+    networks:
+      - sima-net
+    restart: unless-stopped
+    
+  # --- SPECIALIZED SERVICES ---
+  api-gateway:
+    image: sima/api-gateway:latest
+    container_name: sima-api-gateway
+    build:
+      context: .
+      dockerfile: apps/api-gateway/Dockerfile
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - core-service
+      - shared-service
+      - inventory-service
+    networks:
+      - sima-net
+    restart: unless-stopped
+    
+  audit-service:
+    image: sima/audit-service:latest
+    container_name: sima-audit-service
+    build:
+      context: .
+      dockerfile: apps/audit-service/Dockerfile
+    environment:
+      - MONGO_URI=mongodb://${MONGO_USER:-root}:${MONGO_PASSWORD}@mongo:27017/sima_audit?authSource=admin
+      - KAFKA_BROKERS=kafka:9092
+    depends_on:
+      - mongo
+      - kafka
+    networks:
+      - sima-net
+    restart: unless-stopped
+    
+  mobile-bff:
+    image: sima/mobile-bff:latest
+    container_name: sima-mobile-bff
+    build:
+      context: .
+      dockerfile: apps/mobile-bff/Dockerfile
+    environment:
+      - PORT=3011
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "3011:3011"
+    depends_on:
+      - redis
+      - api-gateway
+    networks:
+      - sima-net
+    restart: unless-stopped
+
+  geo-tracker:
+    image: sima/geo-tracker:latest
+    container_name: sima-geo-tracker
+    build:
+      context: .
+      dockerfile: apps/geo-tracker/Dockerfile
+    environment:
+      - PORT=3009
+    ports:
+      - "3009:3009"
+    networks:
+      - sima-net
+    restart: unless-stopped
+    
+  analytics-engine:
+    image: sima/analytics-engine:latest
+    container_name: sima-analytics-engine
+    build:
+      context: .
+      dockerfile: apps/analytics-engine/Dockerfile
+    environment:
+      - PORT=3010
+      - DB_HOST=postgres
+      - DB_NAME=${POSTGRES_DB:-sima_core}
+      - DB_USER=${POSTGRES_USER:-sima}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "3010:3010"
+    depends_on:
+      - postgres
+    networks:
+      - sima-net
+    restart: unless-stopped
+
+  # --- FRONTENDS (served via Nginx or similar in prod, here mapped for completeness) --- 
+  # Note: Frontends are usually built as static assets, but defining shell-app here for context
+  shell-app:
+    image: sima/shell-app:latest
+    container_name: sima-shell-app
+    build:
+      context: .
+      dockerfile: apps/shell-app/Dockerfile
+    ports:
+      - "4100:80"
+    networks:
+      - sima-net
 
 networks:
   sima-net:

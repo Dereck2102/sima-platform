@@ -20,44 +20,20 @@ scrape_configs:
     metrics_path: /api/health
     scrape_interval: 30s
 
-  - job_name: 'sima-auth-service'
+  - job_name: 'sima-core-service'
     static_configs:
       - targets: ['host.docker.internal:3002']
-    metrics_path: /api/health
+    metrics_path: /api/auth/health
     scrape_interval: 30s
 
-  - job_name: 'sima-tenant-service'
+  - job_name: 'sima-shared-service'
     static_configs:
-      - targets: ['host.docker.internal:3003']
-    metrics_path: /api/health
+      - targets: ['host.docker.internal:3006']
+    metrics_path: /api/notifications/health
     scrape_interval: 30s
 
   - job_name: 'sima-inventory-service'
     static_configs:
-      - targets: ['host.docker.internal:3001']
-    metrics_path: /api/health
-    scrape_interval: 30s
-
-  - job_name: 'sima-search-service'
-    static_configs:
-      - targets: ['host.docker.internal:3008']
-    metrics_path: /api/health
-    scrape_interval: 30s
-
-  - job_name: 'sima-notification-service'
-    static_configs:
-      - targets: ['host.docker.internal:3006']
-    metrics_path: /api/health
-    scrape_interval: 30s
-
-  - job_name: 'sima-storage-service'
-    static_configs:
-      - targets: ['host.docker.internal:3005']
-    metrics_path: /api/health
-    scrape_interval: 30s
-
-  - job_name: 'sima-report-service'
-    static_configs:
-      - targets: ['host.docker.internal:3007']
+      - targets: ['host.docker.internal:3004']
     metrics_path: /api/health
     scrape_interval: 30s

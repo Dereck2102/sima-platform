@@ -71,8 +71,11 @@ FAILED=0
 # API Gateway
 check_endpoint "API Gateway" "/api/health" || ((FAILED++))
 
-# Auth Service
-check_endpoint "Auth Service" "/api/auth/health" || ((FAILED++))
+# Core Service (Auth+Tenant)
+check_endpoint "Core Service" "/api/auth/health" || ((FAILED++))
+
+# Shared Service
+check_endpoint "Shared Service" "/api/notifications/health" || ((FAILED++))
 
 # Inventory Service
 check_endpoint "Inventory Service" "/api/assets" "401" || ((FAILED++))
