@@ -124,7 +124,6 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@uce.edu.ec"
               required
             />
           </div>
@@ -135,7 +134,6 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
               required
             />
           </div>
@@ -145,9 +143,6 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
           </button>
         </form>
 
-        <div className="login-footer">
-          <p>Demo credentials: admin@uce.edu.ec / Test123!</p>
-        </div>
       </div>
     </div>
   );

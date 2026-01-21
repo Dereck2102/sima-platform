@@ -15,7 +15,7 @@
     "docker:ps": "docker-compose ps",
     "start:infra": "docker-compose up -d postgres mongo redis kafka zookeeper mosquitto",
     "start:backend": "npx nx run-many --target=serve --projects=api-gateway,core-service,shared-service,inventory-service --parallel=4",
-    "start:all-services": "npx nx run-many --target=serve --all --parallel=10",
+    "start:all-services": "npx nx run-many --target=serve --all --parallel=4",
     "start:testing-dashboard": "npx nx serve testing-dashboard",
     "lint": "npx nx run-many --target=lint --all",
     "lint:fix": "npx nx run-many --target=lint --all --fix",

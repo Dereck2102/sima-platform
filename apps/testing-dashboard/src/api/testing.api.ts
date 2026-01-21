@@ -241,7 +241,7 @@ export async function testAuthentication(): Promise<TestResult> {
   const start = Date.now();
   try {
     const response = await axios.post(`${SERVICES_BASE_URL}/api/auth/login`, {
-      email: 'admin@uce.edu.ec',
+      email: 'dsamacoria@uce.edu.ec',
       password: 'Admin123!',
     }, { timeout: 10000 });
     

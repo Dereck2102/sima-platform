@@ -16,6 +16,10 @@ export class AuditLog {
 
   @Prop({ type: Object }) // Guardamos el JSON completo del cambio
   payload: any;
+
+  // Timestamps - added by Mongoose but declared for TypeScript
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const AuditLogSchema = SchemaFactory.createForClass(AuditLog);

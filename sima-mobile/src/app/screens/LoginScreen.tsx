@@ -58,7 +58,7 @@ export const LoginScreen = ({ navigation }: any) => {
       <View style={styles.content}>
         <View style={styles.header}>
           <Image 
-            source={require('../../assets/logo_load.png')} 
+            source={{ uri: '/favicon.png' }} 
             style={styles.logoImage} 
             resizeMode="contain" 
           />
