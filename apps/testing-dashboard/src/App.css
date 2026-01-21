@@ -20,7 +20,13 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   background: var(--bg-dark);
   color: var(--text-primary);
   min-height: 100vh;
@@ -288,8 +294,13 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .result-status {
@@ -329,11 +340,11 @@ body {
   .content {
     grid-template-columns: 1fr;
   }
-  
+
   .metrics-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .results-panel {
     position: static;
   }
@@ -343,16 +354,202 @@ body {
   .dashboard {
     padding: 1rem;
   }
-  
+
   .header h1 {
     font-size: 1.75rem;
   }
-  
+
   .tabs {
     flex-direction: column;
   }
-  
+
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Health Check Grid */
+.health-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.health-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-card-hover);
+  border-radius: 10px;
+  border-left: 4px solid var(--border);
+}
+
+.health-card.healthy {
+  border-left-color: var(--success);
+}
+
+.health-card.unhealthy {
+  border-left-color: var(--error);
+}
+
+.health-icon {
+  font-size: 1.5rem;
+}
+
+.health-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.health-name {
+  font-weight: 500;
+}
+
+.health-url {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.health-time {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Quick Actions */
+.quick-actions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.quick-actions h3 {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.action-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  margin-right: 0.5rem;
+}
+
+.action-btn:hover:not(:disabled) {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Protocol Grid */
+.protocol-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.protocol-card {
+  background: var(--bg-card-hover);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.protocol-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.protocol-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.protocol-card p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.protocol-card code {
+  display: block;
+  background: var(--bg-dark);
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.protocol-card .run-btn {
+  width: 100%;
+}
+
+.protocol-card .run-btn.disabled {
+  background: var(--bg-dark);
+  color: var(--text-secondary);
+}
+
+/* Quality Actions */
+.quality-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.quality-card {
+  background: var(--bg-card-hover);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.quality-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.quality-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.quality-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.run-btn.large {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+/* Info Box */
+.info-box {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.info-box p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.info-box code {
+  background: var(--bg-dark);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
 }

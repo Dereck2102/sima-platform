@@ -106,6 +106,25 @@ services:
       retries: 5
     restart: unless-stopped
 
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: sima-mosquitto
+    ports:
+      - "1883:1883"
+      - "9883:9001"
+    volumes:
+      - ./infrastructure/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    networks:
+      - sima-net
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/#", "-C", "1", "-i", "healthcheck", "-W", "3"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
   # --- STORAGE ---
   minio:
     image: minio/minio
@@ -359,4 +378,6 @@ volumes:
   prometheus_data:
   grafana_data:
   n8n_data:
+  mosquitto_data:
+  mosquitto_logs:
 

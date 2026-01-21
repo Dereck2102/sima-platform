@@ -1,7 +1,7 @@
-import { Controller, Post, Body, Get, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Request, Param, Patch, Delete, ForbiddenException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto, RefreshTokenDto, TokenResponseDto } from '@sima/domain';
+import { LoginDto, RegisterDto, RefreshTokenDto, TokenResponseDto, UserRole } from '@sima/domain';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @ApiTags('Authentication')
@@ -123,8 +123,54 @@ export class AuthController {
   async getUsers(@Request() req) {
     const allowedRoles = ['super_admin', 'admin'];
     if (!allowedRoles.includes(req.user.role)) {
-      return { error: 'Forbidden', message: 'Admin role required' };
+      throw new ForbiddenException('Admin role required');
+    }
+    if (req.user.role === 'super_admin') {
+      return this.authService.findAll();
     }
     return this.authService.findAllByTenant(req.user.tenantId);
   }
+
+  @Patch('users/:id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ 
+    summary: 'Update user',
+    description: 'Updates a user. Admin can update users in their tenant, Super Admin can update any user.'
+  })
+  @ApiResponse({ status: 200, description: 'User updated successfully' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Admin role required' })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  async updateUser(
+    @Request() req,
+    @Param('id') userId: string,
+    @Body() updateData: Partial<{ fullName: string; role: UserRole; password: string; isActive: boolean }>
+  ) {
+    const allowedRoles = ['super_admin', 'admin'];
+    if (!allowedRoles.includes(req.user.role)) {
+      throw new ForbiddenException('Admin role required');
+    }
+    return this.authService.updateUser(userId, updateData);
+  }
+
+  @Delete('users/:id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ 
+    summary: 'Delete user',
+    description: 'Deletes a user. Only Super Admin can delete users.'
+  })
+  @ApiResponse({ status: 200, description: 'User deleted successfully' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Super Admin role required' })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  async deleteUser(@Request() req, @Param('id') userId: string) {
+    if (req.user.role !== 'super_admin') {
+      throw new ForbiddenException('Super Admin role required');
+    }
+    if (req.user.id === userId) {
+      throw new ForbiddenException('Cannot delete yourself');
+    }
+    return this.authService.deleteUser(userId);
+  }
 }
+

@@ -6,15 +6,17 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AssetsScreen } from '../screens/AssetsScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
-import { PlaceholderScreen } from '../screens/PlaceholderScreen';
+import { ReportsScreen } from '../screens/ReportsScreen';
+import { QRScannerScreen } from '../screens/QRScannerScreen';
 import { AuthService } from '../services/auth.service';
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
-  Assets: undefined;
+  Assets: { search?: string };
   Profile: undefined;
-  Placeholder: { title: string };
+  Reports: undefined;
+  QRScanner: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -65,37 +67,32 @@ export const AppNavigator = () => {
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{
-            headerShown: false,
-          }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{
-            headerShown: false,
-          }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Assets"
           component={AssetsScreen}
-          options={{
-            headerShown: false,
-          }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
-          options={{
-            headerShown: false,
-          }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Placeholder"
-          component={PlaceholderScreen}
-          options={{
-            headerShown: false,
-          }}
+          name="Reports"
+          component={ReportsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="QRScanner"
+          component={QRScannerScreen}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

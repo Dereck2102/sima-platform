@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './styles.css';
 
-const API_URL = 'http://localhost:3000/api/assets';
+const ASSETS_API_URL = 'http://localhost:3000/api/assets';
+const SEARCH_API_URL = 'http://localhost:3000/api/search/assets';
 
 interface Asset {
   id: string;
   internalCode: string;
   name: string;
   description?: string;
-  status: 'ACTIVE' | 'IN_MAINTENANCE' | 'DECOMMISSIONED';
+  status: 'ACTIVE' | 'IN_MAINTENANCE' | 'DECOMMISSIONED' | 'LOST';
   condition: 'NEW' | 'EXCELLENT' | 'GOOD' | 'FAIR' | 'POOR';
   price: number;
   tenantId: string;
@@ -31,19 +32,30 @@ interface AssetFormData {
   acquisitionDate: string;
 }
 
-const STATUSES = ['ACTIVE', 'IN_MAINTENANCE', 'DECOMMISSIONED'] as const;
+interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+const STATUSES = ['ACTIVE', 'IN_MAINTENANCE', 'DECOMMISSIONED', 'LOST'] as const;
 const CONDITIONS = ['NEW', 'EXCELLENT', 'GOOD', 'FAIR', 'POOR'] as const;
 
 const statusColors: Record<string, string> = {
   ACTIVE: '#10b981',
   IN_MAINTENANCE: '#f59e0b',
   DECOMMISSIONED: '#ef4444',
+  LOST: '#6b7280',
 };
 
 const statusLabels: Record<string, string> = {
   ACTIVE: 'Active',
   IN_MAINTENANCE: 'In Maintenance',
   DECOMMISSIONED: 'Decommissioned',
+  LOST: 'Lost',
 };
 
 const conditionColors: Record<string, string> = {
@@ -93,11 +105,15 @@ const emptyForm: AssetFormData = {
 
 function App() {
   const [assets, setAssets] = useState<Asset[]>([]);
+  const [meta, setMeta] = useState<PaginationMeta | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Search Filters
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
   const [conditionFilter, setConditionFilter] = useState<string>('ALL');
+  const [page, setPage] = useState(1);
   
   // Modal states
   const [showModal, setShowModal] = useState(false);
@@ -116,7 +132,16 @@ function App() {
     setError(null);
     try {
       const token = getAuthToken();
-      const response = await fetch(API_URL, {
+      
+      // Build Query Params for Server-Side Search
+      const params = new URLSearchParams();
+      if (searchTerm) params.append('query', searchTerm);
+      if (statusFilter !== 'ALL') params.append('status', statusFilter);
+      if (conditionFilter !== 'ALL') params.append('condition', conditionFilter);
+      params.append('page', page.toString());
+      params.append('limit', '8'); // 8 items per page for grid view
+
+      const response = await fetch(`${SEARCH_API_URL}?${params.toString()}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -132,18 +157,34 @@ function App() {
         throw new Error(`HTTP ${response.status}`);
       }
       
-      const data = await response.json();
-      setAssets(Array.isArray(data) ? data : []);
-    } catch {
+      const result = await response.json();
+      // Helper to handle both structure types if necessary, but expecting { data, meta }
+      if (result.data && Array.isArray(result.data)) {
+         setAssets(result.data);
+         setMeta(result.meta);
+      } else if (Array.isArray(result)) {
+         // Fallback if endpoint returns just array (shouldn't happen with SearchController)
+         setAssets(result);
+         setMeta(null);
+      } else {
+         setAssets([]);
+      }
+
+    } catch (e) {
+      console.error(e);
       setError('No se puede conectar al servidor. Verifique que el backend esté corriendo.');
       setAssets([]);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [searchTerm, statusFilter, conditionFilter, page]);
 
   useEffect(() => {
-    fetchAssets();
+    // Debounce search to avoid too many requests
+    const timer = setTimeout(() => {
+      fetchAssets();
+    }, 500);
+    return () => clearTimeout(timer);
   }, [fetchAssets]);
 
   // Open modal functions
@@ -183,13 +224,13 @@ function App() {
     setFormData(emptyForm);
   };
 
-  // CRUD operations
+  // CRUD operations use ASSETS_API_URL
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     try {
       const token = getAuthToken();
-      const response = await fetch(API_URL, {
+      const response = await fetch(ASSETS_API_URL, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -218,7 +259,7 @@ function App() {
     setSaving(true);
     try {
       const token = getAuthToken();
-      const response = await fetch(`${API_URL}/${selectedAsset.id}`, {
+      const response = await fetch(`${ASSETS_API_URL}/${selectedAsset.id}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -246,7 +287,7 @@ function App() {
     
     try {
       const token = getAuthToken();
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${ASSETS_API_URL}/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -261,59 +302,21 @@ function App() {
     }
   };
 
-  // Filtering with role-based access
-  const userInfo = getUserInfo();
-  const isBasicUser = ['viewer', 'operator'].includes(userInfo.role);
-  const isSuperAdmin = userInfo.role === 'super_admin';
-  
-  const filteredAssets = assets.filter((asset) => {
-    // 1. Basic users only see assets assigned to them
-    if (isBasicUser && asset.custodianId !== userInfo.userId) {
-      return false;
-    }
-
-    // 2. Admins (non-super) only see assets from their tenant
-    if (!isSuperAdmin && !isBasicUser && asset.tenantId !== userInfo.tenantId) {
-       // Note: In a real app backend should filter this, but frontend safety is good
-       return false;
-    }
-    
-    const matchesSearch = 
-      asset.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.internalCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.description?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'ALL' || asset.status === statusFilter;
-    const matchesCondition = conditionFilter === 'ALL' || asset.condition === conditionFilter;
-    return matchesSearch && matchesStatus && matchesCondition;
-  });
-
-  const totalValue = filteredAssets.reduce((sum, a) => sum + (Number(a.price) || 0), 0);
-  const activeCount = filteredAssets.filter(a => a.status === 'ACTIVE').length;
-  const maintenanceCount = filteredAssets.filter(a => a.status === 'IN_MAINTENANCE').length;
-
-  if (loading) {
-    return (
-      <div className="mfe-container">
-        <div className="loading-skeleton">
-          <div className="skeleton-header" />
-          <div className="skeleton-stats">
-            <div className="skeleton-stat" /><div className="skeleton-stat" />
-            <div className="skeleton-stat" /><div className="skeleton-stat" />
-          </div>
-          <div className="skeleton-grid">
-            {[1,2,3,4,5,6].map(i => <div key={i} className="skeleton-card" />)}
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Stats calculation - Note: With server-side pagination, 
+  // we can only show stats for the *current page* or we need a separate stats endpoint.
+  // For now, we'll just sum the current page (limitation of search endpoint not returning aggregation).
+  const totalValue = assets.reduce((sum, a) => sum + (Number(a.price) || 0), 0);
+  const activeCount = assets.filter(a => a.status === 'ACTIVE').length;
+  const maintenanceCount = assets.filter(a => a.status === 'IN_MAINTENANCE').length;
 
   return (
     <div className="mfe-container">
       <div className="mfe-header">
         <div className="header-left">
           <h1>📦 Asset Management</h1>
-          <p className="subtitle">Connected to backend API • Role: <strong>{userRole}</strong></p>
+          <p className="subtitle">
+            Server-Side Search & Pagination • Role: <strong>{userRole}</strong>
+          </p>
         </div>
         {canCreate && (
           <button className="btn-primary" onClick={openCreateModal}>
@@ -329,23 +332,23 @@ function App() {
         </div>
       )}
 
-      {/* Stats */}
+      {/* Stats - Contextual to current view */}
       <div className="stats-row">
         <div className="stat-card">
-          <span className="stat-value">{filteredAssets.length}</span>
-          <span className="stat-label">Total Assets</span>
+          <span className="stat-value">{meta?.total || 0}</span>
+          <span className="stat-label">Total Results</span>
         </div>
         <div className="stat-card">
           <span className="stat-value">${totalValue.toLocaleString()}</span>
-          <span className="stat-label">Total Value</span>
+          <span className="stat-label">Value (Page)</span>
         </div>
         <div className="stat-card active">
           <span className="stat-value">{activeCount}</span>
-          <span className="stat-label">Active</span>
+          <span className="stat-label">Active (Page)</span>
         </div>
         <div className="stat-card warning">
           <span className="stat-value">{maintenanceCount}</span>
-          <span className="stat-label">Maintenance</span>
+          <span className="stat-label">Maint. (Page)</span>
         </div>
       </div>
 
@@ -354,14 +357,14 @@ function App() {
         <input
           type="text"
           className="search-input"
-          placeholder="🔍 Search by name, code or description..."
+          placeholder="🔍 Search backend (name, code)..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => { setSearchTerm(e.target.value); setPage(1); }}
         />
         <select
           className="filter-select"
           value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
+          onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
         >
           <option value="ALL">📊 All Statuses</option>
           {STATUSES.map(s => (
@@ -371,7 +374,7 @@ function App() {
         <select
           className="filter-select"
           value={conditionFilter}
-          onChange={(e) => setConditionFilter(e.target.value)}
+          onChange={(e) => { setConditionFilter(e.target.value); setPage(1); }}
         >
           <option value="ALL">🔧 All Conditions</option>
           {CONDITIONS.map(c => (
@@ -382,44 +385,76 @@ function App() {
       </div>
 
       {/* Assets Grid */}
-      {filteredAssets.length === 0 && !error ? (
+      {loading ? (
+        <div className="loading-skeleton">
+          <div className="skeleton-grid">
+             {[1,2,3,4].map(i => <div key={i} className="skeleton-card" />)}
+          </div>
+          <p style={{textAlign: 'center', marginTop: 20}}>Searching backend...</p>
+        </div>
+      ) : assets.length === 0 && !error ? (
         <div className="empty-state">
           <span className="empty-icon">📭</span>
           <p>No assets found</p>
           {canCreate && <button className="btn-primary" onClick={openCreateModal}>Create first asset</button>}
         </div>
       ) : (
-        <div className="assets-grid">
-          {filteredAssets.map((asset) => (
-            <div key={asset.id} className="asset-card" onClick={() => openViewModal(asset)}>
-              <div className="asset-header">
-                <span className="asset-code">{asset.internalCode}</span>
-                <span className="status-badge" style={{ backgroundColor: statusColors[asset.status] }}>
-                  {statusLabels[asset.status]}
-                </span>
-              </div>
-              <h3 className="asset-name">{asset.name}</h3>
-              {asset.description && <p className="asset-description">{asset.description}</p>}
-              <div className="asset-details">
-                <div className="detail-row">
-                  <span className="detail-label">Condition:</span>
-                  <span className="condition-badge" style={{ color: conditionColors[asset.condition] }}>
-                    {conditionLabels[asset.condition]}
+        <>
+          <div className="assets-grid">
+            {assets.map((asset) => (
+              <div key={asset.id} className="asset-card" onClick={() => openViewModal(asset)}>
+                <div className="asset-header">
+                  <span className="asset-code">{asset.internalCode}</span>
+                  <span className="status-badge" style={{ backgroundColor: statusColors[asset.status] }}>
+                    {statusLabels[asset.status]}
                   </span>
                 </div>
-                <div className="detail-row">
-                  <span className="detail-label">Value:</span>
-                  <span className="detail-value">${Number(asset.price).toLocaleString()}</span>
+                <h3 className="asset-name">{asset.name}</h3>
+                {asset.description && <p className="asset-description">{asset.description}</p>}
+                <div className="asset-details">
+                  <div className="detail-row">
+                    <span className="detail-label">Condition:</span>
+                    <span className="condition-badge" style={{ color: conditionColors[asset.condition] }}>
+                      {conditionLabels[asset.condition]}
+                    </span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-label">Value:</span>
+                    <span className="detail-value">${Number(asset.price).toLocaleString()}</span>
+                  </div>
+                </div>
+                <div className="asset-actions" onClick={e => e.stopPropagation()}>
+                  {canEdit && <button className="btn-icon" title="Edit" onClick={() => openEditModal(asset)}>✏️</button>}
+                  <button className="btn-icon" title="View Details" onClick={() => openViewModal(asset)}>👁️</button>
+                  {canDelete && <button className="btn-icon danger" title="Delete" onClick={() => handleDelete(asset.id, asset.name)}>🗑️</button>}
                 </div>
               </div>
-              <div className="asset-actions" onClick={e => e.stopPropagation()}>
-                {canEdit && <button className="btn-icon" title="Edit" onClick={() => openEditModal(asset)}>✏️</button>}
-                <button className="btn-icon" title="View Details" onClick={() => openViewModal(asset)}>👁️</button>
-                {canDelete && <button className="btn-icon danger" title="Delete" onClick={() => handleDelete(asset.id, asset.name)}>🗑️</button>}
-              </div>
+            ))}
+          </div>
+
+          {/* Pagination Controls */}
+          {meta && (
+            <div className="pagination-controls" style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '30px', alignItems: 'center' }}>
+              <button 
+                className="btn-secondary" 
+                disabled={!meta.hasPrevPage}
+                onClick={() => setPage(p => p - 1)}
+              >
+                ← Previous
+              </button>
+              <span style={{ fontWeight: 'bold' }}>
+                Page {meta.page} of {meta.totalPages} ({meta.total} items)
+              </span>
+              <button 
+                className="btn-secondary" 
+                disabled={!meta.hasNextPage}
+                onClick={() => setPage(p => p + 1)}
+              >
+                Next →
+              </button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
 
       {/* Modal */}

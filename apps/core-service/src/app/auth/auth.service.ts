@@ -152,6 +152,58 @@ export class AuthService implements OnModuleInit {
     return users;
   }
 
+  async findAll() {
+    const users = await this.userRepository.find({
+      select: ['id', 'email', 'fullName', 'role', 'isActive', 'tenantId', 'createdAt', 'updatedAt'],
+      order: { createdAt: 'DESC' },
+    });
+    return users;
+  }
+
+  async updateUser(userId: string, updateData: Partial<{ fullName: string; role: UserRole; password: string; isActive: boolean }>) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    if (updateData.fullName) {
+      user.fullName = updateData.fullName;
+    }
+    if (updateData.role) {
+      user.role = updateData.role;
+    }
+    if (updateData.password) {
+      user.passwordHash = await bcrypt.hash(updateData.password, 10);
+    }
+    if (typeof updateData.isActive === 'boolean') {
+      user.isActive = updateData.isActive;
+    }
+
+    await this.userRepository.save(user);
+    
+    return {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      role: user.role,
+      isActive: user.isActive,
+      tenantId: user.tenantId,
+    };
+  }
+
+  async deleteUser(userId: string) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    await this.userRepository.remove(user);
+    
+    return { message: 'User deleted successfully' };
+  }
+
   private generateTokens(user: User): TokenResponseDto {
     const payload: JwtPayload = {
       sub: user.id,

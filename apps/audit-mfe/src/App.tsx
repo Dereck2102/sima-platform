@@ -98,62 +98,8 @@ function App() {
       const data = await response.json();
       setLogs(Array.isArray(data) ? data : []);
     } catch {
-      // Generate mock data for demo
-      setLogs([
-        {
-          id: '1',
-          action: 'CREATE',
-          entity: 'Asset',
-          entityId: 'asset-001',
-          userId: 'user-1',
-          userEmail: 'admin@uce.edu.ec',
-          tenantId: 'tenant-1',
-          timestamp: new Date().toISOString(),
-        },
-        {
-          id: '2',
-          action: 'UPDATE',
-          entity: 'Asset',
-          entityId: 'asset-001',
-          userId: 'user-1',
-          userEmail: 'admin@uce.edu.ec',
-          oldValue: { status: 'ACTIVE' },
-          newValue: { status: 'IN_MAINTENANCE' },
-          tenantId: 'tenant-1',
-          timestamp: new Date(Date.now() - 3600000).toISOString(),
-        },
-        {
-          id: '3',
-          action: 'LOGIN',
-          entity: 'User',
-          entityId: 'user-1',
-          userId: 'user-1',
-          userEmail: 'admin@uce.edu.ec',
-          ipAddress: '192.168.1.100',
-          tenantId: 'tenant-1',
-          timestamp: new Date(Date.now() - 7200000).toISOString(),
-        },
-        {
-          id: '4',
-          action: 'DELETE',
-          entity: 'Asset',
-          entityId: 'asset-002',
-          userId: 'user-2',
-          userEmail: 'operator@uce.edu.ec',
-          tenantId: 'tenant-1',
-          timestamp: new Date(Date.now() - 86400000).toISOString(),
-        },
-        {
-          id: '5',
-          action: 'EXPORT',
-          entity: 'Report',
-          entityId: 'report-001',
-          userId: 'user-1',
-          userEmail: 'admin@uce.edu.ec',
-          tenantId: 'tenant-1',
-          timestamp: new Date(Date.now() - 172800000).toISOString(),
-        },
-      ]);
+      setError('No se puede conectar al servicio de auditoría. El endpoint /api/audit/logs no está disponible.');
+      setLogs([]);
     } finally {
       setLoading(false);
     }

@@ -47,7 +47,7 @@ interface IUser {
 const STATUSES = ['ACTIVE', 'IN_MAINTENANCE', 'DECOMMISSIONED'];
 const CONDITIONS = ['NEW', 'EXCELLENT', 'GOOD', 'FAIR', 'POOR'];
 
-export const AssetsScreen = ({ navigation }: any) => {
+export const AssetsScreen = ({ navigation, route }: any) => {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
@@ -60,6 +60,7 @@ export const AssetsScreen = ({ navigation }: any) => {
   const [error, setError] = useState<string | null>(null);
   
   // Form state
+  // ... (omitted form state for brevity if unchanged, but preserving structure)
   const [form, setForm] = useState<CreateAssetDto>({
     internalCode: '',
     name: '',
@@ -73,6 +74,15 @@ export const AssetsScreen = ({ navigation }: any) => {
     longitude: undefined,
   });
 
+  // Handle Search Params from Navigation (e.g. QR Scanner)
+  useEffect(() => {
+    if (route.params?.search) {
+      setSearchQuery(route.params.search);
+      // Optional: clear params after setting to avoid sticky search on back navigation
+      navigation.setParams({ search: undefined });
+    }
+  }, [route.params?.search, navigation]);
+
   // Filtered assets based on search - with null safety
   const filteredAssets = useMemo(() => {
     if (!assets || !Array.isArray(assets)) return [];
@@ -84,7 +94,7 @@ export const AssetsScreen = ({ navigation }: any) => {
       const code = a.internalCode || '';
       const desc = a.description || '';
       return name.toLowerCase().includes(query) ||
-        code.toLowerCase().includes(query) ||
+        code.toLowerCase().includes(query || '') ||
         desc.toLowerCase().includes(query);
     });
   }, [assets, searchQuery]);

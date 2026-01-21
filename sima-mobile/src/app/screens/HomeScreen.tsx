@@ -92,8 +92,8 @@ export const HomeScreen = ({ navigation }: any) => {
 
   const menuItems = [
     { title: 'Assets Inventory', icon: '📦', route: 'Assets', params: undefined, color: '#4CAF50' },
-    { title: 'Scan QR', icon: '📷', route: 'Placeholder', params: { title: 'QR Scanner' }, color: '#2196F3' },
-    { title: 'Reports', icon: '📊', route: 'Placeholder', params: { title: 'Reports' }, color: '#FF9800' },
+    { title: 'Scan QR', icon: '📷', route: 'QRScanner', params: undefined, color: '#2196F3' },
+    { title: 'Reports', icon: '📊', route: 'Reports', params: undefined, color: '#FF9800' },
     { title: 'My Profile', icon: '👤', route: 'Profile', params: undefined, color: '#9C27B0' },
   ];
 

@@ -9,15 +9,18 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 import { AuthService } from '../services/auth.service';
 
 export const LoginScreen = ({ navigation }: any) => {
+  // ... (keep state)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   const handleLogin = async () => {
+    // ... (keep logic)
     console.log('[LoginScreen] handleLogin called');
     
     if (!email || !password) {
@@ -54,10 +57,15 @@ export const LoginScreen = ({ navigation }: any) => {
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.logo}>🏢</Text>
+          <Image 
+            source={require('../../assets/logo_load.png')} 
+            style={styles.logoImage} 
+            resizeMode="contain" 
+          />
           <Text style={styles.title}>SIMA Platform</Text>
           <Text style={styles.subtitle}>Asset Management System</Text>
         </View>
+// ...
 
         <View style={styles.form}>
           <TextInput
@@ -113,8 +121,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 40,
   },
-  logo: {
-    fontSize: 64,
+  logoImage: {
+    width: 150,
+    height: 150,
     marginBottom: 16,
   },
   title: {

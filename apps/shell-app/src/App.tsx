@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
+import logo from './assets/logo_load.png';
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -109,7 +110,7 @@ const LoginPage = ({ onLogin }: { onLogin: (token: string, user: User) => void }
     <div className="login-page">
       <div className="login-container">
         <div className="login-header">
-          <span className="login-logo">🏢</span>
+          <img src={logo} alt="UCE Logo" className="login-logo-img" style={{ width: '120px', height: 'auto', marginBottom: '1rem' }} />
           <h1>SIMA Platform</h1>
           <p>Integrated Asset Management System</p>
         </div>

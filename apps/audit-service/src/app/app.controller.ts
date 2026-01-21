@@ -1,4 +1,4 @@
-import { Controller, Logger } from '@nestjs/common';
+import { Controller, Get, Logger, Query } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -28,5 +28,42 @@ export class AppController {
     await newLog.save();
 
     this.logger.log(`Audit Saved! ID: ${newLog._id}`);
+  }
+
+  @Get('logs')
+  async getLogs(
+    @Query('action') action?: string,
+    @Query('entity') entity?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
+    this.logger.log('Fetching audit logs...');
+    
+    const query: Record<string, unknown> = {};
+    if (action) query.action = action;
+    if (entity) query.entityType = entity;
+
+    const limitNum = parseInt(limit || '100', 10);
+    const offsetNum = parseInt(offset || '0', 10);
+
+    const logs = await this.auditModel
+      .find(query)
+      .sort({ createdAt: -1 })
+      .skip(offsetNum)
+      .limit(limitNum)
+      .exec();
+
+    return logs.map(log => ({
+      id: log._id,
+      action: log.action,
+      entity: log.entityType,
+      entityId: log.entityId,
+      userId: log.payload?.userId || 'system',
+      userEmail: log.payload?.userEmail,
+      oldValue: log.payload?.oldValue,
+      newValue: log.payload?.newValue,
+      tenantId: log.payload?.tenantId || 'default',
+      timestamp: log.createdAt,
+    }));
   }
 }
