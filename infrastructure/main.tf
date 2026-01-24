@@ -6,27 +6,55 @@ provider "aws" {
 
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
-  tags = { Name = "sima-vpc" }
+
+  tags = {
+    Name = "sima-vpc"
+  }
 }
 
+# ---------------- SUBNETS ----------------
+
+# Public subnet (AZ A)
 resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
-  availability_zone = "us-east-1a"
+  availability_zone       = "us-east-1a"
+
+  tags = {
+    Name = "sima-public"
+  }
 }
 
+# Private subnet (AZ A)
 resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.2.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.2.0/24"
   availability_zone = "us-east-1a"
+
+  tags = {
+    Name = "sima-private"
+  }
 }
+
+# Private subnet (AZ B)  ✅ REQUIRED FOR RDS
+resource "aws_subnet" "private2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.3.0/24"
+  availability_zone = "us-east-1b"
+
+  tags = {
+    Name = "sima-private-2"
+  }
+}
+
+# ---------------- INTERNET ----------------
 
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 }
 
-# --------------- ROUTES ---------------
+# --------------- ROUTES ----------------
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
@@ -34,6 +62,10 @@ resource "aws_route_table" "public" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
+  }
+
+  tags = {
+    Name = "sima-public-rt"
   }
 }
 
@@ -47,6 +79,9 @@ resource "aws_route_table_association" "pub_assoc" {
 resource "aws_security_group" "internal" {
   vpc_id = aws_vpc.main.id
 
+  name = "sima-internal-sg"
+
+  # Internal traffic
   ingress {
     from_port   = 0
     to_port     = 65535
@@ -54,6 +89,7 @@ resource "aws_security_group" "internal" {
     cidr_blocks = ["10.0.0.0/16"]
   }
 
+  # SSH from your PC only
   ingress {
     from_port   = 22
     to_port     = 22
@@ -61,11 +97,16 @@ resource "aws_security_group" "internal" {
     cidr_blocks = [var.allowed_ssh_ip]
   }
 
+  # Outbound
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "sima-internal"
   }
 }
 
@@ -73,7 +114,7 @@ resource "aws_security_group" "internal" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners = ["099720109477"]
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
@@ -86,7 +127,8 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "titan" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.large"
-  subnet_id     = aws_subnet.private.id
+
+  subnet_id = aws_subnet.private.id
 
   vpc_security_group_ids = [
     aws_security_group.internal.id
@@ -103,24 +145,43 @@ resource "aws_instance" "titan" {
 
 # ---------------- RDS -----------------
 
+# DB Subnet Group (2 AZs) ✅ FIXED
 resource "aws_db_subnet_group" "db" {
-  subnet_ids = [aws_subnet.private.id]
+  name = "sima-db-subnet"
+
+  subnet_ids = [
+    aws_subnet.private.id,
+    aws_subnet.private2.id
+  ]
+
+  tags = {
+    Name = "sima-db-subnet"
+  }
 }
 
+# Postgres
 resource "aws_db_instance" "postgres" {
-  allocated_storage    = 20
-  engine               = "postgres"
-  engine_version       = "14"
-  instance_class       = "db.t3.micro"
-  db_name              = "simadb"
-  username             = "sima_admin"
-  password             = var.db_password
-  skip_final_snapshot  = true
-  publicly_accessible  = false
+  allocated_storage = 20
+
+  engine         = "postgres"
+  engine_version = "14"
+
+  instance_class = "db.t3.micro"
+
+  db_name  = "simadb"
+  username = "sima_admin"
+  password = var.db_password
+
+  db_subnet_group_name = aws_db_subnet_group.db.name
+
+  skip_final_snapshot = true
+  publicly_accessible = false
 
   vpc_security_group_ids = [
     aws_security_group.internal.id
   ]
 
-  db_subnet_group_name = aws_db_subnet_group.db.name
+  tags = {
+    Name = "sima-postgres"
+  }
 }
