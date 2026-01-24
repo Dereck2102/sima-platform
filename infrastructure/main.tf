@@ -112,7 +112,7 @@ resource "aws_db_instance" "postgres" {
   engine               = "postgres"
   engine_version       = "14"
   instance_class       = "db.t3.micro"
-  name                 = "simadb"
+  db_name              = "simadb"
   username             = "sima_admin"
   password             = var.db_password
   skip_final_snapshot  = true
