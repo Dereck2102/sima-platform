@@ -1,0 +1,237 @@
+name: CI Backend
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/sima-backend/**'
+      - '.github/workflows/ci-backend.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/sima-backend/**'
+
+env:
+  REGISTRY: ghcr.io
+  NODE_VERSION: '20'
+  DOCKERHUB_ORG: simaplatform
+  NX_DAEMON: 'false'
+  SERVICES: |
+    api-gateway apps/api-gateway dist/apps/api-gateway
+    auth-service apps-services/auth-service dist/apps-services/auth-service
+    users-service apps-services/users-service dist/apps-services/users-service
+    assets-service apps-services/assets-service dist/apps-services/assets-service
+    audit-service apps-services/audit-service dist/apps-services/audit-service
+    iot-service apps-services/iot-service dist/apps-services/iot-service
+    notifications-service apps-services/notifications-service dist/apps-services/notifications-service
+    reports-service apps-services/reports-service dist/apps-services/reports-service
+    storage-service apps-services/storage-service dist/apps-services/storage-service
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint Code
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/sima-backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend/sima-backend
+          npm ci
+
+      - name: Run ESLint
+        env:
+          NX_DAEMON: ${{ env.NX_DAEMON }}
+        run: |
+          cd backend/sima-backend
+          npm run lint
+
+      - name: Check formatting
+        run: |
+          cd backend/sima-backend
+          npm run format:check
+
+  test:
+    runs-on: ubuntu-latest
+    name: Test & Coverage
+    needs: lint
+    env:
+      NX_DAEMON: ${{ env.NX_DAEMON }}
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: sima_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      mongodb:
+        image: mongo:7.0
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand(\"ping\")'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 27017:27017
+
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/sima-backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend/sima-backend
+          npm ci
+
+      - name: Run tests
+        env:
+          NX_DAEMON: ${{ env.NX_DAEMON }}
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 5432
+          DATABASE_NAME: sima_test
+          DATABASE_USER: test_user
+          DATABASE_PASSWORD: test_pass
+          MONGODB_URI: mongodb://localhost:27017/sima_test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          JWT_SECRET: test-secret-key
+        run: |
+          cd backend/sima-backend
+          npm run test:ci
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          files: ./backend/sima-backend/coverage/lcov.info
+          flags: backend
+          name: Backend Coverage
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build Docker Images
+    needs: test
+    if: github.event_name == 'push'
+    permissions:
+      contents: read
+      packages: write
+    env:
+      NX_DAEMON: ${{ env.NX_DAEMON }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log in to Docker Hub
+        if: env.DOCKERHUB_ORG && secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push all services (GHCR + Docker Hub)
+        run: |
+          set -euo pipefail
+          cd backend/sima-backend
+          while read -r name path output; do
+            echo "Building $name from $path (dist: $output)"
+            docker buildx build \
+              --file Dockerfile \
+              --build-arg SERVICE_NAME=$name \
+              --build-arg OUTPUT_PATH=$output \
+              --build-arg NX_DAEMON=${NX_DAEMON} \
+              --push \
+              --platform linux/amd64 \
+              --tag ${{ env.REGISTRY }}/${{ github.repository }}/$name:${{ github.sha }} \
+              --tag ${{ env.REGISTRY }}/${{ github.repository }}/$name:latest \
+              --tag ${{ env.DOCKERHUB_ORG }}/$name:${{ github.sha }} \
+              --tag ${{ env.DOCKERHUB_ORG }}/$name:latest \
+              .
+          done <<< "${SERVICES}"
+
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Security Scanning
+    needs: build
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'backend/sima-backend'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Run npm audit
+        run: |
+          cd backend/sima-backend
+          npm audit --audit-level=moderate
+
+notify:
+  runs-on: ubuntu-latest
+  name: Notify Results
+  needs: [lint, test, build]
+  if: always()
+  steps:
+    - name: Check workflow status
+      run: |
+        if [ "${{ needs.lint.result }}" == "failure" ] || \
+           [ "${{ needs.test.result }}" == "failure" ] || \
+           [ "${{ needs.build.result }}" == "failure" ]; then
+          echo "❌ CI Pipeline Failed"
+          exit 1
+        fi
+        echo "✅ CI Pipeline Passed"

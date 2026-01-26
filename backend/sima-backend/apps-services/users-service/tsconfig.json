@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "moduleResolution": "node",
+    "strict": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "../..",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sima-platform/shared": ["../../libs/shared/src"],
+      "@sima/messaging": ["../../libs/messaging/src/index.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
+}

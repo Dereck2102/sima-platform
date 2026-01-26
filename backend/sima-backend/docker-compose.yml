@@ -1,0 +1,251 @@
+version: '3.9'
+
+services:
+  # ============================================================================
+  # DATABASE SERVICES
+  # ============================================================================
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: sima-postgres-dev
+    environment:
+      POSTGRES_DB: sima_db
+      POSTGRES_USER: sima_user
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # - ./infrastructure/docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U sima_user" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=PostgreSQL Database"
+
+  mongodb:
+    image: mongo:7.0
+    container_name: sima-mongodb-dev
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: mongo123
+      MONGO_INITDB_DATABASE: sima_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      # - ./infrastructure/docker/mongodb/init.js:/docker-entrypoint-initdb.d/init.js
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=MongoDB Database"
+
+  redis:
+    image: redis:7-alpine
+    container_name: sima-redis-dev
+    command: redis-server --requirepass redis123
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=Redis Cache"
+
+  # ============================================================================
+  # MESSAGE BROKERS
+  # ============================================================================
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: sima-zookeeper-dev
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_logs:/var/lib/zookeeper/log
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=Zookeeper for Kafka"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: sima-kafka-dev
+    depends_on:
+      zookeeper:
+        condition: service_started
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=Kafka Message Broker"
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: sima-rabbitmq-dev
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=RabbitMQ Message Broker"
+
+  mqtt:
+    image: eclipse-mosquitto:latest
+    container_name: sima-mqtt-dev
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./infrastructure/docker/mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mqtt_data:/mosquitto/data
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=MQTT Broker"
+
+  # ============================================================================
+  # MONITORING & LOGGING
+  # ============================================================================
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: sima-prometheus-dev
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infrastructure/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=Prometheus Metrics"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: sima-grafana-dev
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin123
+      GF_SECURITY_ADMIN_USER: admin
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infrastructure/docker/grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+    networks:
+      - sima-network
+    labels:
+      - "com.example.description=Grafana Dashboards"
+
+  # ============================================================================
+  # BACKEND SERVICES (Optional for development)
+  # ============================================================================
+
+  # api-gateway:
+  #   build:
+  #     context: .
+  #     dockerfile: apps/api-gateway/Dockerfile
+  #     target: development
+  #   container_name: sima-api-gateway-dev
+  #   environment:
+  #     NODE_ENV: development
+  #     API_GATEWAY_PORT: 3000
+  #     API_GATEWAY_HOST: 0.0.0.0
+  #     DATABASE_HOST: postgres
+  #     DATABASE_PORT: 5432
+  #     DATABASE_NAME: sima_db
+  #     DATABASE_USER: sima_user
+  #     DATABASE_PASSWORD: postgres123
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: 6379
+  #     REDIS_PASSWORD: redis123
+  #     KAFKA_BROKERS: kafka:9092
+  #     RABBITMQ_URI: amqp://guest:guest@rabbitmq:5672
+  #     MQTT_BROKER: mqtt://mqtt:1883
+  #     JWT_SECRET: dev-secret-key-change-in-production
+  #     CORS_ORIGIN: http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:8000
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #     kafka:
+  #       condition: service_started
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     mqtt:
+  #       condition: service_started
+  #   volumes:
+  #     - ./apps/api-gateway/src:/app/src
+  #     - ./libs:/app/libs
+  #   networks:
+  #     - sima-network
+  #   command: npm run start:dev
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  redis_data:
+  zookeeper_data:
+  zookeeper_logs:
+  kafka_data:
+  rabbitmq_data:
+  mqtt_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  sima-network:
+    driver: bridge
+    name: sima-network

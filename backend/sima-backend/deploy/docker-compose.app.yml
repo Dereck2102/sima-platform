@@ -1,0 +1,247 @@
+version: '3.9'
+
+networks:
+  sima:
+    driver: bridge
+
+volumes:
+  redis_data:
+  mongo_data:
+  kafka_data:
+  rabbitmq_data:
+
+services:
+  # ---------------------------------------------------------------------------
+  # Core dependencies
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sima
+
+  kafka:
+    image: bitnami/kafka:3.6
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_HEAP_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka_data:/bitnami/kafka
+    networks:
+      - sima
+
+  mongo:
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: sima
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - sima
+
+  rabbit:
+    image: rabbitmq:3.12-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - sima
+
+  mqtt:
+    image: eclipse-mosquitto:2.0
+    ports:
+      - "1883:1883"
+    networks:
+      - sima
+
+  # ---------------------------------------------------------------------------
+  # Microservices
+  # ---------------------------------------------------------------------------
+  api-gateway:
+    image: ${IMAGE_REGISTRY}/api-gateway:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      PORT: 3000
+      AUTH_SERVICE_URL: http://auth-service:3001
+      USERS_SERVICE_URL: http://users-service:3002
+      ASSETS_SERVICE_URL: http://assets-service:3003
+      AUDIT_SERVICE_URL: http://audit-service:3004
+      IOT_SERVICE_URL: http://iot-service:3005
+      NOTIFICATIONS_SERVICE_URL: http://notifications-service:3006
+      REPORTS_SERVICE_URL: http://reports-service:3007
+      STORAGE_SERVICE_URL: http://storage-service:3008
+    ports:
+      - "80:3000"
+    depends_on:
+      - redis
+      - kafka
+      - mongo
+    networks:
+      - sima
+
+  auth-service:
+    image: ${IMAGE_REGISTRY}/auth-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+      REFRESH_TOKEN_EXPIRATION: ${REFRESH_TOKEN_EXPIRATION}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+    depends_on:
+      - redis
+      - kafka
+    networks:
+      - sima
+
+  users-service:
+    image: ${IMAGE_REGISTRY}/users-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+    networks:
+      - sima
+
+  assets-service:
+    image: ${IMAGE_REGISTRY}/assets-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+    networks:
+      - sima
+
+  audit-service:
+    image: ${IMAGE_REGISTRY}/audit-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+    networks:
+      - sima
+
+  iot-service:
+    image: ${IMAGE_REGISTRY}/iot-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+      MQTT_BROKER: ${MQTT_BROKER}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+      - mqtt
+    networks:
+      - sima
+
+  notifications-service:
+    image: ${IMAGE_REGISTRY}/notifications-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+      RABBITMQ_URI: ${RABBITMQ_URI}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+      - rabbit
+    networks:
+      - sima
+
+  reports-service:
+    image: ${IMAGE_REGISTRY}/reports-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_BROKERS: ${KAFKA_BROKERS}
+      MONGODB_URI: ${MONGODB_URI}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+      - mongo
+    networks:
+      - sima
+
+  storage-service:
+    image: ${IMAGE_REGISTRY}/storage-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+      AWS_S3_ENDPOINT: ${AWS_S3_ENDPOINT}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kafka
+    networks:
+      - sima

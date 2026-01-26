@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/apps-services/users-service",
+    "rootDir": ".",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "isolatedModules": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}

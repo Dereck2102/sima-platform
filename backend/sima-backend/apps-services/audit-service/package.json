@@ -1,0 +1,21 @@
+{
+  "name": "audit-service",
+  "version": "1.0.0",
+  "description": "Audit logging and compliance microservice",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "node dist/src/main.js",
+    "dev": "ts-node src/main.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.12",
+    "@nestjs/core": "^11.1.12",
+    "@nestjs/swagger": "^7.4.0",
+    "@nestjs/typeorm": "^10.0.1",
+    "class-validator": "^0.14.1",
+    "pg": "^8.11.3",
+    "typeorm": "^0.3.19"
+  }
+}

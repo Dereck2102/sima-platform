@@ -1,12 +1,11 @@
-name: Deploy QA
+name: Deploy to Production
 
 on:
   push:
-    branches: [ qa ]
+    branches: [ main ]
+    tags:
+      - 'v*'
   workflow_dispatch:
-
-env:
-  DEPLOY_ENABLED: ${{ secrets.QA_DEPLOY_ENABLED }}
 
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository }}
@@ -14,8 +13,6 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: env.DEPLOY_ENABLED == 'true'
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,18 +23,18 @@ jobs:
       - name: Copy compose to target host
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST_PROD }}
+          username: ${{ secrets.SSH_USER_PROD }}
+          key: ${{ secrets.SSH_KEY_PROD }}
           source: "backend/sima-backend/deploy/docker-compose.app.yml"
           target: "/opt/sima"
 
       - name: Write .env on target host
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST_PROD }}
+          username: ${{ secrets.SSH_USER_PROD }}
+          key: ${{ secrets.SSH_KEY_PROD }}
           script: |
             set -euo pipefail
             mkdir -p /opt/sima
@@ -45,20 +42,20 @@ jobs:
 IMAGE_REGISTRY=${{ env.IMAGE_REGISTRY }}
 IMAGE_TAG=${{ env.IMAGE_TAG }}
 
-DATABASE_HOST=${{ secrets.QA_DATABASE_HOST }}
-DATABASE_PORT=${{ secrets.QA_DATABASE_PORT }}
-DATABASE_NAME=${{ secrets.QA_DATABASE_NAME }}
-DATABASE_USER=${{ secrets.QA_DATABASE_USER }}
-DATABASE_PASSWORD=${{ secrets.QA_DATABASE_PASSWORD }}
+DATABASE_HOST=${{ secrets.PROD_DATABASE_HOST }}
+DATABASE_PORT=${{ secrets.PROD_DATABASE_PORT }}
+DATABASE_NAME=${{ secrets.PROD_DATABASE_NAME }}
+DATABASE_USER=${{ secrets.PROD_DATABASE_USER }}
+DATABASE_PASSWORD=${{ secrets.PROD_DATABASE_PASSWORD }}
 
 REDIS_HOST=redis
 REDIS_PORT=6379
-REDIS_PASSWORD=${{ secrets.QA_REDIS_PASSWORD }}
+REDIS_PASSWORD=${{ secrets.PROD_REDIS_PASSWORD }}
 REDIS_DB=0
 
 MONGODB_URI=mongodb://mongo:27017/sima
-MONGODB_USER=${{ secrets.QA_MONGODB_USER }}
-MONGODB_PASSWORD=${{ secrets.QA_MONGODB_PASSWORD }}
+MONGODB_USER=${{ secrets.PROD_MONGODB_USER }}
+MONGODB_PASSWORD=${{ secrets.PROD_MONGODB_PASSWORD }}
 
 KAFKA_BROKERS=kafka:9092
 KAFKA_GROUP_ID=sima-group
@@ -66,32 +63,32 @@ KAFKA_GROUP_ID=sima-group
 RABBITMQ_URI=amqp://guest:guest@rabbit:5672
 MQTT_BROKER=mqtt://mqtt:1883
 
-JWT_SECRET=${{ secrets.QA_JWT_SECRET }}
-REFRESH_TOKEN_SECRET=${{ secrets.QA_REFRESH_TOKEN_SECRET }}
+JWT_SECRET=${{ secrets.PROD_JWT_SECRET }}
+REFRESH_TOKEN_SECRET=${{ secrets.PROD_REFRESH_TOKEN_SECRET }}
 JWT_EXPIRATION=86400
 REFRESH_TOKEN_EXPIRATION=604800
 
-CORS_ORIGIN=${{ secrets.QA_CORS_ORIGIN }}
+CORS_ORIGIN=${{ secrets.PROD_CORS_ORIGIN }}
 
 AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=${{ secrets.QA_AWS_ACCESS_KEY_ID }}
-AWS_SECRET_ACCESS_KEY=${{ secrets.QA_AWS_SECRET_ACCESS_KEY }}
-AWS_S3_BUCKET=${{ secrets.QA_AWS_S3_BUCKET }}
+AWS_ACCESS_KEY_ID=${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+AWS_SECRET_ACCESS_KEY=${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+AWS_S3_BUCKET=${{ secrets.PROD_AWS_S3_BUCKET }}
 AWS_S3_ENDPOINT=https://s3.amazonaws.com
 
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USER=${{ secrets.QA_MAIL_USER }}
-MAIL_PASSWORD=${{ secrets.QA_MAIL_PASSWORD }}
-MAIL_FROM=${{ secrets.QA_MAIL_FROM }}
+MAIL_USER=${{ secrets.PROD_MAIL_USER }}
+MAIL_PASSWORD=${{ secrets.PROD_MAIL_PASSWORD }}
+MAIL_FROM=${{ secrets.PROD_MAIL_FROM }}
 EOF
 
       - name: Deploy (pull, up, migrate)
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST_PROD }}
+          username: ${{ secrets.SSH_USER_PROD }}
+          key: ${{ secrets.SSH_KEY_PROD }}
           script: |
             set -euo pipefail
             cd /opt/sima

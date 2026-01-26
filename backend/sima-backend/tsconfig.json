@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020"
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    },
+    "esm": false
+  }
+}

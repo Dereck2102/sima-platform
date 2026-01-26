@@ -1,0 +1,3368 @@
+{
+  "graph": {
+    "nodes": {
+      "assets-service": {
+        "name": "assets-service",
+        "type": "lib",
+        "data": {
+          "root": "apps-services/assets-service",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps-services/assets-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "assets-service",
+          "implicitDependencies": [],
+          "tags": []
+        }
+      },
+      "audit-service": {
+        "name": "audit-service",
+        "type": "lib",
+        "data": {
+          "root": "apps-services/audit-service",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps-services/audit-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "audit-service",
+          "implicitDependencies": [],
+          "tags": []
+        }
+      },
+      "users-service": {
+        "name": "users-service",
+        "type": "app",
+        "data": {
+          "root": "apps-services/users-service",
+          "targets": {
+            "lint": {
+              "executor": "@nx/linter:eslint",
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "options": {
+                "lintFilePatterns": [
+                  "apps-services/users-service/src/**/*.ts"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "apps-services/users-service/jest.config.ts",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "start": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "start"
+              },
+              "metadata": {
+                "scriptContent": "node dist/src/main.js",
+                "runCommand": "npm run start"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "dev": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "dev"
+              },
+              "metadata": {
+                "scriptContent": "ts-node src/main.ts",
+                "runCommand": "npm run dev"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test:watch": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "test:watch"
+              },
+              "metadata": {
+                "scriptContent": "jest --watch",
+                "runCommand": "npm run test:watch"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test:cov": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "test:cov"
+              },
+              "metadata": {
+                "scriptContent": "jest --coverage",
+                "runCommand": "npm run test:cov"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {},
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/node:build",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/apps-services/users-service",
+                "main": "apps-services/users-service/src/main.ts",
+                "tsConfig": "apps-services/users-service/tsconfig.app.json",
+                "assets": []
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve": {
+              "executor": "@nx/node:execute",
+              "options": {
+                "buildTarget": "users-service:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "users-service",
+          "tags": [
+            "npm:public",
+            "service",
+            "api"
+          ],
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "start",
+                "dev",
+                "test:watch",
+                "test:cov"
+              ]
+            },
+            "description": "User management microservice",
+            "js": {
+              "packageName": "users-service",
+              "packageVersion": "1.0.0",
+              "packageMain": "src/main.ts",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "sourceRoot": "src",
+          "projectType": "application",
+          "implicitDependencies": []
+        }
+      },
+      "notifications-service-e2e": {
+        "name": "notifications-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "notifications-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "notifications-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/notifications-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "notifications-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "notifications-service:build",
+                "notifications-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "notifications-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "notifications-service"
+          ],
+          "tags": []
+        }
+      },
+      "notifications-service": {
+        "name": "notifications-service",
+        "type": "app",
+        "data": {
+          "root": "notifications-service",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\notifications-service"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "notifications-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "notifications-service:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "notifications-service:build:development"
+                },
+                "production": {
+                  "buildTarget": "notifications-service:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "notifications-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects notifications-service --includeDependentProjects -- npx nx build-deps notifications-service"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "notifications-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/notifications-service/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\notifications-service"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "notifications-service",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/notifications-service/package.json",
+                "{workspaceRoot}/dist/notifications-service/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/notifications-service/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "notifications-service",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "notifications-service/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "api-gateway-e2e": {
+        "name": "api-gateway-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/api-gateway-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/api-gateway-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/api-gateway-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "apps/api-gateway-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "api-gateway:build",
+                "api-gateway:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "api-gateway-e2e",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "api-gateway"
+          ],
+          "tags": []
+        }
+      },
+      "reports-service-e2e": {
+        "name": "reports-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "reports-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "reports-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/reports-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "reports-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "reports-service:build",
+                "reports-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "reports-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "reports-service"
+          ],
+          "tags": []
+        }
+      },
+      "storage-service-e2e": {
+        "name": "storage-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "storage-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "storage-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/storage-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "storage-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "storage-service:build",
+                "storage-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "storage-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "storage-service"
+          ],
+          "tags": []
+        }
+      },
+      "assets-service-e2e": {
+        "name": "assets-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "assets-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "assets-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "assets-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "assets-service:build",
+                "assets-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "assets-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "assets-service"
+          ],
+          "tags": []
+        }
+      },
+      "audit-service-e2e": {
+        "name": "audit-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "audit-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "audit-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/audit-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "audit-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "audit-service:build",
+                "audit-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "audit-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "audit-service"
+          ],
+          "tags": []
+        }
+      },
+      "users-service-e2e": {
+        "name": "users-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "users-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "users-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/users-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "users-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "users-service:build",
+                "users-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "users-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "users-service"
+          ],
+          "tags": []
+        }
+      },
+      "api-gateway": {
+        "name": "api-gateway",
+        "type": "app",
+        "data": {
+          "root": "apps/api-gateway",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\apps\\api-gateway"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "apps/api-gateway",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "api-gateway:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "api-gateway:build:development"
+                },
+                "production": {
+                  "buildTarget": "api-gateway:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "apps/api-gateway",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects api-gateway --includeDependentProjects -- npx nx build-deps api-gateway"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/api-gateway",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/api-gateway/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\apps\\api-gateway"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "apps/api-gateway",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/apps/api-gateway/package.json",
+                "{workspaceRoot}/dist/apps/api-gateway/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/apps/api-gateway/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "api-gateway",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "apps/api-gateway/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "auth-service-e2e": {
+        "name": "auth-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "auth-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "auth-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/auth-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "auth-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "auth-service:build",
+                "auth-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "auth-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "auth-service"
+          ],
+          "tags": []
+        }
+      },
+      "iot-service-e2e": {
+        "name": "iot-service-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "iot-service-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "iot-service-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/iot-service-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{e2eProjectRoot}"
+              ],
+              "options": {
+                "jestConfig": "iot-service-e2e/jest.config.cts",
+                "passWithNoTests": true
+              },
+              "dependsOn": [
+                "iot-service:build",
+                "iot-service:serve"
+              ],
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "iot-service-e2e",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "implicitDependencies": [
+            "iot-service"
+          ],
+          "tags": []
+        }
+      },
+      "reports-service": {
+        "name": "reports-service",
+        "type": "app",
+        "data": {
+          "root": "reports-service",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\reports-service"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "reports-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "reports-service:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "reports-service:build:development"
+                },
+                "production": {
+                  "buildTarget": "reports-service:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "reports-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects reports-service --includeDependentProjects -- npx nx build-deps reports-service"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "reports-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/reports-service/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\reports-service"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "reports-service",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/reports-service/package.json",
+                "{workspaceRoot}/dist/reports-service/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/reports-service/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "reports-service",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "reports-service/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "storage-service": {
+        "name": "storage-service",
+        "type": "app",
+        "data": {
+          "root": "storage-service",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\storage-service"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "storage-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "storage-service:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "storage-service:build:development"
+                },
+                "production": {
+                  "buildTarget": "storage-service:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "storage-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects storage-service --includeDependentProjects -- npx nx build-deps storage-service"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "storage-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/storage-service/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\storage-service"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "storage-service",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/storage-service/package.json",
+                "{workspaceRoot}/dist/storage-service/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/storage-service/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "storage-service",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "storage-service/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "users-service-legacy": {
+        "name": "users-service-legacy",
+        "type": "app",
+        "data": {
+          "root": "users-service",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\users-service"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "users-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "users-service:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "users-service:build:development"
+                },
+                "production": {
+                  "buildTarget": "users-service:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "users-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects users-service-legacy --includeDependentProjects -- npx nx build-deps users-service-legacy"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "users-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/users-service/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\users-service"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "users-service",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/users-service/package.json",
+                "{workspaceRoot}/dist/users-service/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/users-service/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "users-service-legacy",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "users-service/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "auth-service": {
+        "name": "auth-service",
+        "type": "app",
+        "data": {
+          "root": "auth-service",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\auth-service"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "auth-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "auth-service:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "auth-service:build:development"
+                },
+                "production": {
+                  "buildTarget": "auth-service:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "auth-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects auth-service --includeDependentProjects -- npx nx build-deps auth-service"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "auth-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/auth-service/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\auth-service"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "auth-service",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/auth-service/package.json",
+                "{workspaceRoot}/dist/auth-service/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/auth-service/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "auth-service",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "auth-service/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "iot-service": {
+        "name": "iot-service",
+        "type": "app",
+        "data": {
+          "root": "iot-service",
+          "projectType": "application",
+          "metadata": {},
+          "targets": {
+            "build": {
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "webpack-cli"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist\\iot-service"
+              ],
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Runs Webpack build",
+                "help": {
+                  "command": "npx webpack-cli build --help",
+                  "example": {
+                    "options": {
+                      "json": "stats.json"
+                    },
+                    "args": [
+                      "--profile"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "iot-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli build"
+              },
+              "configurations": {
+                "development": {
+                  "args": [
+                    "--node-env=development"
+                  ]
+                }
+              },
+              "parallelism": true
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/js:node",
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "build"
+              ],
+              "options": {
+                "buildTarget": "iot-service:build",
+                "runBuildTargetDependencies": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "iot-service:build:development"
+                },
+                "production": {
+                  "buildTarget": "iot-service:build:production"
+                }
+              },
+              "parallelism": true
+            },
+            "preview": {
+              "continuous": true,
+              "options": {
+                "cwd": "iot-service",
+                "args": [
+                  "--node-env=production"
+                ],
+                "command": "webpack-cli serve"
+              },
+              "metadata": {
+                "technologies": [
+                  "webpack"
+                ],
+                "description": "Starts Webpack dev server in production mode",
+                "help": {
+                  "command": "npx webpack-cli serve --help",
+                  "example": {
+                    "options": {
+                      "args": [
+                        "--client-progress",
+                        "--history-api-fallback "
+                      ]
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "dependsOn": [
+                "build"
+              ],
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "build",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects iot-service --includeDependentProjects -- npx nx build-deps iot-service"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "iot-service",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/iot-service/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "metadata": {
+                "technologies": [
+                  "jest"
+                ],
+                "description": "Run Jest Tests",
+                "help": {
+                  "command": "npx jest --help",
+                  "example": {
+                    "options": {
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}\\jest.preset.js",
+                {
+                  "externalDependencies": [
+                    "jest"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}\\coverage\\iot-service"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "cwd": "iot-service",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+                },
+                "command": "jest",
+                "passWithNoTests": true
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune-lockfile": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "executor": "@nx/js:prune-lockfile",
+              "outputs": [
+                "{workspaceRoot}/dist/iot-service/package.json",
+                "{workspaceRoot}/dist/iot-service/package-lock.json"
+              ],
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "copy-workspace-modules": {
+              "dependsOn": [
+                "build"
+              ],
+              "cache": true,
+              "outputs": [
+                "{workspaceRoot}/dist/iot-service/workspace_modules"
+              ],
+              "executor": "@nx/js:copy-workspace-modules",
+              "options": {
+                "buildTarget": "build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prune": {
+              "dependsOn": [
+                "prune-lockfile",
+                "copy-workspace-modules"
+              ],
+              "executor": "nx:noop",
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            }
+          },
+          "name": "iot-service",
+          "$schema": "../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "iot-service/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "sima-platform-monorepo": {
+        "name": "sima-platform-monorepo",
+        "type": "lib",
+        "data": {
+          "root": ".",
+          "name": "sima-platform-monorepo",
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "nx",
+                "start",
+                "start:qa",
+                "start:prod",
+                "build",
+                "build:qa",
+                "build:prod",
+                "build:services",
+                "serve:qa",
+                "serve:prod",
+                "test",
+                "test:watch",
+                "test:ci",
+                "test:e2e",
+                "lint",
+                "lint:fix",
+                "format",
+                "format:check",
+                "graph",
+                "affected:build",
+                "affected:test",
+                "affected:lint",
+                "docker:build",
+                "docker:up",
+                "docker:down",
+                "docker:logs",
+                "db:migrate",
+                "db:seed",
+                "health:check",
+                "infra:plan",
+                "infra:apply",
+                "infra:destroy",
+                "n8n:setup",
+                "prometheus:setup",
+                "grafana:setup"
+              ]
+            },
+            "description": "SIMA Platform - Complete Microservices and Frontend Monorepo",
+            "js": {
+              "packageName": "sima-platform-monorepo",
+              "packageVersion": "1.0.0",
+              "packageMain": "jest.preset.js",
+              "isInPackageManagerWorkspaces": true
+            }
+          },
+          "targets": {
+            "nx": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "nx"
+              },
+              "metadata": {
+                "scriptContent": "nx",
+                "runCommand": "npm run nx"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "start": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "start"
+              },
+              "metadata": {
+                "scriptContent": "nx serve api-gateway",
+                "runCommand": "npm run start"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "start:qa": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "start:qa"
+              },
+              "metadata": {
+                "scriptContent": "npm run build:qa && npm run serve:qa",
+                "runCommand": "npm run start:qa"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "start:prod": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "start:prod"
+              },
+              "metadata": {
+                "scriptContent": "npm run build:prod && npm run serve:prod",
+                "runCommand": "npm run start:prod"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "build"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=build --all --parallel",
+                "runCommand": "npm run build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build:qa": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "build:qa"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=build --all --configuration=development --parallel",
+                "runCommand": "npm run build:qa"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build:prod": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "build:prod"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=build --all --configuration=production --parallel",
+                "runCommand": "npm run build:prod"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build:services": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "build:services"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=build --projects=api-gateway,auth-service,users-service,assets-service,audit-service,iot-service,notifications-service,reports-service,storage-service --parallel",
+                "runCommand": "npm run build:services"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve:qa": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "serve:qa"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=serve --all --configuration=development --parallel",
+                "runCommand": "npm run serve:qa"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve:prod": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "serve:prod"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=serve --all --configuration=production --parallel",
+                "runCommand": "npm run serve:prod"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "test"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=test --all --coverage",
+                "runCommand": "npm run test"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test:watch": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "test:watch"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=test --all --watch",
+                "runCommand": "npm run test:watch"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test:ci": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "test:ci"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=test --all --coverage --ci",
+                "runCommand": "npm run test:ci"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "test:e2e": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "test:e2e"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=e2e --all",
+                "runCommand": "npm run test:e2e"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "lint"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=lint --all",
+                "runCommand": "npm run lint"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint:fix": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "lint:fix"
+              },
+              "metadata": {
+                "scriptContent": "nx run-many --target=lint --all -- --fix",
+                "runCommand": "npm run lint:fix"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "format": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "format"
+              },
+              "metadata": {
+                "scriptContent": "prettier --write \\\"**/*.{ts,tsx,js,jsx,json,md}\\\"",
+                "runCommand": "npm run format"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "format:check": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "format:check"
+              },
+              "metadata": {
+                "scriptContent": "prettier --check \\\"**/*.{ts,tsx,js,jsx,json,md}\\\"",
+                "runCommand": "npm run format:check"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "graph": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "graph"
+              },
+              "metadata": {
+                "scriptContent": "nx graph",
+                "runCommand": "npm run graph"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "affected:build": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "affected:build"
+              },
+              "metadata": {
+                "scriptContent": "nx affected:build",
+                "runCommand": "npm run affected:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "affected:test": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "affected:test"
+              },
+              "metadata": {
+                "scriptContent": "nx affected:test",
+                "runCommand": "npm run affected:test"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "affected:lint": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "affected:lint"
+              },
+              "metadata": {
+                "scriptContent": "nx affected:lint",
+                "runCommand": "npm run affected:lint"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "docker:build": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "docker:build"
+              },
+              "metadata": {
+                "scriptContent": "docker-compose build",
+                "runCommand": "npm run docker:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "docker:up": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "docker:up"
+              },
+              "metadata": {
+                "scriptContent": "docker-compose up -d",
+                "runCommand": "npm run docker:up"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "docker:down": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "docker:down"
+              },
+              "metadata": {
+                "scriptContent": "docker-compose down",
+                "runCommand": "npm run docker:down"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "docker:logs": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "docker:logs"
+              },
+              "metadata": {
+                "scriptContent": "docker-compose logs -f",
+                "runCommand": "npm run docker:logs"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "db:migrate": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "db:migrate"
+              },
+              "metadata": {
+                "scriptContent": "ts-node ./migrate.ts",
+                "runCommand": "npm run db:migrate"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "db:seed": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "db:seed"
+              },
+              "metadata": {
+                "scriptContent": "node ../../scripts/seed_admin.js",
+                "runCommand": "npm run db:seed"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "health:check": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "health:check"
+              },
+              "metadata": {
+                "scriptContent": "bash scripts/health-check.sh",
+                "runCommand": "npm run health:check"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "infra:plan": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "infra:plan"
+              },
+              "metadata": {
+                "scriptContent": "terraform -chdir=infrastructure plan",
+                "runCommand": "npm run infra:plan"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "infra:apply": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "infra:apply"
+              },
+              "metadata": {
+                "scriptContent": "terraform -chdir=infrastructure apply",
+                "runCommand": "npm run infra:apply"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "infra:destroy": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "infra:destroy"
+              },
+              "metadata": {
+                "scriptContent": "terraform -chdir=infrastructure destroy",
+                "runCommand": "npm run infra:destroy"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "n8n:setup": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "n8n:setup"
+              },
+              "metadata": {
+                "scriptContent": "bash infrastructure/scripts/n8n-setup.sh",
+                "runCommand": "npm run n8n:setup"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "prometheus:setup": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "prometheus:setup"
+              },
+              "metadata": {
+                "scriptContent": "bash infrastructure/scripts/prometheus-setup.sh",
+                "runCommand": "npm run prometheus:setup"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "grafana:setup": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "grafana:setup"
+              },
+              "metadata": {
+                "scriptContent": "bash infrastructure/scripts/grafana-setup.sh",
+                "runCommand": "npm run grafana:setup"
+              },
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "implicitDependencies": []
+        }
+      }
+    },
+    "dependencies": {
+      "assets-service": [],
+      "audit-service": [],
+      "users-service": [],
+      "notifications-service-e2e": [
+        {
+          "source": "notifications-service-e2e",
+          "target": "notifications-service",
+          "type": "implicit"
+        }
+      ],
+      "notifications-service": [],
+      "api-gateway-e2e": [
+        {
+          "source": "api-gateway-e2e",
+          "target": "api-gateway",
+          "type": "implicit"
+        }
+      ],
+      "reports-service-e2e": [
+        {
+          "source": "reports-service-e2e",
+          "target": "reports-service",
+          "type": "implicit"
+        }
+      ],
+      "storage-service-e2e": [
+        {
+          "source": "storage-service-e2e",
+          "target": "storage-service",
+          "type": "implicit"
+        }
+      ],
+      "assets-service-e2e": [
+        {
+          "source": "assets-service-e2e",
+          "target": "assets-service",
+          "type": "implicit"
+        }
+      ],
+      "audit-service-e2e": [
+        {
+          "source": "audit-service-e2e",
+          "target": "audit-service",
+          "type": "implicit"
+        }
+      ],
+      "users-service-e2e": [
+        {
+          "source": "users-service-e2e",
+          "target": "users-service",
+          "type": "implicit"
+        }
+      ],
+      "api-gateway": [],
+      "auth-service-e2e": [
+        {
+          "source": "auth-service-e2e",
+          "target": "auth-service",
+          "type": "implicit"
+        }
+      ],
+      "iot-service-e2e": [
+        {
+          "source": "iot-service-e2e",
+          "target": "iot-service",
+          "type": "implicit"
+        }
+      ],
+      "reports-service": [],
+      "storage-service": [],
+      "users-service-legacy": [],
+      "auth-service": [],
+      "iot-service": [],
+      "sima-platform-monorepo": [
+        {
+          "source": "sima-platform-monorepo",
+          "target": "users-service",
+          "type": "static"
+        },
+        {
+          "source": "sima-platform-monorepo",
+          "target": "assets-service",
+          "type": "static"
+        },
+        {
+          "source": "sima-platform-monorepo",
+          "target": "audit-service",
+          "type": "static"
+        }
+      ]
+    }
+  }
+}
