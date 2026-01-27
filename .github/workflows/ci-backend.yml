@@ -167,7 +167,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to Docker Hub
-        if: env.DOCKERHUB_ORG && secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN
+        if: ${{ env.DOCKERHUB_ORG && secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN }}
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -219,19 +219,3 @@ jobs:
         run: |
           cd backend/sima-backend
           npm audit --audit-level=moderate
-
-notify:
-  runs-on: ubuntu-latest
-  name: Notify Results
-  needs: [lint, test, build]
-  if: always()
-  steps:
-    - name: Check workflow status
-      run: |
-        if [ "${{ needs.lint.result }}" == "failure" ] || \
-           [ "${{ needs.test.result }}" == "failure" ] || \
-           [ "${{ needs.build.result }}" == "failure" ]; then
-          echo "❌ CI Pipeline Failed"
-          exit 1
-        fi
-        echo "✅ CI Pipeline Passed"
