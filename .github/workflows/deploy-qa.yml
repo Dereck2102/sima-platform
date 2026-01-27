@@ -6,14 +6,15 @@ on:
   workflow_dispatch:
 
 env:
-  DEPLOY_ENABLED: ${{ secrets.QA_DEPLOY_ENABLED }}
   IMAGE_REGISTRY: ghcr.io/${{ github.repository }}
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ secrets.QA_DEPLOY_ENABLED == 'true' }}
+    env:
+      DEPLOY_ENABLED: ${{ secrets.QA_DEPLOY_ENABLED }}
+    if: ${{ env.DEPLOY_ENABLED == 'true' }}
 
     steps:
       - name: Checkout
