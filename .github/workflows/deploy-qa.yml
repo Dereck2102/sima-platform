@@ -12,7 +12,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ secrets.QA_DEPLOY_ENABLED == 'true' }}
+    # Gate deployments with a repo-level variable; secrets are not available when the workflow graph is created.
+    if: ${{ vars.QA_DEPLOY_ENABLED == 'true' }}
 
     steps:
       - name: Checkout
