@@ -12,9 +12,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DEPLOY_ENABLED: ${{ secrets.QA_DEPLOY_ENABLED }}
-    if: ${{ env.DEPLOY_ENABLED == 'true' }}
+    if: ${{ secrets.QA_DEPLOY_ENABLED == 'true' }}
 
     steps:
       - name: Checkout
