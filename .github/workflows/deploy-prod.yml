@@ -79,7 +79,7 @@ jobs:
             MAIL_USER=${{ secrets.PROD_MAIL_USER }}
             MAIL_PASSWORD=${{ secrets.PROD_MAIL_PASSWORD }}
             MAIL_FROM=${{ secrets.PROD_MAIL_FROM }}
-EOF
+            EOF
 
       - name: Deploy (pull, up, migrate)
         uses: appleboy/ssh-action@v1.0.0
