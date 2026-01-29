@@ -175,6 +175,7 @@ jobs:
       - name: Build and push all services (GHCR + Docker Hub)
         run: |
           set -euo pipefail
+          REPO_LOWER="$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')"
           cd backend/sima-backend
           while read -r name path output; do
             echo "Building $name from $path (dist: $output)"
@@ -193,8 +194,8 @@ jobs:
               --build-arg NX_DAEMON=${NX_DAEMON} \
               --push \
               --platform linux/amd64 \
-              --tag ${{ env.REGISTRY }}/${{ github.repository }}/$name:${{ github.sha }} \
-              --tag ${{ env.REGISTRY }}/${{ github.repository }}/$name:latest \
+              --tag ${{ env.REGISTRY }}/$REPO_LOWER/$name:${{ github.sha }} \
+              --tag ${{ env.REGISTRY }}/$REPO_LOWER/$name:latest \
               --tag ${{ env.DOCKERHUB_ORG }}/$name:${{ github.sha }} \
               --tag ${{ env.DOCKERHUB_ORG }}/$name:latest \
               $CONTEXT
