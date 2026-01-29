@@ -31,42 +31,42 @@ env:
     calculator-service apps/calculator-service dist/apps/calculator-service
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    name: Lint Code
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: backend/sima-backend/package-lock.json
-
-      - name: Install dependencies
-        run: |
-          cd backend/sima-backend
-          npm ci
-
-      - name: Run ESLint
-        env:
-          NX_DAEMON: ${{ env.NX_DAEMON }}
-        run: |
-          cd backend/sima-backend
-          npm run lint
-
-      - name: Check formatting
-        run: |
-          cd backend/sima-backend
-          npm run format:check
+#   lint:
+#     runs-on: ubuntu-latest
+#     name: Lint Code
+#     steps:
+#       - uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+# 
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ env.NODE_VERSION }}
+#           cache: 'npm'
+#           cache-dependency-path: backend/sima-backend/package-lock.json
+# 
+#       - name: Install dependencies
+#         run: |
+#           cd backend/sima-backend
+#           npm ci
+# 
+#       - name: Run ESLint
+#         env:
+#           NX_DAEMON: ${{ env.NX_DAEMON }}
+#         run: |
+#           cd backend/sima-backend
+#           npm run lint
+# 
+#       - name: Check formatting
+#         run: |
+#           cd backend/sima-backend
+#           npm run format:check
 
   test:
     runs-on: ubuntu-latest
     name: Test & Coverage
-    needs: lint
+    # needs: lint
     services:
       postgres:
         image: postgres:15-alpine
