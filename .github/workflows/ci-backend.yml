@@ -26,6 +26,7 @@ env:
     notifications-service apps-services/notifications-service dist/apps-services/notifications-service
     reports-service apps-services/reports-service dist/apps-services/reports-service
     storage-service apps-services/storage-service dist/apps-services/storage-service
+    calculator-service apps/calculator-service dist/apps/calculator-service
 
 jobs:
   lint:
@@ -179,8 +180,16 @@ jobs:
           cd backend/sima-backend
           while read -r name path output; do
             echo "Building $name from $path (dist: $output)"
+            
+            DOCKERFILE=Dockerfile
+            CONTEXT=.
+            if [ -f "$path/Dockerfile" ]; then
+              DOCKERFILE=$path/Dockerfile
+              CONTEXT=$path
+            fi
+            
             docker buildx build \
-              --file Dockerfile \
+              --file $DOCKERFILE \
               --build-arg SERVICE_NAME=$name \
               --build-arg OUTPUT_PATH=$output \
               --build-arg NX_DAEMON=${NX_DAEMON} \
@@ -190,7 +199,7 @@ jobs:
               --tag ${{ env.REGISTRY }}/${{ github.repository }}/$name:latest \
               --tag ${{ env.DOCKERHUB_ORG }}/$name:${{ github.sha }} \
               --tag ${{ env.DOCKERHUB_ORG }}/$name:latest \
-              .
+              $CONTEXT
           done <<< "${SERVICES}"
 
   security-scan:

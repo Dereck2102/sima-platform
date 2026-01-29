@@ -249,6 +249,53 @@ services:
     networks:
       - sima
 
+  calculator-service:
+    image: ${IMAGE_REGISTRY}/calculator-service:${IMAGE_TAG}
+    env_file: .env
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - sima
+
+  # ---------------------------------------------------------------------------
+  # Frontend Applications
+  # ---------------------------------------------------------------------------
+  sima-portal:
+    image: ${IMAGE_REGISTRY}/sima-portal:${IMAGE_TAG}
+    env_file: .env
+    ports:
+      - "8080:3000"
+    networks:
+      - sima
+
+  analytics-mfe:
+    image: ${IMAGE_REGISTRY}/analytics-mfe:${IMAGE_TAG}
+    ports:
+      - "3011:80"
+    networks:
+      - sima
+
+  dashboard-mfe:
+    image: ${IMAGE_REGISTRY}/dashboard-mfe:${IMAGE_TAG}
+    ports:
+      - "3012:80"
+    networks:
+      - sima
+
+  settings-mfe:
+    image: ${IMAGE_REGISTRY}/settings-mfe:${IMAGE_TAG}
+    ports:
+      - "3013:80"
+    networks:
+      - sima
+
+  sima-qa:
+    image: ${IMAGE_REGISTRY}/sima-qa:${IMAGE_TAG}
+    ports:
+      - "3014:80"
+    networks:
+      - sima
+
   # ---------------------------------------------------------------------------
   # Observability stack
   # ---------------------------------------------------------------------------
