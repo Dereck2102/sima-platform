@@ -24,7 +24,7 @@ jobs:
           host: ${{ secrets.SSH_HOST_PROD }}
           username: ${{ secrets.SSH_USER_PROD }}
           key: ${{ secrets.SSH_KEY_PROD }}
-          source: "backend/sima-backend/deploy/docker-compose.app.yml"
+          source: "backend/sima-backend/deploy/docker-compose.app.yml,backend/sima-backend/deploy/monitoring"
           target: "/opt/sima"
 
       - name: Write .env on target host
@@ -79,6 +79,9 @@ jobs:
             MAIL_USER=${{ secrets.PROD_MAIL_USER }}
             MAIL_PASSWORD=${{ secrets.PROD_MAIL_PASSWORD }}
             MAIL_FROM=${{ secrets.PROD_MAIL_FROM }}
+
+            GRAFANA_ADMIN_USER=${{ vars.GRAFANA_ADMIN_USER }}
+            GRAFANA_ADMIN_PASSWORD=${{ secrets.PROD_GRAFANA_ADMIN_PASSWORD }}
             EOF
 
       - name: Deploy (pull, up, migrate)

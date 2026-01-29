@@ -14,7 +14,7 @@ export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 
   @Post()
-  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.ANALYST)
   @ApiOperation({ summary: 'Create a new report' })
   async create(@Body() createReportDto: CreateReportDto, @Req() req: Request) {
     const userId = (req as any).user?.sub;
@@ -22,21 +22,21 @@ export class ReportsController {
   }
 
   @Get()
-  @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.VIEWER)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.ANALYST)
   @ApiOperation({ summary: 'Get all reports' })
   async findAll() {
     return this.reportsService.listReports();
   }
 
   @Get(':id')
-  @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.VIEWER)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.ANALYST)
   @ApiOperation({ summary: 'Get report by id' })
   async findOne(@Param('id') id: string) {
     return this.reportsService.getReport(id);
   }
 
   @Post(':id/export')
-  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.ANALYST)
   @ApiOperation({ summary: 'Export report' })
   async export(@Param('id') id: string, @Body() exportDto: ExportReportDto) {
     return this.reportsService.exportReport(id, exportDto);

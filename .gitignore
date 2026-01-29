@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Next.js and build outputs
+.next/
+out/
+dist/
+build/
+coverage/
+
+# Logs and caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.cache/
+.nx/cache/
+.nx/workspace-data/
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

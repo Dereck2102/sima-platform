@@ -4,6 +4,8 @@ import { Exclude } from 'class-transformer';
 export enum UserRole {
   SUPER_ADMIN = 'SUPER_ADMIN',
   ADMIN = 'ADMIN',
+  ASSET_MANAGER = 'ASSET_MANAGER',
+  ANALYST = 'ANALYST',
   MANAGER = 'MANAGER',
   OPERATOR = 'OPERATOR',
   VIEWER = 'VIEWER',

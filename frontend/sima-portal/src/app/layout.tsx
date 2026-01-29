@@ -1,5 +1,4 @@
 import React from 'react';
-import Dashboard from './pages/Dashboard';
 import './globals.css';
 
 export const metadata = {
@@ -7,16 +6,15 @@ export const metadata = {
   description: 'Enterprise asset management and IoT platform',
 };
 
-export default function RootLayout() {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/uce-logo.png" />
       </head>
-      <body>
-        <Dashboard />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

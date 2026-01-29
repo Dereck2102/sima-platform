@@ -15,7 +15,7 @@ export class AssetsController {
 
   @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MANAGER)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.ASSET_MANAGER, UserRole.MANAGER)
   @ApiOperation({ summary: 'Create a new asset' })
   @ApiResponse({ status: 201, description: 'Asset created successfully' })
   async create(@Body() createAssetDto: CreateAssetDto): Promise<Asset> {
@@ -64,7 +64,7 @@ export class AssetsController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MANAGER)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.ASSET_MANAGER, UserRole.MANAGER)
   @ApiOperation({ summary: 'Update asset' })
   async update(@Param('id') id: string, @Body() updateAssetDto: UpdateAssetDto): Promise<Asset> {
     return this.assetsService.update(id, updateAssetDto);

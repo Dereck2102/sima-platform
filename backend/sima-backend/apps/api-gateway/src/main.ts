@@ -1,10 +1,15 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { LoggingMiddleware, MetricsMiddleware } from '@sima/shared';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Observability: metrics and structured logging for all incoming requests.
+  app.use(new MetricsMiddleware().use);
+  app.use(new LoggingMiddleware().use);
 
   app.enableCors({
     origin: process.env.CORS_ORIGIN || '*',
