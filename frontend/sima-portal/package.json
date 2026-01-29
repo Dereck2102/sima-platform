@@ -1,6 +1,8 @@
 {
   "name": "sima-portal",
   "version": "1.0.0",
+  "description": "SIMA Platform Portal",
+  "author": "Dereck2102",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +13,8 @@
     "test:coverage": "jest --coverage",
     "cap:sync": "npx cap sync",
     "cap:android": "npx cap run android",
-    "electron:dev": "npm run build && node ./electron/main.js"
+    "electron:dev": "npm run build && node ./electron/main.js",
+    "electron:build": "npm run build && electron-builder"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -35,6 +38,19 @@
     "@capacitor/android": "^6.0.0",
     "electron": "^28.2.8",
     "eslint": "^8.57.1",
-    "eslint-config-next": "14.0.4"
+    "eslint-config-next": "14.0.4",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.sima.portal",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }
