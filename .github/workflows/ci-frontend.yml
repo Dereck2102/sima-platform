@@ -43,7 +43,7 @@ jobs:
             dockerfile: frontend/Dockerfile.mfe
           - name: sima-qa
             path: frontend/sima-qa
-            dockerfile: frontend/Dockerfile.mfe
+            dockerfile: frontend/Dockerfile.next
 
     steps:
       - uses: actions/checkout@v3
