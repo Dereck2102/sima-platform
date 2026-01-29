@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:3000/api';
 
 export default function Settings() {
   const [settings, setSettings] = useState({
@@ -7,15 +9,56 @@ export default function Settings() {
     autoSave: true,
     language: 'en',
   });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/settings/u1`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        setSettings(json);
+      } catch (err) {
+        setError(err.message || 'Error al cargar');
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
 
   const handleChange = (key, value) => {
     setSettings({ ...settings, [key]: value });
   };
 
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_BASE}/settings/u1`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      setSettings(json);
+    } catch (err) {
+      setError(err.message || 'Error al guardar');
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <h1>Settings MFE</h1>
-      <form style={{ maxWidth: '500px' }}>
+      {loading && <p>Cargando...</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form style={{ maxWidth: '500px' }} onSubmit={handleSave}>
         <div style={{ marginBottom: '15px' }}>
           <label>
             Theme:
@@ -60,7 +103,7 @@ export default function Settings() {
           </label>
         </div>
 
-        <button type="submit">Save Settings</button>
+        <button type="submit" disabled={saving}>{saving ? 'Guardando...' : 'Save Settings'}</button>
       </form>
     </div>
   );
